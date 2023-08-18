@@ -206,6 +206,13 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
         const status = mangaDetails.status
 
         const tags: Tag[] = []
+        const contentRating: string = mangaDetails.contentRating
+        if(contentRating && contentRating != 'safe') {
+            tags.push(App.createTag({
+                id: contentRating,
+                label: contentRating.charAt(0).toUpperCase() + contentRating.substring(1)
+            }))
+        }
         for (const tag of mangaDetails.tags) {
             const tagName: { [index: string]: string } = tag.attributes.name
             tags.push(App.createTag({ id: tag.id, label: Object.keys(tagName).map((keys) => tagName[keys])[0] ?? 'Unknown' }))

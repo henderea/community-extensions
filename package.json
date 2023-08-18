@@ -5,9 +5,9 @@
   "description": "Community maintained Paperback extension repository",
   "main": "index.js",
   "scripts": {
-    "bundle": "npx paperback bundle",
-    "serve": "npx paperback serve",
-    "test": "npx paperback test",
+    "bundle": "paperback bundle",
+    "serve": "paperback serve",
+    "test": "paperback test",
     "nodemon": "nodemon"
   },
   "author": "Netsky",
@@ -28,5 +28,6 @@
     "entities": "^4.4.0",
     "nodemon": "^2.0.22",
     "ts-node": "^10.2.1"
-  }
+  },
+  "baseURL": "https://paperback.henderea.com/0.8/"
 }
