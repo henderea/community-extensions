@@ -37,6 +37,8 @@ module.exports = {
         '@typescript-eslint/comma-dangle': 'error',
         'prefer-arrow-callback': 'error',
         'modules-newline/import-declaration-newline': 'error',
-        'modules-newline/export-declaration-newline': 'error'
+        'modules-newline/export-declaration-newline': 'error',
+        '@typescript-eslint/no-explicit-any': 0,
+        '@typescript-eslint/no-non-null-assertion': 0
     }
 }
