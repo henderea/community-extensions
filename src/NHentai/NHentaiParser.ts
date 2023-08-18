@@ -28,7 +28,7 @@ export const parseMangaDetails = (data: Gallery): SourceManga => {
     return App.createSourceManga({
         id: data.id.toString(),
         mangaInfo: App.createMangaInfo({
-            titles: Object.values(data.title).filter(title => title !== null),
+            titles: [data.title.pretty, data.title.english, data.title.japanese].filter(title => title !== null),
             artist: artist,
             author: artist,
             image: `https://t.nhentai.net/galleries/${data.media_id}/cover.${typeOfImage(data.images.cover)}`,
