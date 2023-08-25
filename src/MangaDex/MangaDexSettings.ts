@@ -69,6 +69,22 @@ export async function saveAccessToken(stateManager: SourceStateManager, accessTo
     }
 }
 
+const getCheckerBaseUrl = async (stateManager: SourceStateManager): Promise<string> => {
+    return (await stateManager.retrieve('checker_base_url') as string) ?? ''
+}
+
+export const getCheckerUrl = async (stateManager: SourceStateManager): Promise<string | null> => {
+    const baseUrl = await getCheckerBaseUrl(stateManager)
+    if(baseUrl && baseUrl.length > 0) {
+        return `${baseUrl}/manga-check`
+    }
+    return null
+}
+
+export const getCheckerUser = async (stateManager: SourceStateManager): Promise<string> => {
+    return (await stateManager.retrieve('checker_user') as string) ?? ''
+}
+
 export function contentSettings(stateManager: SourceStateManager) {
     return App.createDUINavigationButton({
         id: 'content_settings',
@@ -84,7 +100,9 @@ export function contentSettings(stateManager: SourceStateManager) {
                             getLanguages(stateManager),
                             getRatings(stateManager),
                             getDataSaver(stateManager),
-                            getSkipSameChapter(stateManager)
+                            getSkipSameChapter(stateManager),
+                            getCheckerBaseUrl(stateManager),
+                            getCheckerUser(stateManager)
                         ])
 
                         return await [
@@ -136,6 +154,24 @@ export function contentSettings(stateManager: SourceStateManager) {
                                 value: App.createDUIBinding({
                                     get: async () => forcePort443(stateManager),
                                     set: async (newValue) => { await stateManager.store('force_port_443', newValue) }
+                                })
+                            }),
+
+                            App.createDUIInputField({
+                                id: 'checker_base_url',
+                                label: 'paperback-mdchecker base url',
+                                value: App.createDUIBinding({
+                                    get: async () => getCheckerBaseUrl(stateManager),
+                                    set: async (newValue) => { await stateManager.store('checker_base_url', (newValue ?? '').replace(/[/]$/, '')) }
+                                })
+                            }),
+
+                            App.createDUIInputField({
+                                id: 'checker_user',
+                                label: 'paperback-mdchecker username',
+                                value: App.createDUIBinding({
+                                    get: async () => getCheckerUser(stateManager),
+                                    set: async (newValue) => { await stateManager.store('checker_user', newValue) }
                                 })
                             })
                         ]
