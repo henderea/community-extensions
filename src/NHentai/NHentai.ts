@@ -19,8 +19,8 @@ import {
     HomeSectionType,
     SourceIntents,
     HomePageSectionsProviding,
-    Tag,
-    TagSection
+    Tag//,
+    // TagSection
 } from '@paperback/types'
 
 import { NHSortOrders } from './NHentaiHelper'
@@ -38,7 +38,7 @@ import {
     settings
 } from './NHentaiSettings'
 
-import { popularTags } from './tags.json'
+// import { popularTags } from './tags.json'
 
 const NHENTAI_URL = 'https://nhentai.net'
 
@@ -135,17 +135,17 @@ export class NHentai implements SearchResultsProviding, MangaProviding, ChapterP
         return parseChapterDetails(jsonData, mangaId)
     }
 
-    async getSearchTags(): Promise<TagSection[]> {
-        const arrayTags: Tag[] = []
+    // async getSearchTags(): Promise<TagSection[]> {
+    //     const arrayTags: Tag[] = []
 
-        for (const tag of popularTags) {
-            const label = tag.label
-            const id = tag.id
-            arrayTags.push({ id: id, label: label })
-        }
-        const tagSections: TagSection[] = [App.createTagSection({ id: '0', label: 'Tags', tags: arrayTags.map(x => App.createTag(x)) })]
-        return tagSections
-    }
+    //     for (const tag of popularTags) {
+    //         const label = tag.label
+    //         const id = tag.id
+    //         arrayTags.push({ id: id, label: label })
+    //     }
+    //     const tagSections: TagSection[] = [App.createTagSection({ id: '0', label: 'Tags', tags: arrayTags.map(x => App.createTag(x)) })]
+    //     return tagSections
+    // }
 
     async getSearchResults(query: SearchRequest, metadata: any): Promise<PagedResults> {
         const page: number = metadata?.page ?? 1
