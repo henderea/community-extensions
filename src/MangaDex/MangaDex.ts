@@ -66,7 +66,7 @@ export const MangaDexInfo: SourceInfo = {
     description: 'Extension that pulls manga from MangaDex',
     icon: 'icon.png',
     name: 'MangaDex',
-    version: '3.0.7',
+    version: '3.0.8',
     authorWebsite: 'https://github.com/nar1n',
     websiteBaseURL: MANGADEX_DOMAIN,
     contentRating: ContentRating.EVERYONE,
@@ -284,7 +284,7 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
             throw new Error('Invalid user configured')
         }
         if(json.state == 'current') {
-            await this.stateManager.store(epochKey, json.epoch)
+            // await this.stateManager.store(epochKey, json.epoch)
             throw new Error('Already up to date')
         }
         return [epochKey, json.epoch]
