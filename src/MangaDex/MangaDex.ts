@@ -122,7 +122,7 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
     })
 
     checkerRequestManager = App.createRequestManager({
-        requestsPerSecond: 4,
+        requestsPerSecond: 10,
         requestTimeout: 20000,
         interceptor: {
             interceptRequest: async (request: Request) => {
