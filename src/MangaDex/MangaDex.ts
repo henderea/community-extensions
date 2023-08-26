@@ -66,7 +66,7 @@ export const MangaDexInfo: SourceInfo = {
     description: 'Extension that pulls manga from MangaDex',
     icon: 'icon.png',
     name: 'MangaDex',
-    version: '3.0.5',
+    version: '3.0.6',
     authorWebsite: 'https://github.com/nar1n',
     websiteBaseURL: MANGADEX_DOMAIN,
     contentRating: ContentRating.EVERYONE,
@@ -266,10 +266,10 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
         })
     }
 
-    async tryChecker(mangaId: string): Promise<void> {
-        const checkerUrl = await getCheckerUrl(this.stateManager)
-        if(!checkerUrl) return
+    async tryChecker(mangaId: string): Promise<[string, number]> {
         const epochKey = `${mangaId}-check-epoch`
+        const checkerUrl = await getCheckerUrl(this.stateManager)
+        if(!checkerUrl) return [epochKey, -1]
         const lastCheckEpoch = (await this.stateManager.retrieve(epochKey) as number) ?? 0
         const request = App.createRequest({
             url: `${checkerUrl}?mangaId=${mangaId}&lastCheckEpoch=${lastCheckEpoch}`,
@@ -277,22 +277,23 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
         })
         const response = await this.checkerRequestManager.schedule(request, 1)
         const json = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data
-        if(!json.state) return
+        if(!json.state) return [epochKey, -1]
         if(json.state == 'error') {
-            console.log(`Encountered error fetching ${mangaId}`)
-            return
+            throw new Error(`Encountered error fetching ${mangaId}`)
         } else if(json.state == 'no-user') {
-            console.log('Invalid user configured')
-            return
+            throw new Error('Invalid user configured')
         }
-        await this.stateManager.store(epochKey, json.epoch)
-        if(json.state == 'current') throw new Error('Already up to date')
+        if(json.state == 'current') {
+            await this.stateManager.store(epochKey, json.epoch)
+            throw new Error('Already up to date')
+        }
+        return [epochKey, json.epoch]
     }
 
     async getChapters(mangaId: string): Promise<Chapter[]> {
         this.checkId(mangaId)
 
-        await this.tryChecker(mangaId)
+        const [epochKey, epoch] = await this.tryChecker(mangaId)
 
         const languages: string[] = await getLanguages(this.stateManager)
         const skipSameChapter = await getSkipSameChapter(this.stateManager)
@@ -368,6 +369,8 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
         if (chapters.length == 0) {
             throw new Error(`Couldn't find any chapters in your selected language for mangaId: ${mangaId}!`)
         }
+
+        if(epoch >= 0) await this.stateManager.store(epochKey, epoch)
 
         return chapters.map(chapter => {
             chapter.sortingIndex += chapters.length
