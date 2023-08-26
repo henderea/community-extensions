@@ -123,7 +123,7 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
 
     checkerRequestManager = App.createRequestManager({
         requestsPerSecond: 10,
-        requestTimeout: 20000,
+        requestTimeout: 10000,
         interceptor: {
             interceptRequest: async (request: Request) => {
                 const checkerUser = await getCheckerUser(this.stateManager)
