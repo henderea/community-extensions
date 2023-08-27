@@ -420,7 +420,7 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
             .addPathComponent('manga')
             .addQueryParameter(searchType, (query.title?.length ?? 0) > 0 ? encodeURIComponent(query.title!) : undefined)
             .addQueryParameter('limit', 100)
-            .addQueryParameter('hasAvailableChapters', true)
+            // .addQueryParameter('hasAvailableChapters', true)
             // .addQueryParameter('availableTranslatedLanguage', languages)
             .addQueryParameter('offset', offset)
             .addQueryParameter('contentRating', ratings)
