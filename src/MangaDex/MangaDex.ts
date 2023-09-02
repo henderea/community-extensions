@@ -66,7 +66,7 @@ export const MangaDexInfo: SourceInfo = {
     description: 'Extension that pulls manga from MangaDex',
     icon: 'icon.png',
     name: 'MangaDex',
-    version: '3.0.9',
+    version: '3.0.10',
     authorWebsite: 'https://github.com/nar1n',
     websiteBaseURL: MANGADEX_DOMAIN,
     contentRating: ContentRating.EVERYONE,
@@ -126,16 +126,6 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
         requestTimeout: 10000,
         interceptor: {
             interceptRequest: async (request: Request) => {
-                const checkerUser = await getCheckerUser(this.stateManager)
-
-                if(!checkerUser || checkerUser.length <= 0) return request
-
-                // Impossible to have undefined headers, ensured by the app
-                request.headers = {
-                    ...request.headers,
-                    'user-id': checkerUser
-                }
-
                 return request
             },
             interceptResponse: async (response: Response): Promise<Response> => {
@@ -270,9 +260,11 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
         const epochKey = `${mangaId}-check-epoch`
         const checkerUrl = await getCheckerUrl(this.stateManager)
         if(!checkerUrl) return [epochKey, -1]
+        const checkerUser = await getCheckerUser(this.stateManager)
+        if(!checkerUser || checkerUser.length <= 0) throw new Error('No user configured')
         const lastCheckEpoch = (await this.stateManager.retrieve(epochKey) as number) ?? 0
         const request = App.createRequest({
-            url: `${checkerUrl}?mangaId=${mangaId}&lastCheckEpoch=${lastCheckEpoch}`,
+            url: `${checkerUrl}?userId=${checkerUser}&mangaId=${mangaId}&lastCheckEpoch=${lastCheckEpoch}`,
             method: 'GET'
         })
         const response = await this.checkerRequestManager.schedule(request, 1)
