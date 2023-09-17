@@ -66,7 +66,7 @@ export const MangaDexInfo: SourceInfo = {
     description: 'Extension that pulls manga from MangaDex',
     icon: 'icon.png',
     name: 'MangaDex',
-    version: '3.0.10',
+    version: '3.0.11',
     authorWebsite: 'https://github.com/nar1n',
     websiteBaseURL: MANGADEX_DOMAIN,
     contentRating: ContentRating.EVERYONE,
@@ -122,7 +122,7 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
     })
 
     checkerRequestManager = App.createRequestManager({
-        requestsPerSecond: 10,
+        requestsPerSecond: 250,
         requestTimeout: 10000,
         interceptor: {
             interceptRequest: async (request: Request) => {
