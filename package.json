@@ -8,7 +8,9 @@
     "bundle": "paperback bundle",
     "serve": "paperback serve",
     "test": "paperback test",
-    "nodemon": "nodemon"
+    "nodemon": "nodemon",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src"
   },
   "author": "Netsky",
   "license": "GPL-3.0-or-later",
