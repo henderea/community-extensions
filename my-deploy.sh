@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-echo "npm run bundle"
-npm run bundle
+echo "pnpm bundle"
+pnpm bundle
 name="${1:-$(git rev-parse --abbrev-ref HEAD)}"
 echo "sudo rm -rf '/home/henderea/domains/paperback/${name}'"
 sudo rm -rf "/home/henderea/domains/paperback/${name}"
