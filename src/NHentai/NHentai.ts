@@ -80,7 +80,7 @@ export class NHentai implements SearchResultsProviding, MangaProviding, ChapterP
                 return response
             }
         }
-    });
+    })
 
     stateManager = App.createSourceStateManager()
 
