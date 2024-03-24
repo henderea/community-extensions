@@ -15,7 +15,7 @@
   "author": "Netsky",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "@tsconfig/recommended": "^1.0.3",
+    "@tsconfig/recommended": "^1.0.4",
     "@types/cheerio": "^0.22.35",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
