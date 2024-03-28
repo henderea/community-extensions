@@ -129,12 +129,12 @@ packages:
     resolution: {integrity: sha512-MqBisuxTkYvPFnEiu+dag3xG/NBUDzSbAFAWlzfkGnQkjVZ6by3h4atbBc+Ikqup1z5BfB4BN18gKWR1YyppNw==}
     engines: {node: '>=12.10.0'}
     dependencies:
-      '@grpc/proto-loader': 0.7.11
+      '@grpc/proto-loader': 0.7.12
       '@js-sdsl/ordered-map': 4.4.2
     dev: false
 
-  /@grpc/proto-loader@0.7.11:
-    resolution: {integrity: sha512-amjhSfJ+xYnTP+hncJMmkchoRtjIdi+uO3FaymGSCr07yu5xfpXFEnhZkTU1mj2lPJB3oVToau7j9YkqB+YNdg==}
+  /@grpc/proto-loader@0.7.12:
+    resolution: {integrity: sha512-DCVwMxqYzpUCiDMl7hQ384FqP4T3DbNpXU8pt681l3UWCip1WUiD5JrkImUwCB9a7f2cq4CUTmi5r/xIMRPY1Q==}
     engines: {node: '>=6'}
     hasBin: true
     dependencies:
