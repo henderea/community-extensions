@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@paperback/toolchain':
     specifier: 0.8.0-alpha.47
-    version: 0.8.0-alpha.47(@types/node@20.12.4)(typescript@5.4.4)
+    version: 0.8.0-alpha.47(@types/node@20.12.5)(typescript@5.4.4)
   '@paperback/types':
     specifier: 0.8.0-alpha.47
     version: 0.8.0-alpha.47
@@ -22,12 +22,12 @@ dependencies:
     version: 3.1.0
   ts-node:
     specifier: ^10.9.2
-    version: 10.9.2(@types/node@20.12.4)(typescript@5.4.4)
+    version: 10.9.2(@types/node@20.12.5)(typescript@5.4.4)
 
 devDependencies:
   '@tsconfig/recommended':
-    specifier: ^1.0.5
-    version: 1.0.5
+    specifier: ^1.0.6
+    version: 1.0.6
   '@types/cheerio':
     specifier: ^0.22.35
     version: 0.22.35
@@ -247,7 +247,7 @@ packages:
       wrap-ansi: 7.0.0
     dev: false
 
-  /@oclif/core@2.15.0(@types/node@20.12.4)(typescript@5.4.4):
+  /@oclif/core@2.15.0(@types/node@20.12.5)(typescript@5.4.4):
     resolution: {integrity: sha512-fNEMG5DzJHhYmI3MgpByTvltBOMyFcnRIUMxbiz2ai8rhaYgaTHMG3Q38HcosfIvtw9nCjxpcQtC8MN8QtVCcA==}
     engines: {node: '>=14.0.0'}
     dependencies:
@@ -274,7 +274,7 @@ packages:
       strip-ansi: 6.0.1
       supports-color: 8.1.1
       supports-hyperlinks: 2.3.0
-      ts-node: 10.9.2(@types/node@20.12.4)(typescript@5.4.4)
+      ts-node: 10.9.2(@types/node@20.12.5)(typescript@5.4.4)
       tslib: 2.6.2
       widest-line: 3.1.0
       wordwrap: 1.0.0
@@ -290,11 +290,11 @@ packages:
     resolution: {integrity: sha512-Ups2dShK52xXa8w6iBWLgcjPJWjais6KPJQq3gQ/88AY6BXoTX+MIGFPrWQO1KLMiQfoTpcLnUwloN4brrVUHw==}
     dev: false
 
-  /@oclif/plugin-help@5.2.20(@types/node@20.12.4)(typescript@5.4.4):
+  /@oclif/plugin-help@5.2.20(@types/node@20.12.5)(typescript@5.4.4):
     resolution: {integrity: sha512-u+GXX/KAGL9S10LxAwNUaWdzbEBARJ92ogmM7g3gDVud2HioCmvWQCDohNRVZ9GYV9oKwZ/M8xwd6a1d95rEKQ==}
     engines: {node: '>=12.0.0'}
     dependencies:
-      '@oclif/core': 2.15.0(@types/node@20.12.4)(typescript@5.4.4)
+      '@oclif/core': 2.15.0(@types/node@20.12.5)(typescript@5.4.4)
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
@@ -302,12 +302,12 @@ packages:
       - typescript
     dev: false
 
-  /@oclif/plugin-plugins@2.4.7(@types/node@20.12.4)(typescript@5.4.4):
+  /@oclif/plugin-plugins@2.4.7(@types/node@20.12.5)(typescript@5.4.4):
     resolution: {integrity: sha512-6fzUDLWrSK7n6+EBrEekEEYrYTCneRoOF9TzojkjuFn1+ailvUlr98G90bblxKOyy8fqMe7QjvqwTgIDQ9ZIzg==}
     engines: {node: '>=12.0.0'}
     dependencies:
       '@oclif/color': 1.0.13
-      '@oclif/core': 2.15.0(@types/node@20.12.4)(typescript@5.4.4)
+      '@oclif/core': 2.15.0(@types/node@20.12.5)(typescript@5.4.4)
       chalk: 4.1.2
       debug: 4.3.4
       fs-extra: 9.1.0
@@ -335,15 +335,15 @@ packages:
     resolution: {integrity: sha512-JJF7SGISYvTDevvtuudv9M8JM8VSMW/vM6HopA4K8OUJPdqFN/4cC9D1l6A1t8Viot44htGVs1zjTTEen2/lVA==}
     dev: false
 
-  /@paperback/toolchain@0.8.0-alpha.47(@types/node@20.12.4)(typescript@5.4.4):
+  /@paperback/toolchain@0.8.0-alpha.47(@types/node@20.12.5)(typescript@5.4.4):
     resolution: {integrity: sha512-eOqI8HV9vyICeydQN9RKln8Y0NDePhpkROT0PLsKhvAV/aE6gUS1lg/5msU2TrYw6rwRW6f6xISzQ4W4W3+bsQ==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
       '@grpc/grpc-js': 1.10.6
       '@oclif/core': 1.26.2
-      '@oclif/plugin-help': 5.2.20(@types/node@20.12.4)(typescript@5.4.4)
-      '@oclif/plugin-plugins': 2.4.7(@types/node@20.12.4)(typescript@5.4.4)
+      '@oclif/plugin-help': 5.2.20(@types/node@20.12.5)(typescript@5.4.4)
+      '@oclif/plugin-plugins': 2.4.7(@types/node@20.12.5)(typescript@5.4.4)
       '@paperback/runtime-polyfills': 1.0.0-alpha.13
       '@paperback/types': 1.0.0-alpha.13
       '@protobuf-ts/runtime-rpc': 2.9.4
@@ -439,28 +439,28 @@ packages:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
     dev: false
 
-  /@tsconfig/recommended@1.0.5:
-    resolution: {integrity: sha512-bbozf0TZVH1Tu9hET9HYTtKeOMBBR01kjhc8s+c9cDFQU8Jw6F9A3tRZYOWiMEyMqpf/3LSw2b528g1k8TkYvg==}
+  /@tsconfig/recommended@1.0.6:
+    resolution: {integrity: sha512-0IKu9GHYF1NGTJiYgfWwqnOQSlnE9V9R7YohHNNf0/fj/SyOZWzdd06JFr0fLpg1Mqw0kGbYg8w5xdkSqLKM9g==}
     dev: true
 
   /@types/cheerio@0.22.35:
     resolution: {integrity: sha512-yD57BchKRvTV+JD53UZ6PD8KWY5g5rvvMLRnZR3EQBCZXiDT/HR+pKpMzFGlWNhFrXlo7VPZXtKvIEwZkAWOIA==}
     dependencies:
-      '@types/node': 20.12.4
+      '@types/node': 20.12.5
     dev: true
 
   /@types/cli-progress@3.11.5:
     resolution: {integrity: sha512-D4PbNRbviKyppS5ivBGyFO29POlySLmA2HyUFE4p5QGazAMM3CwkKWcvTl8gvElSuxRh6FPKL8XmidX873ou4g==}
     dependencies:
-      '@types/node': 20.12.4
+      '@types/node': 20.12.5
     dev: false
 
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
     dev: true
 
-  /@types/node@20.12.4:
-    resolution: {integrity: sha512-E+Fa9z3wSQpzgYQdYmme5X3OTuejnnTx88A6p6vkkJosR3KBz+HpE3kqNm98VE6cfLFcISx7zW7MsJkH6KwbTw==}
+  /@types/node@20.12.5:
+    resolution: {integrity: sha512-BD+BjQ9LS/D8ST9p5uqBxghlN+S42iuNxjsUGjeZobe/ciXzk2qb1B6IXc6AnRLS+yFJRpN2IPEHMzwspfDJNw==}
     dependencies:
       undici-types: 5.26.5
 
@@ -2543,7 +2543,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.12.4
+      '@types/node': 20.12.5
       long: 5.2.3
     dev: false
 
@@ -3057,7 +3057,7 @@ packages:
       typescript: 5.4.4
     dev: true
 
-  /ts-node@10.9.2(@types/node@20.12.4)(typescript@5.4.4):
+  /ts-node@10.9.2(@types/node@20.12.5)(typescript@5.4.4):
     resolution: {integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==}
     hasBin: true
     peerDependencies:
@@ -3076,7 +3076,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.12.4
+      '@types/node': 20.12.5
       acorn: 8.11.3
       acorn-walk: 8.3.2
       arg: 4.1.3
