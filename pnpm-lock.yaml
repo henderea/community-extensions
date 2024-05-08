@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@paperback/toolchain':
         specifier: 0.8.0-alpha.47
-        version: 0.8.0-alpha.47(@types/node@20.12.10)(typescript@5.4.5)
+        version: 0.8.0-alpha.47(@types/node@20.12.11)(typescript@5.4.5)
       '@paperback/types':
         specifier: 0.8.0-alpha.47
         version: 0.8.0-alpha.47
@@ -25,7 +25,7 @@ importers:
         version: 3.1.0
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@20.12.10)(typescript@5.4.5)
+        version: 10.9.2(@types/node@20.12.11)(typescript@5.4.5)
     devDependencies:
       '@tsconfig/recommended':
         specifier: ^1.0.6
@@ -237,8 +237,8 @@ packages:
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
-  '@types/node@20.12.10':
-    resolution: {integrity: sha512-Eem5pH9pmWBHoGAT8Dr5fdc5rYA+4NAovdM4EktRPVAAiJhmWWfQrA0cFhAbOsQdSfIHjAud6YdkbL69+zSKjw==}
+  '@types/node@20.12.11':
+    resolution: {integrity: sha512-vDg9PZ/zi+Nqp6boSOT7plNuthRugEKixDv5sFTIpkE89MmNtEArAShI4mxuX2+UrLEe9pxC1vm2cjm9YlWbJw==}
 
   '@types/semver@7.5.8':
     resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
@@ -1887,7 +1887,7 @@ snapshots:
       widest-line: 3.1.0
       wrap-ansi: 7.0.0
 
-  '@oclif/core@2.16.0(@types/node@20.12.10)(typescript@5.4.5)':
+  '@oclif/core@2.16.0(@types/node@20.12.11)(typescript@5.4.5)':
     dependencies:
       '@types/cli-progress': 3.11.5
       ansi-escapes: 4.3.2
@@ -1912,7 +1912,7 @@ snapshots:
       strip-ansi: 6.0.1
       supports-color: 8.1.1
       supports-hyperlinks: 2.3.0
-      ts-node: 10.9.2(@types/node@20.12.10)(typescript@5.4.5)
+      ts-node: 10.9.2(@types/node@20.12.11)(typescript@5.4.5)
       tslib: 2.6.2
       widest-line: 3.1.0
       wordwrap: 1.0.0
@@ -1925,19 +1925,19 @@ snapshots:
 
   '@oclif/linewrap@1.0.0': {}
 
-  '@oclif/plugin-help@5.2.20(@types/node@20.12.10)(typescript@5.4.5)':
+  '@oclif/plugin-help@5.2.20(@types/node@20.12.11)(typescript@5.4.5)':
     dependencies:
-      '@oclif/core': 2.16.0(@types/node@20.12.10)(typescript@5.4.5)
+      '@oclif/core': 2.16.0(@types/node@20.12.11)(typescript@5.4.5)
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
       - '@types/node'
       - typescript
 
-  '@oclif/plugin-plugins@2.4.7(@types/node@20.12.10)(typescript@5.4.5)':
+  '@oclif/plugin-plugins@2.4.7(@types/node@20.12.11)(typescript@5.4.5)':
     dependencies:
       '@oclif/color': 1.0.13
-      '@oclif/core': 2.16.0(@types/node@20.12.10)(typescript@5.4.5)
+      '@oclif/core': 2.16.0(@types/node@20.12.11)(typescript@5.4.5)
       chalk: 4.1.2
       debug: 4.3.4
       fs-extra: 9.1.0
@@ -1958,12 +1958,12 @@ snapshots:
 
   '@paperback/runtime-polyfills@1.0.0-alpha.13': {}
 
-  '@paperback/toolchain@0.8.0-alpha.47(@types/node@20.12.10)(typescript@5.4.5)':
+  '@paperback/toolchain@0.8.0-alpha.47(@types/node@20.12.11)(typescript@5.4.5)':
     dependencies:
       '@grpc/grpc-js': 1.10.7
       '@oclif/core': 1.26.2
-      '@oclif/plugin-help': 5.2.20(@types/node@20.12.10)(typescript@5.4.5)
-      '@oclif/plugin-plugins': 2.4.7(@types/node@20.12.10)(typescript@5.4.5)
+      '@oclif/plugin-help': 5.2.20(@types/node@20.12.11)(typescript@5.4.5)
+      '@oclif/plugin-plugins': 2.4.7(@types/node@20.12.11)(typescript@5.4.5)
       '@paperback/runtime-polyfills': 1.0.0-alpha.13
       '@paperback/types': 1.0.0-alpha.13
       '@protobuf-ts/runtime-rpc': 2.9.4
@@ -2026,15 +2026,15 @@ snapshots:
 
   '@types/cheerio@0.22.35':
     dependencies:
-      '@types/node': 20.12.10
+      '@types/node': 20.12.11
 
   '@types/cli-progress@3.11.5':
     dependencies:
-      '@types/node': 20.12.10
+      '@types/node': 20.12.11
 
   '@types/json-schema@7.0.15': {}
 
-  '@types/node@20.12.10':
+  '@types/node@20.12.11':
     dependencies:
       undici-types: 5.26.5
 
@@ -3347,7 +3347,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.12.10
+      '@types/node': 20.12.11
       long: 5.2.3
 
   pstree.remy@1.1.8: {}
@@ -3671,14 +3671,14 @@ snapshots:
     dependencies:
       typescript: 5.4.5
 
-  ts-node@10.9.2(@types/node@20.12.10)(typescript@5.4.5):
+  ts-node@10.9.2(@types/node@20.12.11)(typescript@5.4.5):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.12.10
+      '@types/node': 20.12.11
       acorn: 8.11.3
       acorn-walk: 8.3.2
       arg: 4.1.3
