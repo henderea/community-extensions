@@ -90,8 +90,8 @@ packages:
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
-  '@grpc/grpc-js@1.10.7':
-    resolution: {integrity: sha512-ZMBVjSeDAz3tFSehyO6Pd08xZT1HfIwq3opbeM4cDlBh52gmwp0wVIPcQur53NN0ac68HMZ/7SF2rGRD5KmVmg==}
+  '@grpc/grpc-js@1.10.8':
+    resolution: {integrity: sha512-vYVqYzHicDqyKB+NQhAc54I1QWCBLCrYG6unqOIcBTHx+7x8C9lcoLj3KVJXs2VB4lUbpWY+Kk9NipcbXYWmvg==}
     engines: {node: '>=12.10.0'}
 
   '@grpc/proto-loader@0.7.13':
@@ -1788,7 +1788,7 @@ snapshots:
 
   '@eslint/js@8.57.0': {}
 
-  '@grpc/grpc-js@1.10.7':
+  '@grpc/grpc-js@1.10.8':
     dependencies:
       '@grpc/proto-loader': 0.7.13
       '@js-sdsl/ordered-map': 4.4.2
@@ -1947,7 +1947,7 @@ snapshots:
 
   '@paperback/toolchain@0.8.0-alpha.47(@types/node@20.12.12)(typescript@5.4.5)':
     dependencies:
-      '@grpc/grpc-js': 1.10.7
+      '@grpc/grpc-js': 1.10.8
       '@oclif/core': 1.26.2
       '@oclif/plugin-help': 5.2.20(@types/node@20.12.12)(typescript@5.4.5)
       '@oclif/plugin-plugins': 2.4.7(@types/node@20.12.12)(typescript@5.4.5)
