@@ -165,19 +165,19 @@ packages:
     engines: {node: '>=12.0.0'}
     deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
-  '@paperback/runtime-polyfills@0.8.0':
-    resolution: {integrity: sha512-6p4rsCQLPT+tXPnPNkTIY4LniCsfAFJpOIFRmGVERkCaPDNWVPKWtekPer5n1INq9bNcJnXCcsSDB28aYph5Tg==}
+  '@paperback/runtime-polyfills@0.8.1':
+    resolution: {integrity: sha512-NkVNW54LtcjzEkXHjHf4hXWpiaomAlQ0a3wHxNTquVjG45EsZ+tokk+BfUsiAwy+o0RrrMXPIHANsHMUv6GrXA==}
 
   '@paperback/toolchain@0.8.0-alpha.47':
     resolution: {integrity: sha512-eOqI8HV9vyICeydQN9RKln8Y0NDePhpkROT0PLsKhvAV/aE6gUS1lg/5msU2TrYw6rwRW6f6xISzQ4W4W3+bsQ==}
     engines: {node: '>=12.0.0'}
     hasBin: true
 
-  '@paperback/types@0.8.0':
-    resolution: {integrity: sha512-kmldTkwJgXsqG+mN8lBIWGysdpal5TUuoegNTtsD7Pi8Ldij3dlojM5DujCiDshY8DxWRFj7W/GtKRuCF7apQQ==}
-
   '@paperback/types@0.8.0-alpha.47':
     resolution: {integrity: sha512-hmphBshCGemhWO/G8zKCYNZ1VzZnI4zbsswOIrx+jiCrsTIxJZStAhiQ4vlowCWq58gYFcH0en4RjoqAKOOaZQ==}
+
+  '@paperback/types@0.8.1':
+    resolution: {integrity: sha512-6oYOYNgxHy6vIqm0/JGz4VvsxOOosn+GVTgoJoTACeduQgAUmbak4hc7XGIycZ/Z5YGLr9beL/h78t5jK4TpZg==}
 
   '@protobuf-ts/runtime-rpc@2.9.4':
     resolution: {integrity: sha512-y9L9JgnZxXFqH5vD4d7j9duWvIJ7AShyBRoNKJGhu9Q27qIbchfzli66H9RvrQNIFk5ER7z1Twe059WZGqERcA==}
@@ -1983,7 +1983,7 @@ snapshots:
 
   '@oclif/screen@3.0.8': {}
 
-  '@paperback/runtime-polyfills@0.8.0':
+  '@paperback/runtime-polyfills@0.8.1':
     dependencies:
       axios: 0.27.2
     transitivePeerDependencies:
@@ -1995,8 +1995,8 @@ snapshots:
       '@oclif/core': 1.26.2
       '@oclif/plugin-help': 5.2.20(@types/node@20.14.2)(typescript@5.4.5)
       '@oclif/plugin-plugins': 2.4.7(@types/node@20.14.2)(typescript@5.4.5)
-      '@paperback/runtime-polyfills': 0.8.0
-      '@paperback/types': 0.8.0
+      '@paperback/runtime-polyfills': 0.8.1
+      '@paperback/types': 0.8.1
       '@protobuf-ts/runtime-rpc': 2.9.4
       browserify: 17.0.0
       chai: 4.4.1
@@ -2013,9 +2013,9 @@ snapshots:
       - supports-color
       - typescript
 
-  '@paperback/types@0.8.0': {}
-
   '@paperback/types@0.8.0-alpha.47': {}
+
+  '@paperback/types@0.8.1': {}
 
   '@protobuf-ts/runtime-rpc@2.9.4':
     dependencies:
