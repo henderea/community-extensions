@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@paperback/toolchain':
-        specifier: ^0.8.1
-        version: 0.8.1(@types/node@20.14.8)(chokidar@3.6.0)(typescript@5.5.2)
+        specifier: ^0.8.6
+        version: 0.8.6(@types/node@20.14.8)(chokidar@3.6.0)(typescript@5.5.2)
       '@paperback/types':
-        specifier: ^0.8.1
-        version: 0.8.1
+        specifier: ^0.8.6
+        version: 0.8.6
       cheerio:
         specifier: 1.0.0-rc.12
         version: 1.0.0-rc.12
@@ -334,16 +334,16 @@ packages:
     engines: {node: '>=12.0.0'}
     deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
-  '@paperback/runtime-polyfills@0.8.1':
-    resolution: {integrity: sha512-NkVNW54LtcjzEkXHjHf4hXWpiaomAlQ0a3wHxNTquVjG45EsZ+tokk+BfUsiAwy+o0RrrMXPIHANsHMUv6GrXA==}
+  '@paperback/runtime-polyfills@0.8.6':
+    resolution: {integrity: sha512-Hft1XFRda16jnvckKFQ0lejtK8oXma5893NLymYD3NS/bGJwNtJt6zo+Zjra9IPULtXE2kBonc1MET94Z/vgrQ==}
 
-  '@paperback/toolchain@0.8.1':
-    resolution: {integrity: sha512-eKsrJp5rEsOI05Ns0MN3be/v0lTTw3Uf4FvgA/otj1YMzrexKM8S9VWy+vj4Rl8EhQj909VaWCbiDs/Adpf0PQ==}
+  '@paperback/toolchain@0.8.6':
+    resolution: {integrity: sha512-RSaryXeeI8kfulKusaXPcFdcHXhtFQ72HPCNfArwa9obd/ZKLHCBJ21XvbNIUsgbl1nG7KozKJApalHUoQ1T+w==}
     engines: {node: '>=12.0.0'}
     hasBin: true
 
-  '@paperback/types@0.8.1':
-    resolution: {integrity: sha512-6oYOYNgxHy6vIqm0/JGz4VvsxOOosn+GVTgoJoTACeduQgAUmbak4hc7XGIycZ/Z5YGLr9beL/h78t5jK4TpZg==}
+  '@paperback/types@0.8.6':
+    resolution: {integrity: sha512-p2vRKts0uVm0jzBUUISKxv5HaX92m2xwcLGVunP0kWpkw31cK3FPfETpf37dK1fnuyP7POgq2mVWjfIfzA0GFA==}
 
   '@protobuf-ts/runtime-rpc@2.9.4':
     resolution: {integrity: sha512-y9L9JgnZxXFqH5vD4d7j9duWvIJ7AShyBRoNKJGhu9Q27qIbchfzli66H9RvrQNIFk5ER7z1Twe059WZGqERcA==}
@@ -2627,21 +2627,21 @@ snapshots:
 
   '@oclif/screen@3.0.8': {}
 
-  '@paperback/runtime-polyfills@0.8.1':
+  '@paperback/runtime-polyfills@0.8.6':
     dependencies:
       axios: 0.27.2
     transitivePeerDependencies:
       - debug
 
-  '@paperback/toolchain@0.8.1(@types/node@20.14.8)(chokidar@3.6.0)(typescript@5.5.2)':
+  '@paperback/toolchain@0.8.6(@types/node@20.14.8)(chokidar@3.6.0)(typescript@5.5.2)':
     dependencies:
       '@grpc/grpc-js': 1.10.9
       '@ivanmatthew/fs-utils-rs': 0.1.5
       '@oclif/core': 1.26.2
       '@oclif/plugin-help': 5.2.20(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
       '@oclif/plugin-plugins': 2.4.7(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
-      '@paperback/runtime-polyfills': 0.8.1
-      '@paperback/types': 0.8.1
+      '@paperback/runtime-polyfills': 0.8.6
+      '@paperback/types': 0.8.6
       '@protobuf-ts/runtime-rpc': 2.9.4
       '@swc/cli': 0.1.65(@swc/core@1.6.5)(chokidar@3.6.0)
       '@swc/core': 1.6.5
@@ -2662,7 +2662,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@paperback/types@0.8.1': {}
+  '@paperback/types@0.8.6': {}
 
   '@protobuf-ts/runtime-rpc@2.9.4':
     dependencies:

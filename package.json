@@ -24,8 +24,8 @@
     "typescript": "^5.5.2"
   },
   "dependencies": {
-    "@paperback/toolchain": "^0.8.1",
-    "@paperback/types": "^0.8.1",
+    "@paperback/toolchain": "^0.8.6",
+    "@paperback/types": "^0.8.6",
     "cheerio": "1.0.0-rc.12",
     "entities": "^4.5.0",
     "nodemon": "^3.1.4",
