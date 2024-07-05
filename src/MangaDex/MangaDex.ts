@@ -20,7 +20,7 @@ import {
     HomePageSectionsProviding
 } from '@paperback/types'
 
-import entities = require('entities')
+import { decode as decodeHTMLEntity } from 'html-entities'
 import {
     contentSettings,
     getLanguages,
@@ -215,8 +215,8 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
         const json = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data
         const mangaDetails = json.data.attributes
 
-        const titles = <string[]>([...Object.values(mangaDetails.title), ...mangaDetails.altTitles.flatMap((x: never) => Object.values(x))].map((x: string) => this.decodeHTMLEntity(x)).filter((x) => x))
-        const desc = this.decodeHTMLEntity(mangaDetails.description.en)?.replace(/\[\/?[bus]]/g, '') // Get rid of BBcode tags
+        const titles = <string[]>([...Object.values(mangaDetails.title), ...mangaDetails.altTitles.flatMap((x: never) => Object.values(x))].map((x: string) => decodeHTMLEntity(x)).filter((x) => x))
+        const desc = decodeHTMLEntity(mangaDetails.description.en)?.replace(/\[\/?[bus]]/g, '') // Get rid of BBcode tags
 
         const status = mangaDetails.status
 
@@ -324,7 +324,7 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
             for (const chapter of json.data) {
                 const chapterId = chapter.id
                 const chapterDetails = chapter.attributes
-                const name = this.decodeHTMLEntity(chapterDetails.title)
+                const name = decodeHTMLEntity(chapterDetails.title)
                 const chapNum = Number(chapterDetails?.chapter)
                 const volume = Number(chapterDetails?.volume)
                 const langCode: string = MDLanguages.getFlagCode(chapterDetails.translatedLanguage)
@@ -622,11 +622,6 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
     }
 
     // Utility
-    decodeHTMLEntity(str: string | undefined): string | undefined {
-        if (str == undefined) return undefined
-        return entities.decodeHTML(str)
-    }
-
     checkId(id: string): void {
         if (!id.includes('-')) {
             throw new Error('OLD ID: PLEASE REFRESH AND CLEAR ORPHANED CHAPTERS')
