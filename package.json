@@ -17,8 +17,8 @@
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.7",
     "@types/cheerio": "^0.22.35",
-    "@typescript-eslint/eslint-plugin": "^7.16.0",
-    "@typescript-eslint/parser": "^7.16.0",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.1",
     "eslint": "^8.57.0",
     "eslint-plugin-modules-newline": "^0.0.6",
     "typescript": "^5.5.3"
