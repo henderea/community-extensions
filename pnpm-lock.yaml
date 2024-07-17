@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@paperback/toolchain':
         specifier: ^0.8.7
-        version: 0.8.7(@types/node@20.14.10)(chokidar@3.6.0)(typescript@5.5.3)
+        version: 0.8.7(@types/node@20.14.11)(chokidar@3.6.0)(typescript@5.5.3)
       '@paperback/types':
         specifier: ^0.8.7
         version: 0.8.7
@@ -25,7 +25,7 @@ importers:
         version: 3.1.4
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.6.13)(@types/node@20.14.10)(typescript@5.5.3)
+        version: 10.9.2(@swc/core@1.6.13)(@types/node@20.14.11)(typescript@5.5.3)
     devDependencies:
       '@tsconfig/recommended':
         specifier: ^1.0.7
@@ -508,8 +508,8 @@ packages:
   '@types/keyv@3.1.4':
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
 
-  '@types/node@20.14.10':
-    resolution: {integrity: sha512-MdiXf+nDuMvY0gJKxyfZ7/6UFsETO7mGKF54MVD/ekJS6HdFtpZFBgrh6Pseu64XTb2MLyFPlbW6hj8HYRQNOQ==}
+  '@types/node@20.14.11':
+    resolution: {integrity: sha512-kprQpL8MMeszbz6ojB5/tU8PLN4kesnN8Gjzw349rDlNgsSzg90lAVj3llK99Dh7JON+t9AuscPPFW6mPbTnSA==}
 
   '@types/responselike@1.0.3':
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
@@ -1010,8 +1010,8 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
 
-  elliptic@6.5.5:
-    resolution: {integrity: sha512-7EjbcmUm17NQFu4Pmgmq2olYMj8nwMnpcddByChSUjArp8F5DQWcIcpriwO4ZToLNAJig0yiyjswfyGNje/ixw==}
+  elliptic@6.5.6:
+    resolution: {integrity: sha512-mpzdtpeCLuS3BmE3pO3Cpp5bbjlOPY2Q0PgoF+Od1XZrHLYI28Xe3ossCmYCQt11FQKEYd9+PF8jymTvtWJSHQ==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -1977,8 +1977,8 @@ packages:
     resolution: {integrity: sha512-LJWA9kSvMolR51oDE6PN3kALBNaUdkxzAGcexw8gjMA8xr5zUqK0JiR3CgARSqanYF3Z1YHvsErb1KDgh+v7Rg==}
     engines: {node: '>=12'}
 
-  semver@7.6.2:
-    resolution: {integrity: sha512-FNAIBWCx9qcRhoHcgcJ0gvU7SN1lYU2ZXuSfl04bSC5OpvDHFyJCjdNHomPXxjQlCBU67YW64PzY7/VIEH7F2w==}
+  semver@7.6.3:
+    resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -2556,7 +2556,7 @@ snapshots:
       natural-orderby: 2.0.3
       object-treeify: 1.1.33
       password-prompt: 1.1.3
-      semver: 7.6.2
+      semver: 7.6.3
       string-width: 4.2.3
       strip-ansi: 6.0.1
       supports-color: 8.1.1
@@ -2565,7 +2565,7 @@ snapshots:
       widest-line: 3.1.0
       wrap-ansi: 7.0.0
 
-  '@oclif/core@2.16.0(@swc/core@1.6.13)(@types/node@20.14.10)(typescript@5.5.3)':
+  '@oclif/core@2.16.0(@swc/core@1.6.13)(@types/node@20.14.11)(typescript@5.5.3)':
     dependencies:
       '@types/cli-progress': 3.11.6
       ansi-escapes: 4.3.2
@@ -2590,7 +2590,7 @@ snapshots:
       strip-ansi: 6.0.1
       supports-color: 8.1.1
       supports-hyperlinks: 2.3.0
-      ts-node: 10.9.2(@swc/core@1.6.13)(@types/node@20.14.10)(typescript@5.5.3)
+      ts-node: 10.9.2(@swc/core@1.6.13)(@types/node@20.14.11)(typescript@5.5.3)
       tslib: 2.6.3
       widest-line: 3.1.0
       wordwrap: 1.0.0
@@ -2603,26 +2603,26 @@ snapshots:
 
   '@oclif/linewrap@1.0.0': {}
 
-  '@oclif/plugin-help@5.2.20(@swc/core@1.6.13)(@types/node@20.14.10)(typescript@5.5.3)':
+  '@oclif/plugin-help@5.2.20(@swc/core@1.6.13)(@types/node@20.14.11)(typescript@5.5.3)':
     dependencies:
-      '@oclif/core': 2.16.0(@swc/core@1.6.13)(@types/node@20.14.10)(typescript@5.5.3)
+      '@oclif/core': 2.16.0(@swc/core@1.6.13)(@types/node@20.14.11)(typescript@5.5.3)
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
       - '@types/node'
       - typescript
 
-  '@oclif/plugin-plugins@2.4.7(@swc/core@1.6.13)(@types/node@20.14.10)(typescript@5.5.3)':
+  '@oclif/plugin-plugins@2.4.7(@swc/core@1.6.13)(@types/node@20.14.11)(typescript@5.5.3)':
     dependencies:
       '@oclif/color': 1.0.13
-      '@oclif/core': 2.16.0(@swc/core@1.6.13)(@types/node@20.14.10)(typescript@5.5.3)
+      '@oclif/core': 2.16.0(@swc/core@1.6.13)(@types/node@20.14.11)(typescript@5.5.3)
       chalk: 4.1.2
       debug: 4.3.5
       fs-extra: 9.1.0
       http-call: 5.3.0
       load-json-file: 5.3.0
       npm-run-path: 4.0.1
-      semver: 7.6.2
+      semver: 7.6.3
       tslib: 2.6.3
       yarn: 1.22.22
     transitivePeerDependencies:
@@ -2640,13 +2640,13 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@paperback/toolchain@0.8.7(@types/node@20.14.10)(chokidar@3.6.0)(typescript@5.5.3)':
+  '@paperback/toolchain@0.8.7(@types/node@20.14.11)(chokidar@3.6.0)(typescript@5.5.3)':
     dependencies:
       '@grpc/grpc-js': 1.11.1
       '@ivanmatthew/fs-utils-rs': 0.1.5
       '@oclif/core': 1.26.2
-      '@oclif/plugin-help': 5.2.20(@swc/core@1.6.13)(@types/node@20.14.10)(typescript@5.5.3)
-      '@oclif/plugin-plugins': 2.4.7(@swc/core@1.6.13)(@types/node@20.14.10)(typescript@5.5.3)
+      '@oclif/plugin-help': 5.2.20(@swc/core@1.6.13)(@types/node@20.14.11)(typescript@5.5.3)
+      '@oclif/plugin-plugins': 2.4.7(@swc/core@1.6.13)(@types/node@20.14.11)(typescript@5.5.3)
       '@paperback/runtime-polyfills': 0.8.7
       '@paperback/types': 0.8.7
       '@protobuf-ts/runtime-rpc': 2.9.4
@@ -2709,7 +2709,7 @@ snapshots:
       commander: 7.2.0
       fast-glob: 3.3.2
       minimatch: 9.0.5
-      semver: 7.6.2
+      semver: 7.6.3
       slash: 3.0.0
       source-map: 0.7.4
     optionalDependencies:
@@ -2787,30 +2787,30 @@ snapshots:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.14.10
+      '@types/node': 20.14.11
       '@types/responselike': 1.0.3
 
   '@types/cheerio@0.22.35':
     dependencies:
-      '@types/node': 20.14.10
+      '@types/node': 20.14.11
 
   '@types/cli-progress@3.11.6':
     dependencies:
-      '@types/node': 20.14.10
+      '@types/node': 20.14.11
 
   '@types/http-cache-semantics@4.0.4': {}
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 20.14.10
+      '@types/node': 20.14.11
 
-  '@types/node@20.14.10':
+  '@types/node@20.14.11':
     dependencies:
       undici-types: 5.26.5
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 20.14.10
+      '@types/node': 20.14.11
 
   '@typescript-eslint/eslint-plugin@7.16.1(@typescript-eslint/parser@7.16.1(eslint@8.57.0)(typescript@5.5.3))(eslint@8.57.0)(typescript@5.5.3)':
     dependencies:
@@ -2870,7 +2870,7 @@ snapshots:
       globby: 11.1.0
       is-glob: 4.0.3
       minimatch: 9.0.5
-      semver: 7.6.2
+      semver: 7.6.3
       ts-api-utils: 1.3.0(typescript@5.5.3)
     optionalDependencies:
       typescript: 5.5.3
@@ -3008,7 +3008,7 @@ snapshots:
   bin-version-check@5.1.0:
     dependencies:
       bin-version: 6.0.0
-      semver: 7.6.2
+      semver: 7.6.3
       semver-truncate: 3.0.0
 
   bin-version@6.0.0:
@@ -3085,7 +3085,7 @@ snapshots:
       browserify-rsa: 4.1.0
       create-hash: 1.2.0
       create-hmac: 1.1.7
-      elliptic: 6.5.5
+      elliptic: 6.5.6
       hash-base: 3.0.4
       inherits: 2.0.4
       parse-asn1: 5.1.7
@@ -3314,7 +3314,7 @@ snapshots:
   create-ecdh@4.0.4:
     dependencies:
       bn.js: 4.12.0
-      elliptic: 6.5.5
+      elliptic: 6.5.6
 
   create-hash@1.2.0:
     dependencies:
@@ -3481,7 +3481,7 @@ snapshots:
     dependencies:
       jake: 10.9.1
 
-  elliptic@6.5.5:
+  elliptic@6.5.6:
     dependencies:
       bn.js: 4.12.0
       brorand: 1.1.0
@@ -4186,7 +4186,7 @@ snapshots:
       ignore-by-default: 1.0.1
       minimatch: 3.1.2
       pstree.remy: 1.1.8
-      semver: 7.6.2
+      semver: 7.6.3
       simple-update-notifier: 2.0.0
       supports-color: 5.5.0
       touch: 3.1.1
@@ -4354,7 +4354,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.14.10
+      '@types/node': 20.14.11
       long: 5.2.3
 
   pseudomap@1.0.2: {}
@@ -4542,9 +4542,9 @@ snapshots:
 
   semver-truncate@3.0.0:
     dependencies:
-      semver: 7.6.2
+      semver: 7.6.3
 
-  semver@7.6.2: {}
+  semver@7.6.3: {}
 
   set-function-length@1.2.2:
     dependencies:
@@ -4597,7 +4597,7 @@ snapshots:
 
   simple-update-notifier@2.0.0:
     dependencies:
-      semver: 7.6.2
+      semver: 7.6.3
 
   slash@3.0.0: {}
 
@@ -4739,14 +4739,14 @@ snapshots:
     dependencies:
       typescript: 5.5.3
 
-  ts-node@10.9.2(@swc/core@1.6.13)(@types/node@20.14.10)(typescript@5.5.3):
+  ts-node@10.9.2(@swc/core@1.6.13)(@types/node@20.14.11)(typescript@5.5.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.14.10
+      '@types/node': 20.14.11
       acorn: 8.12.1
       acorn-walk: 8.3.3
       arg: 4.1.3
