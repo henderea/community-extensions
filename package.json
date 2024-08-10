@@ -26,7 +26,7 @@
   "dependencies": {
     "@paperback/toolchain": "0.8.0-alpha.47",
     "@paperback/types": "0.8.0-alpha.47",
-    "cheerio": "1.0.0-rc.12",
+    "cheerio": "1.0.0",
     "html-entities": "^2.5.2",
     "nodemon": "^3.1.4",
     "ts-node": "^10.9.2"
