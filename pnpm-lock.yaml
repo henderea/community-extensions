@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@paperback/toolchain':
         specifier: 0.8.0-alpha.47
-        version: 0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.5.5)(typescript@5.6.2)
+        version: 0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.7.4)(typescript@5.6.2)
       '@paperback/types':
         specifier: 0.8.0-alpha.47
         version: 0.8.0-alpha.47
@@ -25,7 +25,7 @@ importers:
         version: 3.1.7
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.7.1)(@types/node@22.5.5)(typescript@5.6.2)
+        version: 10.9.2(@swc/core@1.7.1)(@types/node@22.7.4)(typescript@5.6.2)
     devDependencies:
       '@tsconfig/recommended':
         specifier: ^1.0.7
@@ -311,8 +311,8 @@ packages:
   '@types/cli-progress@3.11.6':
     resolution: {integrity: sha512-cE3+jb9WRlu+uOSAugewNpITJDt1VF8dHOopPO4IABFc3SXYL5WE/+PTz/FCdZRRfIujiWW3n3aMbv1eIGVRWA==}
 
-  '@types/node@22.5.5':
-    resolution: {integrity: sha512-Xjs4y5UPO/CLdzpgR6GirZJx36yScjh73+2NlLlkFRSoQN8B0DpfXPdZGnvVmLRLOsqDpOfTNv7D9trgGhmOIA==}
+  '@types/node@22.7.4':
+    resolution: {integrity: sha512-y+NPi1rFzDs1NdQHHToqeiX2TIS79SWEAw9GYhkkx8bD0ChpfqC+n2j5OXOCpzfojBEBt6DnEnnG9MY0zk1XLg==}
 
   '@typescript-eslint/eslint-plugin@7.18.0':
     resolution: {integrity: sha512-94EQTWZ40mzBc42ATNIBimBEDltSJ9RQHCC8vc/PDbxi4k8dVwUAv4o98dk50M1zB+JGFxp43FP7f8+FP8R6Sw==}
@@ -522,8 +522,9 @@ packages:
   browserify-des@1.0.2:
     resolution: {integrity: sha512-BioO1xf3hFwz4kc6iBhI3ieDFompMhrMlnDFC4/0/vd5MokpuAc3R+LYbwTA9A5Yc9pq9UYPqffKpW2ObuwX5A==}
 
-  browserify-rsa@4.1.0:
-    resolution: {integrity: sha512-AdEER0Hkspgno2aR97SAf6vi0y0k8NuOpGnVH3O99rcA5Q6sh8QxcngtHuJ6uXwnfAXNM4Gn1Gb7/MV1+Ymbog==}
+  browserify-rsa@4.1.1:
+    resolution: {integrity: sha512-YBjSAiTqM04ZVei6sXighu679a3SqWORA3qZTEqZImnlkDIFtKc6pNutpjyZ8RJTjQtuYfeetkxM11GwoYXMIQ==}
+    engines: {node: '>= 0.10'}
 
   browserify-sign@4.2.3:
     resolution: {integrity: sha512-JWCZW6SKhfhjJxO8Tyiiy+XYB7cqd2S5/+WeYHsKdNKFlCBhKbblba1A/HN/90YwtxKc8tCErjffZl++UNmGiw==}
@@ -1985,7 +1986,7 @@ snapshots:
       widest-line: 3.1.0
       wrap-ansi: 7.0.0
 
-  '@oclif/core@2.16.0(@swc/core@1.7.1)(@types/node@22.5.5)(typescript@5.6.2)':
+  '@oclif/core@2.16.0(@swc/core@1.7.1)(@types/node@22.7.4)(typescript@5.6.2)':
     dependencies:
       '@types/cli-progress': 3.11.6
       ansi-escapes: 4.3.2
@@ -2010,7 +2011,7 @@ snapshots:
       strip-ansi: 6.0.1
       supports-color: 8.1.1
       supports-hyperlinks: 2.3.0
-      ts-node: 10.9.2(@swc/core@1.7.1)(@types/node@22.5.5)(typescript@5.6.2)
+      ts-node: 10.9.2(@swc/core@1.7.1)(@types/node@22.7.4)(typescript@5.6.2)
       tslib: 2.7.0
       widest-line: 3.1.0
       wordwrap: 1.0.0
@@ -2023,19 +2024,19 @@ snapshots:
 
   '@oclif/linewrap@1.0.0': {}
 
-  '@oclif/plugin-help@5.2.20(@swc/core@1.7.1)(@types/node@22.5.5)(typescript@5.6.2)':
+  '@oclif/plugin-help@5.2.20(@swc/core@1.7.1)(@types/node@22.7.4)(typescript@5.6.2)':
     dependencies:
-      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.5.5)(typescript@5.6.2)
+      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.7.4)(typescript@5.6.2)
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
       - '@types/node'
       - typescript
 
-  '@oclif/plugin-plugins@2.4.7(@swc/core@1.7.1)(@types/node@22.5.5)(typescript@5.6.2)':
+  '@oclif/plugin-plugins@2.4.7(@swc/core@1.7.1)(@types/node@22.7.4)(typescript@5.6.2)':
     dependencies:
       '@oclif/color': 1.0.13
-      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.5.5)(typescript@5.6.2)
+      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.7.4)(typescript@5.6.2)
       chalk: 4.1.2
       debug: 4.3.7
       fs-extra: 9.1.0
@@ -2056,12 +2057,12 @@ snapshots:
 
   '@paperback/runtime-polyfills@1.0.0-alpha.20': {}
 
-  '@paperback/toolchain@0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.5.5)(typescript@5.6.2)':
+  '@paperback/toolchain@0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.7.4)(typescript@5.6.2)':
     dependencies:
       '@grpc/grpc-js': 1.11.3
       '@oclif/core': 1.26.2
-      '@oclif/plugin-help': 5.2.20(@swc/core@1.7.1)(@types/node@22.5.5)(typescript@5.6.2)
-      '@oclif/plugin-plugins': 2.4.7(@swc/core@1.7.1)(@types/node@22.5.5)(typescript@5.6.2)
+      '@oclif/plugin-help': 5.2.20(@swc/core@1.7.1)(@types/node@22.7.4)(typescript@5.6.2)
+      '@oclif/plugin-plugins': 2.4.7(@swc/core@1.7.1)(@types/node@22.7.4)(typescript@5.6.2)
       '@paperback/runtime-polyfills': 1.0.0-alpha.20
       '@paperback/types': 1.0.0-alpha.20
       '@protobuf-ts/runtime-rpc': 2.9.4
@@ -2179,13 +2180,13 @@ snapshots:
 
   '@types/cheerio@0.22.35':
     dependencies:
-      '@types/node': 22.5.5
+      '@types/node': 22.7.4
 
   '@types/cli-progress@3.11.6':
     dependencies:
-      '@types/node': 22.5.5
+      '@types/node': 22.7.4
 
-  '@types/node@22.5.5':
+  '@types/node@22.7.4':
     dependencies:
       undici-types: 6.19.8
 
@@ -2424,15 +2425,16 @@ snapshots:
       inherits: 2.0.4
       safe-buffer: 5.2.1
 
-  browserify-rsa@4.1.0:
+  browserify-rsa@4.1.1:
     dependencies:
       bn.js: 5.2.1
       randombytes: 2.1.0
+      safe-buffer: 5.2.1
 
   browserify-sign@4.2.3:
     dependencies:
       bn.js: 5.2.1
-      browserify-rsa: 4.1.0
+      browserify-rsa: 4.1.1
       create-hash: 1.2.0
       create-hmac: 1.1.7
       elliptic: 6.5.7
@@ -3506,7 +3508,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 22.5.5
+      '@types/node': 22.7.4
       long: 5.2.3
 
   pstree.remy@1.1.8: {}
@@ -3514,7 +3516,7 @@ snapshots:
   public-encrypt@4.0.3:
     dependencies:
       bn.js: 4.12.0
-      browserify-rsa: 4.1.0
+      browserify-rsa: 4.1.1
       create-hash: 1.2.0
       parse-asn1: 5.1.7
       randombytes: 2.1.0
@@ -3830,14 +3832,14 @@ snapshots:
     dependencies:
       typescript: 5.6.2
 
-  ts-node@10.9.2(@swc/core@1.7.1)(@types/node@22.5.5)(typescript@5.6.2):
+  ts-node@10.9.2(@swc/core@1.7.1)(@types/node@22.7.4)(typescript@5.6.2):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 22.5.5
+      '@types/node': 22.7.4
       acorn: 8.12.1
       acorn-walk: 8.3.4
       arg: 4.1.3
