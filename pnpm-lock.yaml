@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@paperback/toolchain':
         specifier: 0.8.0-alpha.47
-        version: 0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.7.7)(typescript@5.6.3)
+        version: 0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.8.0)(typescript@5.6.3)
       '@paperback/types':
         specifier: 0.8.0-alpha.47
         version: 0.8.0-alpha.47
@@ -25,7 +25,7 @@ importers:
         version: 3.1.7
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.7.1)(@types/node@22.7.7)(typescript@5.6.3)
+        version: 10.9.2(@swc/core@1.7.1)(@types/node@22.8.0)(typescript@5.6.3)
     devDependencies:
       '@tsconfig/recommended':
         specifier: ^1.0.7
@@ -51,21 +51,21 @@ importers:
 
 packages:
 
-  '@babel/helper-string-parser@7.25.7':
-    resolution: {integrity: sha512-CbkjYdsJNHFk8uqpEkpCvRs3YRp9tY6FmFY7wLMSYuGYkrdUi7r2lc4/wqsvlHoMznX3WJ9IP8giGPq68T/Y6g==}
+  '@babel/helper-string-parser@7.25.9':
+    resolution: {integrity: sha512-4A/SCr/2KLd5jrtOMFzaKjVtAei3+2r/NChoBNoZ3EyP/+GlhoaEGoWOZUmFmoITP7zOJyHIMm+DYRd8o3PvHA==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/helper-validator-identifier@7.25.7':
-    resolution: {integrity: sha512-AM6TzwYqGChO45oiuPqwL2t20/HdMC1rTPAesnBCgPCSF1x3oN9MVUwQV2iyz4xqWrctwK5RNC8LV22kaQCNYg==}
+  '@babel/helper-validator-identifier@7.25.9':
+    resolution: {integrity: sha512-Ed61U6XJc3CVRfkERJWDz4dJwKe7iLmmJsbOGu9wSloNSFttHV0I8g6UAgb7qnK5ly5bGLPd4oXZlxCdANBOWQ==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/parser@7.25.8':
-    resolution: {integrity: sha512-HcttkxzdPucv3nNFmfOOMfFf64KgdJVqm1KaCm25dPGMLElo9nsLvXeJECQg8UzPuBGLyTSA0ZzqCtDSzKTEoQ==}
+  '@babel/parser@7.26.0':
+    resolution: {integrity: sha512-aP8x5pIw3xvYr/sXT+SEUwyhrXT8rUJRZltK/qN3Db80dcKpTett8cJxHyjk+xYSVXvNnl2SfcJVjbwxpOSscA==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
-  '@babel/types@7.25.8':
-    resolution: {integrity: sha512-JWtuCu8VQsMladxVz/P4HzHUGCAwpuqacmowgXFs5XjxIgKuNjnLokQzuVjlTvIzODaDmpjT3oxcC48vyk9EWg==}
+  '@babel/types@7.26.0':
+    resolution: {integrity: sha512-Z/yiTPj+lDVnF7lWeKCIJzaIkI0vYO87dMpZ4bg4TDrFe4XXLFWL1TbXU27gBP3QccxV9mZICCrnjnYlJjXHOA==}
     engines: {node: '>=6.9.0'}
 
   '@cspotcode/source-map-support@0.8.1':
@@ -165,8 +165,8 @@ packages:
     engines: {node: '>=12.0.0'}
     deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
-  '@paperback/runtime-polyfills@1.0.0-alpha.22':
-    resolution: {integrity: sha512-Y4FrqjOAbdhVUaRikgwUkLtyBd9hrUQbl3OXNz5ZvK8rBZIwY/MdcdoVfPSjDadgoqvGaEs1K1Wfo8x67w9BAQ==}
+  '@paperback/runtime-polyfills@1.0.0-alpha.24':
+    resolution: {integrity: sha512-MvsreQ2YPh+I+BT5HjM4IGHxXyEL67Xvu+UCO4mO5nktfqCNQ8wE6TseG/VMVlmecJyTTQO+C2eVk0XAzajqOg==}
 
   '@paperback/toolchain@0.8.0-alpha.47':
     resolution: {integrity: sha512-eOqI8HV9vyICeydQN9RKln8Y0NDePhpkROT0PLsKhvAV/aE6gUS1lg/5msU2TrYw6rwRW6f6xISzQ4W4W3+bsQ==}
@@ -176,8 +176,8 @@ packages:
   '@paperback/types@0.8.0-alpha.47':
     resolution: {integrity: sha512-hmphBshCGemhWO/G8zKCYNZ1VzZnI4zbsswOIrx+jiCrsTIxJZStAhiQ4vlowCWq58gYFcH0en4RjoqAKOOaZQ==}
 
-  '@paperback/types@1.0.0-alpha.22':
-    resolution: {integrity: sha512-ogqnGF4QbdeosGADPkt94toLSBp2GPea7Qu6Pxvs8QVdakn1b/jVQXjCSSzmBI1P/ngumXjp4YGizVqNsJ/hOQ==}
+  '@paperback/types@1.0.0-alpha.24':
+    resolution: {integrity: sha512-LAQuH9mUae5iUYrHmTBSGSzD0pfQly4j+LgCdACPVDQ+N/jGjr2a/xRtyfCAJFtMuF6mkfz66zPd7I2T5bRqxA==}
 
   '@protobuf-ts/runtime-rpc@2.9.4':
     resolution: {integrity: sha512-y9L9JgnZxXFqH5vD4d7j9duWvIJ7AShyBRoNKJGhu9Q27qIbchfzli66H9RvrQNIFk5ER7z1Twe059WZGqERcA==}
@@ -311,8 +311,8 @@ packages:
   '@types/cli-progress@3.11.6':
     resolution: {integrity: sha512-cE3+jb9WRlu+uOSAugewNpITJDt1VF8dHOopPO4IABFc3SXYL5WE/+PTz/FCdZRRfIujiWW3n3aMbv1eIGVRWA==}
 
-  '@types/node@22.7.7':
-    resolution: {integrity: sha512-SRxCrrg9CL/y54aiMCG3edPKdprgMVGDXjA3gB8UmmBW5TcXzRUYAh8EWzTnSJFAd1rgImPELza+A3bJ+qxz8Q==}
+  '@types/node@22.8.0':
+    resolution: {integrity: sha512-84rafSBHC/z1i1E3p0cJwKA+CfYDNSXX9WSZBRopjIzLET8oNt6ht2tei4C7izwDeEiLLfdeSVBv1egOH916hg==}
 
   '@typescript-eslint/eslint-plugin@7.18.0':
     resolution: {integrity: sha512-94EQTWZ40mzBc42ATNIBimBEDltSJ9RQHCC8vc/PDbxi4k8dVwUAv4o98dk50M1zB+JGFxp43FP7f8+FP8R6Sw==}
@@ -657,8 +657,9 @@ packages:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
 
-  crypto-browserify@3.12.0:
-    resolution: {integrity: sha512-fz4spIh+znjO2VjL+IdhEpRJ3YN6sMzITSBijk6FK2UvTqruSQW+/cCZTSNsMiZNvUeq0CqurF+dAbyiGOY6Wg==}
+  crypto-browserify@3.12.1:
+    resolution: {integrity: sha512-r4ESw/IlusD17lgQi1O20Fa3qNnsckR126TdUuBgAu7GBYSIPvdNyONd3Zrxh0xCwA4+6w/TDArBPsMvhur+KQ==}
+    engines: {node: '>= 0.10'}
 
   css-select@5.1.0:
     resolution: {integrity: sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==}
@@ -965,10 +966,6 @@ packages:
 
   hash-base@3.0.4:
     resolution: {integrity: sha512-EeeoJKjTyt868liAlVmcv2ZsUfGHlE3Q+BICOXcZiwN3osr5Q/zFGYmTJpoIzuaSTAwndFy+GqhEwlU4L3j4Ow==}
-    engines: {node: '>=4'}
-
-  hash-base@3.1.0:
-    resolution: {integrity: sha512-1nmYp/rhMDiE7AYkDw+lLwlAzz0AntGIe51F3RfFfEqyQ3feY2eI/NcwC6umIQVOASPMsWJLJScWKSSvzL9IVA==}
     engines: {node: '>=4'}
 
   hash.js@1.1.7:
@@ -1666,10 +1663,6 @@ packages:
     resolution: {integrity: sha512-PIxwAupJZiYU4JmVZYwXp9FKsHMXb5h0ZEFyuXTAn8WLHOlcij+FEcbrvDsom1o5dr1YggEtFbECvGCW2sT53Q==}
     engines: {node: '>=0.6.0'}
 
-  to-fast-properties@2.0.0:
-    resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
-    engines: {node: '>=4'}
-
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
@@ -1856,19 +1849,18 @@ packages:
 
 snapshots:
 
-  '@babel/helper-string-parser@7.25.7': {}
+  '@babel/helper-string-parser@7.25.9': {}
 
-  '@babel/helper-validator-identifier@7.25.7': {}
+  '@babel/helper-validator-identifier@7.25.9': {}
 
-  '@babel/parser@7.25.8':
+  '@babel/parser@7.26.0':
     dependencies:
-      '@babel/types': 7.25.8
+      '@babel/types': 7.26.0
 
-  '@babel/types@7.25.8':
+  '@babel/types@7.26.0':
     dependencies:
-      '@babel/helper-string-parser': 7.25.7
-      '@babel/helper-validator-identifier': 7.25.7
-      to-fast-properties: 2.0.0
+      '@babel/helper-string-parser': 7.25.9
+      '@babel/helper-validator-identifier': 7.25.9
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -1983,7 +1975,7 @@ snapshots:
       widest-line: 3.1.0
       wrap-ansi: 7.0.0
 
-  '@oclif/core@2.16.0(@swc/core@1.7.1)(@types/node@22.7.7)(typescript@5.6.3)':
+  '@oclif/core@2.16.0(@swc/core@1.7.1)(@types/node@22.8.0)(typescript@5.6.3)':
     dependencies:
       '@types/cli-progress': 3.11.6
       ansi-escapes: 4.3.2
@@ -2008,7 +2000,7 @@ snapshots:
       strip-ansi: 6.0.1
       supports-color: 8.1.1
       supports-hyperlinks: 2.3.0
-      ts-node: 10.9.2(@swc/core@1.7.1)(@types/node@22.7.7)(typescript@5.6.3)
+      ts-node: 10.9.2(@swc/core@1.7.1)(@types/node@22.8.0)(typescript@5.6.3)
       tslib: 2.8.0
       widest-line: 3.1.0
       wordwrap: 1.0.0
@@ -2021,19 +2013,19 @@ snapshots:
 
   '@oclif/linewrap@1.0.0': {}
 
-  '@oclif/plugin-help@5.2.20(@swc/core@1.7.1)(@types/node@22.7.7)(typescript@5.6.3)':
+  '@oclif/plugin-help@5.2.20(@swc/core@1.7.1)(@types/node@22.8.0)(typescript@5.6.3)':
     dependencies:
-      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.7.7)(typescript@5.6.3)
+      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.8.0)(typescript@5.6.3)
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
       - '@types/node'
       - typescript
 
-  '@oclif/plugin-plugins@2.4.7(@swc/core@1.7.1)(@types/node@22.7.7)(typescript@5.6.3)':
+  '@oclif/plugin-plugins@2.4.7(@swc/core@1.7.1)(@types/node@22.8.0)(typescript@5.6.3)':
     dependencies:
       '@oclif/color': 1.0.13
-      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.7.7)(typescript@5.6.3)
+      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.8.0)(typescript@5.6.3)
       chalk: 4.1.2
       debug: 4.3.7
       fs-extra: 9.1.0
@@ -2052,16 +2044,16 @@ snapshots:
 
   '@oclif/screen@3.0.8': {}
 
-  '@paperback/runtime-polyfills@1.0.0-alpha.22': {}
+  '@paperback/runtime-polyfills@1.0.0-alpha.24': {}
 
-  '@paperback/toolchain@0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.7.7)(typescript@5.6.3)':
+  '@paperback/toolchain@0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.8.0)(typescript@5.6.3)':
     dependencies:
       '@grpc/grpc-js': 1.12.2
       '@oclif/core': 1.26.2
-      '@oclif/plugin-help': 5.2.20(@swc/core@1.7.1)(@types/node@22.7.7)(typescript@5.6.3)
-      '@oclif/plugin-plugins': 2.4.7(@swc/core@1.7.1)(@types/node@22.7.7)(typescript@5.6.3)
-      '@paperback/runtime-polyfills': 1.0.0-alpha.22
-      '@paperback/types': 1.0.0-alpha.22
+      '@oclif/plugin-help': 5.2.20(@swc/core@1.7.1)(@types/node@22.8.0)(typescript@5.6.3)
+      '@oclif/plugin-plugins': 2.4.7(@swc/core@1.7.1)(@types/node@22.8.0)(typescript@5.6.3)
+      '@paperback/runtime-polyfills': 1.0.0-alpha.24
+      '@paperback/types': 1.0.0-alpha.24
       '@protobuf-ts/runtime-rpc': 2.9.4
       browserify: 17.0.1
       chai: 4.5.0
@@ -2079,7 +2071,7 @@ snapshots:
 
   '@paperback/types@0.8.0-alpha.47': {}
 
-  '@paperback/types@1.0.0-alpha.22': {}
+  '@paperback/types@1.0.0-alpha.24': {}
 
   '@protobuf-ts/runtime-rpc@2.9.4':
     dependencies:
@@ -2177,13 +2169,13 @@ snapshots:
 
   '@types/cheerio@0.22.35':
     dependencies:
-      '@types/node': 22.7.7
+      '@types/node': 22.8.0
 
   '@types/cli-progress@3.11.6':
     dependencies:
-      '@types/node': 22.7.7
+      '@types/node': 22.8.0
 
-  '@types/node@22.7.7':
+  '@types/node@22.8.0':
     dependencies:
       undici-types: 6.19.8
 
@@ -2358,7 +2350,7 @@ snapshots:
 
   babel-walk@3.0.0-canary-5:
     dependencies:
-      '@babel/types': 7.25.8
+      '@babel/types': 7.26.0
 
   balanced-match@1.0.2: {}
 
@@ -2457,7 +2449,7 @@ snapshots:
       concat-stream: 1.6.2
       console-browserify: 1.2.0
       constants-browserify: 1.0.0
-      crypto-browserify: 3.12.0
+      crypto-browserify: 3.12.1
       defined: 1.0.1
       deps-sort: 2.0.1
       domain-browser: 1.2.0
@@ -2627,8 +2619,8 @@ snapshots:
 
   constantinople@4.0.1:
     dependencies:
-      '@babel/parser': 7.25.8
-      '@babel/types': 7.25.8
+      '@babel/parser': 7.26.0
+      '@babel/types': 7.26.0
 
   constants-browserify@1.0.0: {}
 
@@ -2668,7 +2660,7 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  crypto-browserify@3.12.0:
+  crypto-browserify@3.12.1:
     dependencies:
       browserify-cipher: 1.0.1
       browserify-sign: 4.2.3
@@ -2676,6 +2668,7 @@ snapshots:
       create-hash: 1.2.0
       create-hmac: 1.1.7
       diffie-hellman: 5.0.3
+      hash-base: 3.0.4
       inherits: 2.0.4
       pbkdf2: 3.1.2
       public-encrypt: 4.0.3
@@ -3046,12 +3039,6 @@ snapshots:
       inherits: 2.0.4
       safe-buffer: 5.2.1
 
-  hash-base@3.1.0:
-    dependencies:
-      inherits: 2.0.4
-      readable-stream: 3.6.2
-      safe-buffer: 5.2.1
-
   hash.js@1.1.7:
     dependencies:
       inherits: 2.0.4
@@ -3288,7 +3275,7 @@ snapshots:
 
   md5.js@1.3.5:
     dependencies:
-      hash-base: 3.1.0
+      hash-base: 3.0.4
       inherits: 2.0.4
       safe-buffer: 5.2.1
 
@@ -3503,7 +3490,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 22.7.7
+      '@types/node': 22.8.0
       long: 5.2.3
 
   pstree.remy@1.1.8: {}
@@ -3657,7 +3644,7 @@ snapshots:
 
   ripemd160@2.0.2:
     dependencies:
-      hash-base: 3.1.0
+      hash-base: 3.0.4
       inherits: 2.0.4
 
   run-parallel@1.2.0:
@@ -3813,8 +3800,6 @@ snapshots:
     dependencies:
       process: 0.11.10
 
-  to-fast-properties@2.0.0: {}
-
   to-regex-range@5.0.1:
     dependencies:
       is-number: 7.0.0
@@ -3827,14 +3812,14 @@ snapshots:
     dependencies:
       typescript: 5.6.3
 
-  ts-node@10.9.2(@swc/core@1.7.1)(@types/node@22.7.7)(typescript@5.6.3):
+  ts-node@10.9.2(@swc/core@1.7.1)(@types/node@22.8.0)(typescript@5.6.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 22.7.7
+      '@types/node': 22.8.0
       acorn: 8.13.0
       acorn-walk: 8.3.4
       arg: 4.1.3
@@ -3942,8 +3927,8 @@ snapshots:
 
   with@7.0.2:
     dependencies:
-      '@babel/parser': 7.25.8
-      '@babel/types': 7.25.8
+      '@babel/parser': 7.26.0
+      '@babel/types': 7.26.0
       assert-never: 1.3.0
       babel-walk: 3.0.0-canary-5
 
