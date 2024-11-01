@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@paperback/toolchain':
         specifier: 0.8.0-alpha.47
-        version: 0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.8.4)(typescript@5.6.3)
+        version: 0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.8.6)(typescript@5.6.3)
       '@paperback/types':
         specifier: 0.8.0-alpha.47
         version: 0.8.0-alpha.47
@@ -25,7 +25,7 @@ importers:
         version: 3.1.7
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.7.1)(@types/node@22.8.4)(typescript@5.6.3)
+        version: 10.9.2(@swc/core@1.7.1)(@types/node@22.8.6)(typescript@5.6.3)
     devDependencies:
       '@tsconfig/recommended':
         specifier: ^1.0.8
@@ -59,8 +59,8 @@ packages:
     resolution: {integrity: sha512-Ed61U6XJc3CVRfkERJWDz4dJwKe7iLmmJsbOGu9wSloNSFttHV0I8g6UAgb7qnK5ly5bGLPd4oXZlxCdANBOWQ==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/parser@7.26.1':
-    resolution: {integrity: sha512-reoQYNiAJreZNsJzyrDNzFQ+IQ5JFiIzAHJg9bn94S3l+4++J7RsIhNMoB+lgP/9tpmiAQqspv+xfdxTSzREOw==}
+  '@babel/parser@7.26.2':
+    resolution: {integrity: sha512-DWMCZH9WA4Maitz2q21SRKHo9QXZxkDsbNZoVD62gusNtNBBqDg9i7uOhASfTfIGNzW+O+r7+jAlM8dwphcJKQ==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -311,8 +311,8 @@ packages:
   '@types/cli-progress@3.11.6':
     resolution: {integrity: sha512-cE3+jb9WRlu+uOSAugewNpITJDt1VF8dHOopPO4IABFc3SXYL5WE/+PTz/FCdZRRfIujiWW3n3aMbv1eIGVRWA==}
 
-  '@types/node@22.8.4':
-    resolution: {integrity: sha512-SpNNxkftTJOPk0oN+y2bIqurEXHTA2AOZ3EJDDKeJ5VzkvvORSvmQXGQarcOzWV1ac7DCaPBEdMDxBsM+d8jWw==}
+  '@types/node@22.8.6':
+    resolution: {integrity: sha512-tosuJYKrIqjQIlVCM4PEGxOmyg3FCPa/fViuJChnGeEIhjA46oy8FMVoF9su1/v8PNs2a8Q0iFNyOx0uOF91nw==}
 
   '@typescript-eslint/eslint-plugin@7.18.0':
     resolution: {integrity: sha512-94EQTWZ40mzBc42ATNIBimBEDltSJ9RQHCC8vc/PDbxi4k8dVwUAv4o98dk50M1zB+JGFxp43FP7f8+FP8R6Sw==}
@@ -1674,8 +1674,8 @@ packages:
     resolution: {integrity: sha512-r0eojU4bI8MnHr8c5bNo7lJDdI2qXlWWJk6a9EAFG7vbhTjElYhBVS3/miuE0uOuoLdb8Mc/rVfsmm6eo5o9GA==}
     hasBin: true
 
-  ts-api-utils@1.3.0:
-    resolution: {integrity: sha512-UQMIo7pb8WRomKR1/+MFVLTroIvDVtMX3K6OUir8ynLyzB8Jeriont2bTAtmNPa1ekAgN7YPDyf6V+ygrdU+eQ==}
+  ts-api-utils@1.4.0:
+    resolution: {integrity: sha512-032cPxaEKwM+GT3vA5JXNzIaizx388rhsSW79vGRNGXfRRAdEAn2mvk36PvK5HnOchyWZ7afLEXqYCvPCrzuzQ==}
     engines: {node: '>=16'}
     peerDependencies:
       typescript: '>=4.2.0'
@@ -1694,8 +1694,8 @@ packages:
       '@swc/wasm':
         optional: true
 
-  tslib@2.8.0:
-    resolution: {integrity: sha512-jWVzBLplnCmoaTr13V9dYbiQ99wvZRd0vNWaDRg+aVYRcjDF3nDksxFDE/+fkXnKhpnUUkmx5pK/v8mCtLVqZA==}
+  tslib@2.8.1:
+    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
   tty-browserify@0.0.1:
     resolution: {integrity: sha512-C3TaO7K81YvjCgQH9Q1S3R3P3BtN3RIM8n+OvX4il1K1zgE8ZhI0op7kClgkxtutIE8hQrcrHBXvIheqKUUCxw==}
@@ -1853,7 +1853,7 @@ snapshots:
 
   '@babel/helper-validator-identifier@7.25.9': {}
 
-  '@babel/parser@7.26.1':
+  '@babel/parser@7.26.2':
     dependencies:
       '@babel/types': 7.26.0
 
@@ -1942,7 +1942,7 @@ snapshots:
       chalk: 4.1.2
       strip-ansi: 6.0.1
       supports-color: 8.1.1
-      tslib: 2.8.0
+      tslib: 2.8.1
 
   '@oclif/core@1.26.2':
     dependencies:
@@ -1971,11 +1971,11 @@ snapshots:
       strip-ansi: 6.0.1
       supports-color: 8.1.1
       supports-hyperlinks: 2.3.0
-      tslib: 2.8.0
+      tslib: 2.8.1
       widest-line: 3.1.0
       wrap-ansi: 7.0.0
 
-  '@oclif/core@2.16.0(@swc/core@1.7.1)(@types/node@22.8.4)(typescript@5.6.3)':
+  '@oclif/core@2.16.0(@swc/core@1.7.1)(@types/node@22.8.6)(typescript@5.6.3)':
     dependencies:
       '@types/cli-progress': 3.11.6
       ansi-escapes: 4.3.2
@@ -2000,8 +2000,8 @@ snapshots:
       strip-ansi: 6.0.1
       supports-color: 8.1.1
       supports-hyperlinks: 2.3.0
-      ts-node: 10.9.2(@swc/core@1.7.1)(@types/node@22.8.4)(typescript@5.6.3)
-      tslib: 2.8.0
+      ts-node: 10.9.2(@swc/core@1.7.1)(@types/node@22.8.6)(typescript@5.6.3)
+      tslib: 2.8.1
       widest-line: 3.1.0
       wordwrap: 1.0.0
       wrap-ansi: 7.0.0
@@ -2013,19 +2013,19 @@ snapshots:
 
   '@oclif/linewrap@1.0.0': {}
 
-  '@oclif/plugin-help@5.2.20(@swc/core@1.7.1)(@types/node@22.8.4)(typescript@5.6.3)':
+  '@oclif/plugin-help@5.2.20(@swc/core@1.7.1)(@types/node@22.8.6)(typescript@5.6.3)':
     dependencies:
-      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.8.4)(typescript@5.6.3)
+      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.8.6)(typescript@5.6.3)
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
       - '@types/node'
       - typescript
 
-  '@oclif/plugin-plugins@2.4.7(@swc/core@1.7.1)(@types/node@22.8.4)(typescript@5.6.3)':
+  '@oclif/plugin-plugins@2.4.7(@swc/core@1.7.1)(@types/node@22.8.6)(typescript@5.6.3)':
     dependencies:
       '@oclif/color': 1.0.13
-      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.8.4)(typescript@5.6.3)
+      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.8.6)(typescript@5.6.3)
       chalk: 4.1.2
       debug: 4.3.7
       fs-extra: 9.1.0
@@ -2033,7 +2033,7 @@ snapshots:
       load-json-file: 5.3.0
       npm-run-path: 4.0.1
       semver: 7.6.3
-      tslib: 2.8.0
+      tslib: 2.8.1
       yarn: 1.22.22
     transitivePeerDependencies:
       - '@swc/core'
@@ -2046,12 +2046,12 @@ snapshots:
 
   '@paperback/runtime-polyfills@1.0.0-alpha.24': {}
 
-  '@paperback/toolchain@0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.8.4)(typescript@5.6.3)':
+  '@paperback/toolchain@0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.8.6)(typescript@5.6.3)':
     dependencies:
       '@grpc/grpc-js': 1.12.2
       '@oclif/core': 1.26.2
-      '@oclif/plugin-help': 5.2.20(@swc/core@1.7.1)(@types/node@22.8.4)(typescript@5.6.3)
-      '@oclif/plugin-plugins': 2.4.7(@swc/core@1.7.1)(@types/node@22.8.4)(typescript@5.6.3)
+      '@oclif/plugin-help': 5.2.20(@swc/core@1.7.1)(@types/node@22.8.6)(typescript@5.6.3)
+      '@oclif/plugin-plugins': 2.4.7(@swc/core@1.7.1)(@types/node@22.8.6)(typescript@5.6.3)
       '@paperback/runtime-polyfills': 1.0.0-alpha.24
       '@paperback/types': 1.0.0-alpha.24
       '@protobuf-ts/runtime-rpc': 2.9.4
@@ -2169,13 +2169,13 @@ snapshots:
 
   '@types/cheerio@0.22.35':
     dependencies:
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
 
   '@types/cli-progress@3.11.6':
     dependencies:
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
 
-  '@types/node@22.8.4':
+  '@types/node@22.8.6':
     dependencies:
       undici-types: 6.19.8
 
@@ -2191,7 +2191,7 @@ snapshots:
       graphemer: 1.4.0
       ignore: 5.3.2
       natural-compare: 1.4.0
-      ts-api-utils: 1.3.0(typescript@5.6.3)
+      ts-api-utils: 1.4.0(typescript@5.6.3)
     optionalDependencies:
       typescript: 5.6.3
     transitivePeerDependencies:
@@ -2221,7 +2221,7 @@ snapshots:
       '@typescript-eslint/utils': 7.18.0(eslint@8.57.1)(typescript@5.6.3)
       debug: 4.3.7
       eslint: 8.57.1
-      ts-api-utils: 1.3.0(typescript@5.6.3)
+      ts-api-utils: 1.4.0(typescript@5.6.3)
     optionalDependencies:
       typescript: 5.6.3
     transitivePeerDependencies:
@@ -2238,7 +2238,7 @@ snapshots:
       is-glob: 4.0.3
       minimatch: 9.0.5
       semver: 7.6.3
-      ts-api-utils: 1.3.0(typescript@5.6.3)
+      ts-api-utils: 1.4.0(typescript@5.6.3)
     optionalDependencies:
       typescript: 5.6.3
     transitivePeerDependencies:
@@ -2619,7 +2619,7 @@ snapshots:
 
   constantinople@4.0.1:
     dependencies:
-      '@babel/parser': 7.26.1
+      '@babel/parser': 7.26.2
       '@babel/types': 7.26.0
 
   constants-browserify@1.0.0: {}
@@ -3490,7 +3490,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       long: 5.2.3
 
   pstree.remy@1.1.8: {}
@@ -3808,18 +3808,18 @@ snapshots:
 
   touch@3.1.1: {}
 
-  ts-api-utils@1.3.0(typescript@5.6.3):
+  ts-api-utils@1.4.0(typescript@5.6.3):
     dependencies:
       typescript: 5.6.3
 
-  ts-node@10.9.2(@swc/core@1.7.1)(@types/node@22.8.4)(typescript@5.6.3):
+  ts-node@10.9.2(@swc/core@1.7.1)(@types/node@22.8.6)(typescript@5.6.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       acorn: 8.14.0
       acorn-walk: 8.3.4
       arg: 4.1.3
@@ -3832,7 +3832,7 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.7.1
 
-  tslib@2.8.0: {}
+  tslib@2.8.1: {}
 
   tty-browserify@0.0.1: {}
 
@@ -3927,7 +3927,7 @@ snapshots:
 
   with@7.0.2:
     dependencies:
-      '@babel/parser': 7.26.1
+      '@babel/parser': 7.26.2
       '@babel/types': 7.26.0
       assert-never: 1.3.0
       babel-walk: 3.0.0-canary-5
