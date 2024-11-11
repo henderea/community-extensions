@@ -27,6 +27,9 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@swc/core@1.7.1)(@types/node@22.9.0)(typescript@5.6.3)
     devDependencies:
+      '@spence1115/eslint-plugin-modules-newlines':
+        specifier: ^1.0.1
+        version: 1.0.1
       '@tsconfig/recommended':
         specifier: ^1.0.8
         version: 1.0.8
@@ -42,9 +45,6 @@ importers:
       eslint:
         specifier: ^8.57.1
         version: 8.57.1
-      eslint-plugin-modules-newline:
-        specifier: ^0.0.6
-        version: 0.0.6
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -165,8 +165,8 @@ packages:
     engines: {node: '>=12.0.0'}
     deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
-  '@paperback/runtime-polyfills@1.0.0-alpha.27':
-    resolution: {integrity: sha512-Aof9vJYwGGxqD08Q8ctie9KcHNQWEtkapS9qUjZukXJIMY0iKKCx7km2bbs4Q2QMIoZYhybcp6s54hJhFLK1UA==}
+  '@paperback/runtime-polyfills@1.0.0-alpha.28':
+    resolution: {integrity: sha512-GNh5eISerzVVtpuNE5lOcOv/3ZW7zLUyzi7170uQlparOZJ/2vw0WwKQZiqvF7JBmSdjd+FhcPuI5wolH1vxbw==}
 
   '@paperback/toolchain@0.8.0-alpha.47':
     resolution: {integrity: sha512-eOqI8HV9vyICeydQN9RKln8Y0NDePhpkROT0PLsKhvAV/aE6gUS1lg/5msU2TrYw6rwRW6f6xISzQ4W4W3+bsQ==}
@@ -176,8 +176,8 @@ packages:
   '@paperback/types@0.8.0-alpha.47':
     resolution: {integrity: sha512-hmphBshCGemhWO/G8zKCYNZ1VzZnI4zbsswOIrx+jiCrsTIxJZStAhiQ4vlowCWq58gYFcH0en4RjoqAKOOaZQ==}
 
-  '@paperback/types@1.0.0-alpha.27':
-    resolution: {integrity: sha512-GWDl7SdmoKKdx/cqoJQvFlTLYc70a77P7TlHULjGKR5h7ghtJioWd+uSbrKxLbi0SNt6/NTdF58HSFV8acNDew==}
+  '@paperback/types@1.0.0-alpha.28':
+    resolution: {integrity: sha512-FAScGJwXIc/5rzGgQvqZfvbfLchSVIUl18TvvD2umpleQLUCjKDkWEgLZmLdE34zrHikHCFPsrPOQWwP5hITLw==}
 
   '@protobuf-ts/runtime-rpc@2.9.4':
     resolution: {integrity: sha512-y9L9JgnZxXFqH5vD4d7j9duWvIJ7AShyBRoNKJGhu9Q27qIbchfzli66H9RvrQNIFk5ER7z1Twe059WZGqERcA==}
@@ -214,6 +214,10 @@ packages:
 
   '@protobufjs/utf8@1.1.0':
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
+
+  '@spence1115/eslint-plugin-modules-newlines@1.0.1':
+    resolution: {integrity: sha512-QED6SSgSS/yDfPWVE2VyK/KBCuPohjb0HqVY9Ln3iNcZteW06ttyiRBN4AjVxYen9grnlsVQuBht549p0mXEpw==}
+    engines: {node: '>=0.10.0'}
 
   '@swc/core-darwin-arm64@1.7.1':
     resolution: {integrity: sha512-CuifMhtBNdIq6sHElOcu8E8SOO0BUlLyRw52wC+aiHrb5gR+iGlbi4L9sUhbR5bWoxD0Bz9ZJcE5uUhcLP+lJQ==}
@@ -784,10 +788,6 @@ packages:
   escape-string-regexp@4.0.0:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
-
-  eslint-plugin-modules-newline@0.0.6:
-    resolution: {integrity: sha512-69NpBr68U6pmXL+y+KHl/64PwRarceC3/sCNUVxRbe0gPI32SIw8AtdpkqNiJYCa2yMd4lRrkrnU09Yio7KVzA==}
-    engines: {node: '>=0.10.0'}
 
   eslint-scope@7.2.2:
     resolution: {integrity: sha512-dOt21O7lTMhDM+X9mB4GX+DZrZtCUJPL/wlcTqxyrx5IvO0IYtILdtrQGQp+8n5S0gwSVmOf9NQrjMOgfQZlIg==}
@@ -2044,7 +2044,7 @@ snapshots:
 
   '@oclif/screen@3.0.8': {}
 
-  '@paperback/runtime-polyfills@1.0.0-alpha.27': {}
+  '@paperback/runtime-polyfills@1.0.0-alpha.28': {}
 
   '@paperback/toolchain@0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.9.0)(typescript@5.6.3)':
     dependencies:
@@ -2052,8 +2052,8 @@ snapshots:
       '@oclif/core': 1.26.2
       '@oclif/plugin-help': 5.2.20(@swc/core@1.7.1)(@types/node@22.9.0)(typescript@5.6.3)
       '@oclif/plugin-plugins': 2.4.7(@swc/core@1.7.1)(@types/node@22.9.0)(typescript@5.6.3)
-      '@paperback/runtime-polyfills': 1.0.0-alpha.27
-      '@paperback/types': 1.0.0-alpha.27
+      '@paperback/runtime-polyfills': 1.0.0-alpha.28
+      '@paperback/types': 1.0.0-alpha.28
       '@protobuf-ts/runtime-rpc': 2.9.4
       browserify: 17.0.1
       chai: 4.5.0
@@ -2071,7 +2071,7 @@ snapshots:
 
   '@paperback/types@0.8.0-alpha.47': {}
 
-  '@paperback/types@1.0.0-alpha.27': {}
+  '@paperback/types@1.0.0-alpha.28': {}
 
   '@protobuf-ts/runtime-rpc@2.9.4':
     dependencies:
@@ -2101,6 +2101,10 @@ snapshots:
   '@protobufjs/pool@1.1.0': {}
 
   '@protobufjs/utf8@1.1.0': {}
+
+  '@spence1115/eslint-plugin-modules-newlines@1.0.1':
+    dependencies:
+      requireindex: 1.1.0
 
   '@swc/core-darwin-arm64@1.7.1':
     optional: true
@@ -2819,10 +2823,6 @@ snapshots:
   escalade@3.2.0: {}
 
   escape-string-regexp@4.0.0: {}
-
-  eslint-plugin-modules-newline@0.0.6:
-    dependencies:
-      requireindex: 1.1.0
 
   eslint-scope@7.2.2:
     dependencies:

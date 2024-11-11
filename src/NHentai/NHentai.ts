@@ -23,7 +23,8 @@ import {
     // TagSection
 } from '@paperback/types'
 
-import { hasNoResults, NHSortOrders } from './NHentaiHelper'
+import { hasNoResults,
+    NHSortOrders } from './NHentaiHelper'
 
 import {
     parseMangaDetails,

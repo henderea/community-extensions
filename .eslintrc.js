@@ -13,7 +13,7 @@ module.exports = {
         'sourceType': 'module'
     },
     'plugins': [
-        'modules-newline',
+        '@spence1115/modules-newlines',
         '@typescript-eslint'
     ],
     'rules': {
@@ -36,8 +36,8 @@ module.exports = {
         'comma-dangle': 'off',
         '@typescript-eslint/comma-dangle': 'error',
         'prefer-arrow-callback': 'error',
-        'modules-newline/import-declaration-newline': 'error',
-        'modules-newline/export-declaration-newline': 'error',
+        '@spence1115/modules-newlines/import-declaration-newline': 'error',
+        '@spence1115/modules-newlines/export-declaration-newline': 'error',
         '@typescript-eslint/no-explicit-any': 0,
         '@typescript-eslint/no-non-null-assertion': 0
     }
