@@ -1,6 +1,6 @@
 
 export interface ImagePageObject {
-    t: 'j' | 'p' | 'g';// JPG (≧◡≦)
+    t: 'j' | 'p' | 'g' | 'w';// JPG (≧◡≦)
     w: number;
     h: number;
 }
