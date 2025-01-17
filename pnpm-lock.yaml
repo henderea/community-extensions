@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@paperback/toolchain':
         specifier: 0.8.0-alpha.47
-        version: 0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.10.6)(typescript@5.7.3)
+        version: 0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.10.7)(typescript@5.7.3)
       '@paperback/types':
         specifier: 0.8.0-alpha.47
         version: 0.8.0-alpha.47
@@ -25,7 +25,7 @@ importers:
         version: 3.1.9
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.7.1)(@types/node@22.10.6)(typescript@5.7.3)
+        version: 10.9.2(@swc/core@1.7.1)(@types/node@22.10.7)(typescript@5.7.3)
     devDependencies:
       '@spence1115/eslint-plugin-modules-newlines':
         specifier: ^1.0.1
@@ -315,8 +315,8 @@ packages:
   '@types/cli-progress@3.11.6':
     resolution: {integrity: sha512-cE3+jb9WRlu+uOSAugewNpITJDt1VF8dHOopPO4IABFc3SXYL5WE/+PTz/FCdZRRfIujiWW3n3aMbv1eIGVRWA==}
 
-  '@types/node@22.10.6':
-    resolution: {integrity: sha512-qNiuwC4ZDAUNcY47xgaSuS92cjf8JbSUoaKS77bmLG1rU7MlATVSiw/IlrjtIyyskXBZ8KkNfjK/P5na7rgXbQ==}
+  '@types/node@22.10.7':
+    resolution: {integrity: sha512-V09KvXxFiutGp6B7XkpaDXlNadZxrzajcY50EuoLIpQ6WWYCSvf19lVIazzfIzQvhUN2HjX12spLojTnhuKlGg==}
 
   '@typescript-eslint/eslint-plugin@7.18.0':
     resolution: {integrity: sha512-94EQTWZ40mzBc42ATNIBimBEDltSJ9RQHCC8vc/PDbxi4k8dVwUAv4o98dk50M1zB+JGFxp43FP7f8+FP8R6Sw==}
@@ -794,8 +794,8 @@ packages:
     resolution: {integrity: sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==}
     engines: {node: '>= 0.4'}
 
-  es-object-atoms@1.1.0:
-    resolution: {integrity: sha512-Ujz8Al/KfOVR7fkaghAB1WvnLsdYxHDWmfoi2vlA2jZWRg31XhIC1a4B+/I24muD8iSbHxJ1JkrfqmWb65P/Mw==}
+  es-object-atoms@1.1.1:
+    resolution: {integrity: sha512-FGgH2h8zKNim9ljj7dankFPcICIK9Cp5bm+c2gQSYePhpaG5+esrLODihIorn+Pe6FGJzWhXQotPv73jTaldXA==}
     engines: {node: '>= 0.4'}
 
   escalade@3.2.0:
@@ -1785,8 +1785,8 @@ packages:
   undici-types@6.20.0:
     resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
 
-  undici@6.21.0:
-    resolution: {integrity: sha512-BUgJXc752Kou3oOIuU1i+yZZypyZRqNPW0vqoMPl8VaoalSfeR0D8/t4iAS3yirs79SSMTxTag+ZC86uswv+Cw==}
+  undici@6.21.1:
+    resolution: {integrity: sha512-q/1rj5D0/zayJB2FraXdaWxbhWiNKDvu8naDT2dl1yTlvJp4BLtOcp2a5BvgGNQpYYJzau7tf1WgKv3b+7mqpQ==}
     engines: {node: '>=18.17'}
 
   universalify@2.0.1:
@@ -2015,7 +2015,7 @@ snapshots:
       widest-line: 3.1.0
       wrap-ansi: 7.0.0
 
-  '@oclif/core@2.16.0(@swc/core@1.7.1)(@types/node@22.10.6)(typescript@5.7.3)':
+  '@oclif/core@2.16.0(@swc/core@1.7.1)(@types/node@22.10.7)(typescript@5.7.3)':
     dependencies:
       '@types/cli-progress': 3.11.6
       ansi-escapes: 4.3.2
@@ -2040,7 +2040,7 @@ snapshots:
       strip-ansi: 6.0.1
       supports-color: 8.1.1
       supports-hyperlinks: 2.3.0
-      ts-node: 10.9.2(@swc/core@1.7.1)(@types/node@22.10.6)(typescript@5.7.3)
+      ts-node: 10.9.2(@swc/core@1.7.1)(@types/node@22.10.7)(typescript@5.7.3)
       tslib: 2.8.1
       widest-line: 3.1.0
       wordwrap: 1.0.0
@@ -2053,19 +2053,19 @@ snapshots:
 
   '@oclif/linewrap@1.0.0': {}
 
-  '@oclif/plugin-help@5.2.20(@swc/core@1.7.1)(@types/node@22.10.6)(typescript@5.7.3)':
+  '@oclif/plugin-help@5.2.20(@swc/core@1.7.1)(@types/node@22.10.7)(typescript@5.7.3)':
     dependencies:
-      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.10.6)(typescript@5.7.3)
+      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.10.7)(typescript@5.7.3)
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
       - '@types/node'
       - typescript
 
-  '@oclif/plugin-plugins@2.4.7(@swc/core@1.7.1)(@types/node@22.10.6)(typescript@5.7.3)':
+  '@oclif/plugin-plugins@2.4.7(@swc/core@1.7.1)(@types/node@22.10.7)(typescript@5.7.3)':
     dependencies:
       '@oclif/color': 1.0.13
-      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.10.6)(typescript@5.7.3)
+      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.10.7)(typescript@5.7.3)
       chalk: 4.1.2
       debug: 4.4.0
       fs-extra: 9.1.0
@@ -2086,12 +2086,12 @@ snapshots:
 
   '@paperback/runtime-polyfills@1.0.0-alpha.33': {}
 
-  '@paperback/toolchain@0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.10.6)(typescript@5.7.3)':
+  '@paperback/toolchain@0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.10.7)(typescript@5.7.3)':
     dependencies:
       '@grpc/grpc-js': 1.12.5
       '@oclif/core': 1.26.2
-      '@oclif/plugin-help': 5.2.20(@swc/core@1.7.1)(@types/node@22.10.6)(typescript@5.7.3)
-      '@oclif/plugin-plugins': 2.4.7(@swc/core@1.7.1)(@types/node@22.10.6)(typescript@5.7.3)
+      '@oclif/plugin-help': 5.2.20(@swc/core@1.7.1)(@types/node@22.10.7)(typescript@5.7.3)
+      '@oclif/plugin-plugins': 2.4.7(@swc/core@1.7.1)(@types/node@22.10.7)(typescript@5.7.3)
       '@paperback/runtime-polyfills': 1.0.0-alpha.33
       '@paperback/types': 1.0.0-alpha.33
       '@protobuf-ts/runtime-rpc': 2.9.4
@@ -2213,13 +2213,13 @@ snapshots:
 
   '@types/cheerio@0.22.35':
     dependencies:
-      '@types/node': 22.10.6
+      '@types/node': 22.10.7
 
   '@types/cli-progress@3.11.6':
     dependencies:
-      '@types/node': 22.10.6
+      '@types/node': 22.10.7
 
-  '@types/node@22.10.6':
+  '@types/node@22.10.7':
     dependencies:
       undici-types: 6.20.0
 
@@ -2612,7 +2612,7 @@ snapshots:
       parse5: 7.2.1
       parse5-htmlparser2-tree-adapter: 7.1.0
       parse5-parser-stream: 7.1.2
-      undici: 6.21.0
+      undici: 6.21.1
       whatwg-mimetype: 4.0.0
 
   chokidar@3.6.0:
@@ -2873,7 +2873,7 @@ snapshots:
 
   es-errors@1.3.0: {}
 
-  es-object-atoms@1.1.0:
+  es-object-atoms@1.1.1:
     dependencies:
       es-errors: 1.3.0
 
@@ -3032,7 +3032,7 @@ snapshots:
       call-bind-apply-helpers: 1.0.1
       es-define-property: 1.0.1
       es-errors: 1.3.0
-      es-object-atoms: 1.1.0
+      es-object-atoms: 1.1.1
       function-bind: 1.1.2
       get-proto: 1.0.1
       gopd: 1.2.0
@@ -3045,7 +3045,7 @@ snapshots:
   get-proto@1.0.1:
     dependencies:
       dunder-proto: 1.0.1
-      es-object-atoms: 1.1.0
+      es-object-atoms: 1.1.1
 
   glob-parent@5.1.2:
     dependencies:
@@ -3441,7 +3441,7 @@ snapshots:
       call-bind: 1.0.8
       call-bound: 1.0.3
       define-properties: 1.2.1
-      es-object-atoms: 1.1.0
+      es-object-atoms: 1.1.1
       has-symbols: 1.1.0
       object-keys: 1.1.1
 
@@ -3562,7 +3562,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 22.10.6
+      '@types/node': 22.10.7
       long: 5.2.4
 
   pstree.remy@1.1.8: {}
@@ -3911,14 +3911,14 @@ snapshots:
     dependencies:
       typescript: 5.7.3
 
-  ts-node@10.9.2(@swc/core@1.7.1)(@types/node@22.10.6)(typescript@5.7.3):
+  ts-node@10.9.2(@swc/core@1.7.1)(@types/node@22.10.7)(typescript@5.7.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 22.10.6
+      '@types/node': 22.10.7
       acorn: 8.14.0
       acorn-walk: 8.3.4
       arg: 4.1.3
@@ -3969,7 +3969,7 @@ snapshots:
 
   undici-types@6.20.0: {}
 
-  undici@6.21.0: {}
+  undici@6.21.1: {}
 
   universalify@2.0.1: {}
 
