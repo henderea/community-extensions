@@ -165,8 +165,8 @@ packages:
     engines: {node: '>=12.0.0'}
     deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
-  '@paperback/runtime-polyfills@1.0.0-alpha.34':
-    resolution: {integrity: sha512-ipPBT6I9V8xNPQTyuPKk1B3+M7q4Re7H66cix8tGVerZ79yg+Ql2phk9k6vdtdNd+fVzlp98N5J+8NUYSaA43A==}
+  '@paperback/runtime-polyfills@1.0.0-alpha.35':
+    resolution: {integrity: sha512-ah3qGTOiEzVe5of68tw1AVsoliOlI0Vd/iv2JoBXp3uGEf7uRzBIQgzvbNkL5ut7zhy3qVZdV44U71ZXJsh3aQ==}
 
   '@paperback/toolchain@0.8.0-alpha.47':
     resolution: {integrity: sha512-eOqI8HV9vyICeydQN9RKln8Y0NDePhpkROT0PLsKhvAV/aE6gUS1lg/5msU2TrYw6rwRW6f6xISzQ4W4W3+bsQ==}
@@ -176,8 +176,8 @@ packages:
   '@paperback/types@0.8.0-alpha.47':
     resolution: {integrity: sha512-hmphBshCGemhWO/G8zKCYNZ1VzZnI4zbsswOIrx+jiCrsTIxJZStAhiQ4vlowCWq58gYFcH0en4RjoqAKOOaZQ==}
 
-  '@paperback/types@1.0.0-alpha.34':
-    resolution: {integrity: sha512-mbjBq3ffW+YQfcSTKpKbeoRRKnGIrCuSoNW1hvqB+gQvBE2qCXm9gYyZ+vglW8sosNab5p3pYha3twmMIWArfw==}
+  '@paperback/types@1.0.0-alpha.35':
+    resolution: {integrity: sha512-csgnqZ9CkHrMooVj3Pw6QaIPJwIwEeYuT8HNJlL6QfDOSiJgu7ktuJMO3DcUMEk0LqFzwxCUtUi+P+bvtaYVIg==}
 
   '@protobuf-ts/runtime-rpc@2.9.4':
     resolution: {integrity: sha512-y9L9JgnZxXFqH5vD4d7j9duWvIJ7AShyBRoNKJGhu9Q27qIbchfzli66H9RvrQNIFk5ER7z1Twe059WZGqERcA==}
@@ -2085,7 +2085,7 @@ snapshots:
 
   '@oclif/screen@3.0.8': {}
 
-  '@paperback/runtime-polyfills@1.0.0-alpha.34': {}
+  '@paperback/runtime-polyfills@1.0.0-alpha.35': {}
 
   '@paperback/toolchain@0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.13.4)(typescript@5.7.3)':
     dependencies:
@@ -2093,8 +2093,8 @@ snapshots:
       '@oclif/core': 1.26.2
       '@oclif/plugin-help': 5.2.20(@swc/core@1.7.1)(@types/node@22.13.4)(typescript@5.7.3)
       '@oclif/plugin-plugins': 2.4.7(@swc/core@1.7.1)(@types/node@22.13.4)(typescript@5.7.3)
-      '@paperback/runtime-polyfills': 1.0.0-alpha.34
-      '@paperback/types': 1.0.0-alpha.34
+      '@paperback/runtime-polyfills': 1.0.0-alpha.35
+      '@paperback/types': 1.0.0-alpha.35
       '@protobuf-ts/runtime-rpc': 2.9.4
       browserify: 17.0.1
       chai: 4.5.0
@@ -2112,7 +2112,7 @@ snapshots:
 
   '@paperback/types@0.8.0-alpha.47': {}
 
-  '@paperback/types@1.0.0-alpha.34': {}
+  '@paperback/types@1.0.0-alpha.35': {}
 
   '@protobuf-ts/runtime-rpc@2.9.4':
     dependencies:
