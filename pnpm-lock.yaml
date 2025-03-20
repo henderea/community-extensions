@@ -165,8 +165,8 @@ packages:
     engines: {node: '>=12.0.0'}
     deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
-  '@paperback/runtime-polyfills@1.0.0-alpha.41':
-    resolution: {integrity: sha512-lT6lFf8XhjV341RSuo3b7Sy/nW/9e1IMGLcA/PxtZydWPFQicGimaXNU/Hcx6B5O3gXtXRByEZopTJ40e787hw==}
+  '@paperback/runtime-polyfills@1.0.0-alpha.46':
+    resolution: {integrity: sha512-yiKKjJcxWZ6YntckveAZwqaYZUaeEyi8GA2VWjiMln69EGPX862dDA/pVB1116B14dvCWMZe6xBhB0Lh56lk+A==}
 
   '@paperback/toolchain@0.8.0-alpha.47':
     resolution: {integrity: sha512-eOqI8HV9vyICeydQN9RKln8Y0NDePhpkROT0PLsKhvAV/aE6gUS1lg/5msU2TrYw6rwRW6f6xISzQ4W4W3+bsQ==}
@@ -176,14 +176,14 @@ packages:
   '@paperback/types@0.8.0-alpha.47':
     resolution: {integrity: sha512-hmphBshCGemhWO/G8zKCYNZ1VzZnI4zbsswOIrx+jiCrsTIxJZStAhiQ4vlowCWq58gYFcH0en4RjoqAKOOaZQ==}
 
-  '@paperback/types@1.0.0-alpha.41':
-    resolution: {integrity: sha512-04ktB+PIl15oymlUqdd7bDVPFyaVlZFcJoZstp733ogxoPMjHAcV1DJRlJ8V5adtzo1gqqy1R/Q9mJdzMMK9vg==}
+  '@paperback/types@1.0.0-alpha.46':
+    resolution: {integrity: sha512-rOL8FxfkJBlhejdFhO5fwkLbDCNVeDnuc2RK6+LshL+OqGUssxXvCX17+EGqeI06wj5qzz+2QdiuFA/S2YXLow==}
 
-  '@protobuf-ts/runtime-rpc@2.9.5':
-    resolution: {integrity: sha512-NWAb1TaV4CR+BknZr1WRVT5Ws2AupVwGgRNes4oPAFrgLNXQotDFl2E6pmsjPwME8sAgJVzeSr7bUqQVyoAK2A==}
+  '@protobuf-ts/runtime-rpc@2.9.6':
+    resolution: {integrity: sha512-0UeqDRzNxgsh08lY5eWzFJNfD3gZ8Xf+WG1HzbIAbVAigzigwjwsYNNhTeas5H3gco1U5owTzCg177aambKOOw==}
 
-  '@protobuf-ts/runtime@2.9.5':
-    resolution: {integrity: sha512-SsumigRe3IqNTCQvVZUqDQExsKF72eyAMiWlYb5Jwj3eU4z8UH7JLlSfb/Wjidz4b/chTN6zh5AXBSKl0Asm3A==}
+  '@protobuf-ts/runtime@2.9.6':
+    resolution: {integrity: sha512-C0CfpKx4n4LBbUrajOdRj2BTbd3qBoK0SiKWLq7RgCoU6xiN4wesBMFHUOBp3fFzKeZwgU8Q2KtzaqzIvPLRXg==}
 
   '@protobufjs/aspromise@1.1.2':
     resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}
@@ -2085,7 +2085,7 @@ snapshots:
 
   '@oclif/screen@3.0.8': {}
 
-  '@paperback/runtime-polyfills@1.0.0-alpha.41': {}
+  '@paperback/runtime-polyfills@1.0.0-alpha.46': {}
 
   '@paperback/toolchain@0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2)':
     dependencies:
@@ -2093,9 +2093,9 @@ snapshots:
       '@oclif/core': 1.26.2
       '@oclif/plugin-help': 5.2.20(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2)
       '@oclif/plugin-plugins': 2.4.7(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2)
-      '@paperback/runtime-polyfills': 1.0.0-alpha.41
-      '@paperback/types': 1.0.0-alpha.41
-      '@protobuf-ts/runtime-rpc': 2.9.5
+      '@paperback/runtime-polyfills': 1.0.0-alpha.46
+      '@paperback/types': 1.0.0-alpha.46
+      '@protobuf-ts/runtime-rpc': 2.9.6
       browserify: 17.0.1
       chai: 4.5.0
       chalk: 4.1.2
@@ -2112,13 +2112,13 @@ snapshots:
 
   '@paperback/types@0.8.0-alpha.47': {}
 
-  '@paperback/types@1.0.0-alpha.41': {}
+  '@paperback/types@1.0.0-alpha.46': {}
 
-  '@protobuf-ts/runtime-rpc@2.9.5':
+  '@protobuf-ts/runtime-rpc@2.9.6':
     dependencies:
-      '@protobuf-ts/runtime': 2.9.5
+      '@protobuf-ts/runtime': 2.9.6
 
-  '@protobuf-ts/runtime@2.9.5': {}
+  '@protobuf-ts/runtime@2.9.6': {}
 
   '@protobufjs/aspromise@1.1.2': {}
 
