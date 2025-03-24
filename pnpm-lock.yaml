@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@paperback/toolchain':
         specifier: 0.8.0-alpha.47
-        version: 0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2)
+        version: 0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.13.13)(typescript@5.8.2)
       '@paperback/types':
         specifier: 0.8.0-alpha.47
         version: 0.8.0-alpha.47
@@ -18,14 +18,14 @@ importers:
         specifier: 1.0.0
         version: 1.0.0
       html-entities:
-        specifier: ^2.5.2
-        version: 2.5.2
+        specifier: ^2.5.3
+        version: 2.5.3
       nodemon:
         specifier: ^3.1.9
         version: 3.1.9
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2)
+        version: 10.9.2(@swc/core@1.7.1)(@types/node@22.13.13)(typescript@5.8.2)
     devDependencies:
       '@spence1115/eslint-plugin-modules-newlines':
         specifier: ^1.0.1
@@ -90,8 +90,8 @@ packages:
     resolution: {integrity: sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
-  '@grpc/grpc-js@1.13.0':
-    resolution: {integrity: sha512-pMuxInZjUnUkgMT2QLZclRqwk2ykJbIU05aZgPgJYXEpN9+2I7z7aNwcjWZSycRPl232FfhPszyBFJyOxTHNog==}
+  '@grpc/grpc-js@1.13.1':
+    resolution: {integrity: sha512-z5nNuIs75S73ZULjPDe5QCNTiCv7FyBZXEVWOyAHtcebnuJf0g1SuueI3U1/z/KK39XyAQRUC+C9ZQJOtgHynA==}
     engines: {node: '>=12.10.0'}
 
   '@grpc/proto-loader@0.7.13':
@@ -315,8 +315,8 @@ packages:
   '@types/cli-progress@3.11.6':
     resolution: {integrity: sha512-cE3+jb9WRlu+uOSAugewNpITJDt1VF8dHOopPO4IABFc3SXYL5WE/+PTz/FCdZRRfIujiWW3n3aMbv1eIGVRWA==}
 
-  '@types/node@22.13.10':
-    resolution: {integrity: sha512-I6LPUvlRH+O6VRUqYOcMudhaIdUVWfsjnZavnsraHvpBwaEyMN29ry+0UVJhImYL16xsscu0aske3yA+uPOWfw==}
+  '@types/node@22.13.13':
+    resolution: {integrity: sha512-ClsL5nMwKaBRwPcCvH8E7+nU4GxHVx1axNvMZTFHMEfNI7oahimt26P5zjVCRrjiIWj6YFXfE1v3dEp94wLcGQ==}
 
   '@typescript-eslint/eslint-plugin@7.18.0':
     resolution: {integrity: sha512-94EQTWZ40mzBc42ATNIBimBEDltSJ9RQHCC8vc/PDbxi4k8dVwUAv4o98dk50M1zB+JGFxp43FP7f8+FP8R6Sw==}
@@ -997,8 +997,8 @@ packages:
   hmac-drbg@1.0.1:
     resolution: {integrity: sha512-Tti3gMqLdZfhOQY1Mzf/AanLiqh1WTiJgEj26ZuYQ9fbkLomzGchCws4FyrSd4VkpBfiNhaE1On+lOz894jvXg==}
 
-  html-entities@2.5.2:
-    resolution: {integrity: sha512-K//PSRMQk4FZ78Kyau+mZurHn3FH0Vwr+H36eE0rPbeYkRRi9YxceYPhuN60UwWorxyKHhqoAJl2OFKa4BVtaA==}
+  html-entities@2.5.3:
+    resolution: {integrity: sha512-D3AfvN7SjhTgBSA8L1BN4FpPzuEd06uy4lHwSoRWr0lndi9BKaNzPLKGOWZ2ocSGguozr08TTb2jhCLHaemruw==}
 
   htmlescape@1.1.1:
     resolution: {integrity: sha512-eVcrzgbR4tim7c7soKQKtxa/kQM4TzjnlU83rcZ9bHU6t31ehfV7SktN6McWgwPWg+JYMA/O3qpGxBvFq1z2Jg==}
@@ -1930,7 +1930,7 @@ snapshots:
 
   '@eslint/js@8.57.1': {}
 
-  '@grpc/grpc-js@1.13.0':
+  '@grpc/grpc-js@1.13.1':
     dependencies:
       '@grpc/proto-loader': 0.7.13
       '@js-sdsl/ordered-map': 4.4.2
@@ -2016,7 +2016,7 @@ snapshots:
       widest-line: 3.1.0
       wrap-ansi: 7.0.0
 
-  '@oclif/core@2.16.0(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2)':
+  '@oclif/core@2.16.0(@swc/core@1.7.1)(@types/node@22.13.13)(typescript@5.8.2)':
     dependencies:
       '@types/cli-progress': 3.11.6
       ansi-escapes: 4.3.2
@@ -2041,7 +2041,7 @@ snapshots:
       strip-ansi: 6.0.1
       supports-color: 8.1.1
       supports-hyperlinks: 2.3.0
-      ts-node: 10.9.2(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2)
+      ts-node: 10.9.2(@swc/core@1.7.1)(@types/node@22.13.13)(typescript@5.8.2)
       tslib: 2.8.1
       widest-line: 3.1.0
       wordwrap: 1.0.0
@@ -2054,19 +2054,19 @@ snapshots:
 
   '@oclif/linewrap@1.0.0': {}
 
-  '@oclif/plugin-help@5.2.20(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2)':
+  '@oclif/plugin-help@5.2.20(@swc/core@1.7.1)(@types/node@22.13.13)(typescript@5.8.2)':
     dependencies:
-      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2)
+      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.13.13)(typescript@5.8.2)
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
       - '@types/node'
       - typescript
 
-  '@oclif/plugin-plugins@2.4.7(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2)':
+  '@oclif/plugin-plugins@2.4.7(@swc/core@1.7.1)(@types/node@22.13.13)(typescript@5.8.2)':
     dependencies:
       '@oclif/color': 1.0.13
-      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2)
+      '@oclif/core': 2.16.0(@swc/core@1.7.1)(@types/node@22.13.13)(typescript@5.8.2)
       chalk: 4.1.2
       debug: 4.4.0
       fs-extra: 9.1.0
@@ -2087,12 +2087,12 @@ snapshots:
 
   '@paperback/runtime-polyfills@1.0.0-alpha.46': {}
 
-  '@paperback/toolchain@0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2)':
+  '@paperback/toolchain@0.8.0-alpha.47(@swc/core@1.7.1)(@types/node@22.13.13)(typescript@5.8.2)':
     dependencies:
-      '@grpc/grpc-js': 1.13.0
+      '@grpc/grpc-js': 1.13.1
       '@oclif/core': 1.26.2
-      '@oclif/plugin-help': 5.2.20(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2)
-      '@oclif/plugin-plugins': 2.4.7(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2)
+      '@oclif/plugin-help': 5.2.20(@swc/core@1.7.1)(@types/node@22.13.13)(typescript@5.8.2)
+      '@oclif/plugin-plugins': 2.4.7(@swc/core@1.7.1)(@types/node@22.13.13)(typescript@5.8.2)
       '@paperback/runtime-polyfills': 1.0.0-alpha.46
       '@paperback/types': 1.0.0-alpha.46
       '@protobuf-ts/runtime-rpc': 2.9.6
@@ -2214,13 +2214,13 @@ snapshots:
 
   '@types/cheerio@0.22.35':
     dependencies:
-      '@types/node': 22.13.10
+      '@types/node': 22.13.13
 
   '@types/cli-progress@3.11.6':
     dependencies:
-      '@types/node': 22.13.10
+      '@types/node': 22.13.13
 
-  '@types/node@22.13.10':
+  '@types/node@22.13.13':
     dependencies:
       undici-types: 6.20.0
 
@@ -3118,7 +3118,7 @@ snapshots:
       minimalistic-assert: 1.0.1
       minimalistic-crypto-utils: 1.0.1
 
-  html-entities@2.5.2: {}
+  html-entities@2.5.3: {}
 
   htmlescape@1.1.1: {}
 
@@ -3563,7 +3563,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 22.13.10
+      '@types/node': 22.13.13
       long: 5.3.1
 
   pstree.remy@1.1.8: {}
@@ -3912,14 +3912,14 @@ snapshots:
     dependencies:
       typescript: 5.8.2
 
-  ts-node@10.9.2(@swc/core@1.7.1)(@types/node@22.13.10)(typescript@5.8.2):
+  ts-node@10.9.2(@swc/core@1.7.1)(@types/node@22.13.13)(typescript@5.8.2):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 22.13.10
+      '@types/node': 22.13.13
       acorn: 8.14.1
       acorn-walk: 8.3.4
       arg: 4.1.3
