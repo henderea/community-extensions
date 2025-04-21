@@ -1,10 +1,23 @@
 {
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-    "editor.formatOnPaste": false, // required 
-    "editor.formatOnType": false, // required
-    "editor.formatOnSave": true, // optional 
-    "editor.formatOnSaveMode": "file", // required to format on save
-    "files.autoSave": "onFocusChange", // optional but recommended
-    "vs-code-prettier-eslint.prettierLast": false // set as "true" to run 'prettier' last not first
+  // These are all my auto-save configs
+  "editor.formatOnSave": false,
+  // turn it off for JS and JSX, we will do this via eslint
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": false
+  },
+  // tell the ESLint plugin to run on save
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "editor.tabSize": 2,
+  "eslint.useFlatConfig": true,
 }

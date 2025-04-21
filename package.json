@@ -15,9 +15,7 @@
   "author": "Netsky",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "@spence1115/eslint-plugin-modules-newlines": "^1.0.1",
     "@stylistic/eslint-plugin": "^4.2.0",
-    "@tsconfig/recommended": "^1.0.8",
     "@types/cheerio": "^0.22.35",
     "@typescript-eslint/eslint-plugin": "^8.31.0",
     "@typescript-eslint/parser": "^8.31.0",

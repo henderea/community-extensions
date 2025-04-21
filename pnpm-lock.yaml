@@ -27,15 +27,9 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@swc/core@1.7.1)(@types/node@22.14.1)(typescript@5.8.3)
     devDependencies:
-      '@spence1115/eslint-plugin-modules-newlines':
-        specifier: ^1.0.1
-        version: 1.0.1
       '@stylistic/eslint-plugin':
         specifier: ^4.2.0
         version: 4.2.0(eslint@9.25.1)(typescript@5.8.3)
-      '@tsconfig/recommended':
-        specifier: ^1.0.8
-        version: 1.0.8
       '@types/cheerio':
         specifier: ^0.22.35
         version: 0.22.35
@@ -260,10 +254,6 @@ packages:
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
 
-  '@spence1115/eslint-plugin-modules-newlines@1.0.1':
-    resolution: {integrity: sha512-QED6SSgSS/yDfPWVE2VyK/KBCuPohjb0HqVY9Ln3iNcZteW06ttyiRBN4AjVxYen9grnlsVQuBht549p0mXEpw==}
-    engines: {node: '>=0.10.0'}
-
   '@stylistic/eslint-plugin@4.2.0':
     resolution: {integrity: sha512-8hXezgz7jexGHdo5WN6JBEIPHCSFyyU4vgbxevu4YLVS5vl+sxqAAGyXSzfNDyR6xMNSH5H1x67nsXcYMOHtZA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -356,9 +346,6 @@ packages:
 
   '@tsconfig/node16@1.0.4':
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
-
-  '@tsconfig/recommended@1.0.8':
-    resolution: {integrity: sha512-TotjFaaXveVUdsrXCdalyF6E5RyG6+7hHHQVZonQtdlk1rJZ1myDIvPUUKPhoYv+JAzThb2lQJh9+9ZfF46hsA==}
 
   '@types/cheerio@0.22.35':
     resolution: {integrity: sha512-yD57BchKRvTV+JD53UZ6PD8KWY5g5rvvMLRnZR3EQBCZXiDT/HR+pKpMzFGlWNhFrXlo7VPZXtKvIEwZkAWOIA==}
@@ -1809,10 +1796,6 @@ packages:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
 
-  requireindex@1.1.0:
-    resolution: {integrity: sha512-LBnkqsDE7BZKvqylbmn7lTIVdpx4K/QCduRATpO5R+wtPmky/a8pN1bO2D6wXppn1497AJF9mNjqAXr6bdl9jg==}
-    engines: {node: '>=0.10.5'}
-
   resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
     engines: {node: '>=4'}
@@ -2519,10 +2502,6 @@ snapshots:
 
   '@rtsao/scc@1.1.0': {}
 
-  '@spence1115/eslint-plugin-modules-newlines@1.0.1':
-    dependencies:
-      requireindex: 1.1.0
-
   '@stylistic/eslint-plugin@4.2.0(eslint@9.25.1)(typescript@5.8.3)':
     dependencies:
       '@typescript-eslint/utils': 8.31.0(eslint@9.25.1)(typescript@5.8.3)
@@ -2597,8 +2576,6 @@ snapshots:
   '@tsconfig/node14@1.0.3': {}
 
   '@tsconfig/node16@1.0.4': {}
-
-  '@tsconfig/recommended@1.0.8': {}
 
   '@types/cheerio@0.22.35':
     dependencies:
@@ -4444,8 +4421,6 @@ snapshots:
       set-function-name: 2.0.2
 
   require-directory@2.1.1: {}
-
-  requireindex@1.1.0: {}
 
   resolve-from@4.0.0: {}
 
