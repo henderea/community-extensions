@@ -1,630 +1,630 @@
 import {
-    PagedResults,
-    SourceManga,
-    Chapter,
-    ChapterDetails,
-    HomeSection,
-    SearchRequest,
-    SourceInfo,
-    PartialSourceManga,
-    Tag,
-    Request,
-    Response,
-    ContentRating,
-    TagSection,
-    HomeSectionType,
-    ChapterProviding,
-    SourceIntents,
-    DUISection,
-    SearchResultsProviding,
-    HomePageSectionsProviding
-} from '@paperback/types'
+  PagedResults,
+  SourceManga,
+  Chapter,
+  ChapterDetails,
+  HomeSection,
+  SearchRequest,
+  SourceInfo,
+  PartialSourceManga,
+  Tag,
+  Request,
+  Response,
+  ContentRating,
+  TagSection,
+  HomeSectionType,
+  ChapterProviding,
+  SourceIntents,
+  DUISection,
+  SearchResultsProviding,
+  HomePageSectionsProviding
+} from '@paperback/types';
 
-import { decode as decodeHTMLEntity } from 'html-entities'
+import { decode as decodeHTMLEntity } from 'html-entities';
 import {
-    contentSettings,
-    getLanguages,
-    getRatings,
-    thumbnailSettings,
-    getHomepageThumbnail,
-    getSearchThumbnail,
-    getMangaThumbnail,
-    resetSettings,
-    getDataSaver,
-    getSkipSameChapter,
-    accountSettings,
-    getAccessToken,
-    authEndpointRequest,
-    saveAccessToken,
-    forcePort443,
-    getCheckerUrl,
-    getCheckerUser
-} from './MangaDexSettings'
-
-import {
-    requestMetadata,
-    MDLanguages,
-    URLBuilder,
-    MDImageQuality
-} from './MangaDexHelper'
+  contentSettings,
+  getLanguages,
+  getRatings,
+  thumbnailSettings,
+  getHomepageThumbnail,
+  getSearchThumbnail,
+  getMangaThumbnail,
+  resetSettings,
+  getDataSaver,
+  getSkipSameChapter,
+  accountSettings,
+  getAccessToken,
+  authEndpointRequest,
+  saveAccessToken,
+  forcePort443,
+  getCheckerUrl,
+  getCheckerUser
+} from './MangaDexSettings';
 
 import {
-    parseMangaList
-} from './MangaDexParser'
+  requestMetadata,
+  MDLanguages,
+  URLBuilder,
+  MDImageQuality
+} from './MangaDexHelper';
 
-import tagJSON from './external/tag.json'
-import { MangaDexSearchResponse } from './MangaDexInterfaces'
+import {
+  parseMangaList
+} from './MangaDexParser';
 
-const MANGADEX_DOMAIN = 'https://mangadex.org'
-const MANGADEX_API = 'https://api.mangadex.org'
-const COVER_BASE_URL = 'https://uploads.mangadex.org/covers'
+import tagJSON from './external/tag.json';
+import { MangaDexSearchResponse } from './MangaDexInterfaces';
 
-const SEASONAL_LIST = '77430796-6625-4684-b673-ffae5140f337'
+const MANGADEX_DOMAIN = 'https://mangadex.org';
+const MANGADEX_API = 'https://api.mangadex.org';
+const COVER_BASE_URL = 'https://uploads.mangadex.org/covers';
+
+const SEASONAL_LIST = '77430796-6625-4684-b673-ffae5140f337';
 
 export const MangaDexInfo: SourceInfo = {
-    author: 'Nar1n & Netsky',
-    description: 'Extension that pulls manga from MangaDex',
-    icon: 'icon.png',
-    name: 'MangaDex',
-    version: '3.0.15',
-    authorWebsite: 'https://github.com/nar1n',
-    websiteBaseURL: MANGADEX_DOMAIN,
-    contentRating: ContentRating.EVERYONE,
-    sourceTags: [],
-    intents: SourceIntents.MANGA_CHAPTERS | SourceIntents.SETTINGS_UI | SourceIntents.HOMEPAGE_SECTIONS
-}
+  author: 'Nar1n & Netsky',
+  description: 'Extension that pulls manga from MangaDex',
+  icon: 'icon.png',
+  name: 'MangaDex',
+  version: '3.0.15',
+  authorWebsite: 'https://github.com/nar1n',
+  websiteBaseURL: MANGADEX_DOMAIN,
+  contentRating: ContentRating.EVERYONE,
+  sourceTags: [],
+  intents: SourceIntents.MANGA_CHAPTERS | SourceIntents.SETTINGS_UI | SourceIntents.HOMEPAGE_SECTIONS
+};
 
 export class MangaDex implements ChapterProviding, SearchResultsProviding, HomePageSectionsProviding {
-    MANGADEX_DOMAIN = MANGADEX_DOMAIN
-    MANGADEX_API = MANGADEX_API
-    COVER_BASE_URL = COVER_BASE_URL
+  MANGADEX_DOMAIN = MANGADEX_DOMAIN;
+  MANGADEX_API = MANGADEX_API;
+  COVER_BASE_URL = COVER_BASE_URL;
 
-    stateManager = App.createSourceStateManager()
+  stateManager = App.createSourceStateManager();
 
-    requestManager = App.createRequestManager({
-        requestsPerSecond: 5,
-        requestTimeout: 20000,
-        interceptor: {
-            interceptRequest: async (request: Request) => {
-                // Impossible to have undefined headers, ensured by the app
-                request.headers = {
-                    ...request.headers,
-                    referer: `${this.MANGADEX_DOMAIN}/`
-                }
+  requestManager = App.createRequestManager({
+    requestsPerSecond: 5,
+    requestTimeout: 20000,
+    interceptor: {
+      interceptRequest: async (request: Request) => {
+        // Impossible to have undefined headers, ensured by the app
+        request.headers = {
+          ...request.headers,
+          referer: `${this.MANGADEX_DOMAIN}/`
+        };
 
-                let accessToken = await getAccessToken(this.stateManager)
-                if (request.url.includes('auth/') || !accessToken) return request
-                // Padding 60 secs to make sure it wont expire in-transit if the connection is really bad
+        let accessToken = await getAccessToken(this.stateManager);
+        if(request.url.includes('auth/') || !accessToken) {return request;}
+        // Padding 60 secs to make sure it wont expire in-transit if the connection is really bad
 
-                if (Number(accessToken.tokenBody.exp) <= Date.now() / 1000 - 60) {
-                    try {
-                        const response = await authEndpointRequest(this.requestManager, 'refresh', {
-                            token: accessToken.refreshToken
-                        })
+        if(Number(accessToken.tokenBody.exp) <= Date.now() / 1000 - 60) {
+          try {
+            const response = await authEndpointRequest(this.requestManager, 'refresh', {
+              token: accessToken.refreshToken
+            });
 
-                        accessToken = await saveAccessToken(this.stateManager, response.token.session, response.token.refresh)
-                        if (!accessToken) return request
-                    } catch {
-                        return request
-                    }
-                }
-                // Impossible to have undefined headers, ensured by the app
-                request.headers = {
-                    ...request.headers,
-                    authorization: 'Bearer ' + accessToken.accessToken
-                }
-                return request
-            },
-            interceptResponse: async (response: Response): Promise<Response> => {
-                return response
-            }
+            accessToken = await saveAccessToken(this.stateManager, response.token.session, response.token.refresh);
+            if(!accessToken) {return request;}
+          } catch {
+            return request;
+          }
         }
-    })
-
-    checkerRequestManager = App.createRequestManager({
-        requestsPerSecond: 250,
-        requestTimeout: 10000,
-        interceptor: {
-            interceptRequest: async (request: Request) => {
-                return request
-            },
-            interceptResponse: async (response: Response): Promise<Response> => {
-                return response
-            }
-        }
-    })
-
-    async getSourceMenu(): Promise<DUISection> {
-        return App.createDUISection({
-            id: 'main',
-            header: 'Source Settings',
-            isHidden: false,
-            rows: async () => [
-                await accountSettings(this.stateManager, this.requestManager),
-                contentSettings(this.stateManager),
-                thumbnailSettings(this.stateManager),
-                resetSettings(this.stateManager)
-            ]
-        })
+        // Impossible to have undefined headers, ensured by the app
+        request.headers = {
+          ...request.headers,
+          authorization: 'Bearer ' + accessToken.accessToken
+        };
+        return request;
+      },
+      interceptResponse: async (response: Response): Promise<Response> => {
+        return response;
+      }
     }
+  });
 
-    getMangaShareUrl(mangaId: string): string { return `${this.MANGADEX_DOMAIN}/title/${mangaId}` }
+  checkerRequestManager = App.createRequestManager({
+    requestsPerSecond: 250,
+    requestTimeout: 10000,
+    interceptor: {
+      interceptRequest: async (request: Request) => {
+        return request;
+      },
+      interceptResponse: async (response: Response): Promise<Response> => {
+        return response;
+      }
+    }
+  });
 
-    async getSearchTags(): Promise<TagSection[]> {
-        const sections: Record<string, TagSection> = {}
+  async getSourceMenu(): Promise<DUISection> {
+    return App.createDUISection({
+      id: 'main',
+      header: 'Source Settings',
+      isHidden: false,
+      rows: async () => [
+        await accountSettings(this.stateManager, this.requestManager),
+        contentSettings(this.stateManager),
+        thumbnailSettings(this.stateManager),
+        resetSettings(this.stateManager)
+      ]
+    });
+  }
 
-        for (const tag of tagJSON) {
-            const group = tag.data.attributes.group
+  getMangaShareUrl(mangaId: string): string { return `${this.MANGADEX_DOMAIN}/title/${mangaId}`; }
 
-            if (sections[group] == null) {
-                sections[group] = App.createTagSection({ id: group, label: group.charAt(0).toUpperCase() + group.slice(1), tags: [] })
-            }
-            const tagObject = App.createTag({
-                id: tag.data.id,
-                label: tag.data.attributes.name.en
-            })
+  async getSearchTags(): Promise<TagSection[]> {
+    const sections: Record<string, TagSection> = {};
+
+    for(const tag of tagJSON) {
+      const group = tag.data.attributes.group;
+
+      if(sections[group] == null) {
+        sections[group] = App.createTagSection({ id: group, label: group.charAt(0).toUpperCase() + group.slice(1), tags: [] });
+      }
+      const tagObject = App.createTag({
+        id: tag.data.id,
+        label: tag.data.attributes.name.en
+      });
 
             // Since we already know that a section for the group has to exist, eslint is complaining
             // for no reason at all.
-            sections[group]!.tags = [...(sections[group]?.tags ?? []), tagObject]
+            sections[group]!.tags = [...(sections[group]?.tags ?? []), tagObject];
+    }
+
+    return Object.values(sections);
+  }
+
+  async supportsSearchOperators(): Promise<boolean> {
+    return true;
+  }
+
+  async supportsTagExclusion(): Promise<boolean> {
+    return true;
+  }
+
+  // Used for seasonal listing
+  async getCustomListRequestURL(listId: string, ratings: string[]): Promise<string> {
+    const request = App.createRequest({
+      url: `${this.MANGADEX_API}/list/${listId}`,
+      method: 'GET'
+    });
+
+    const response = await this.requestManager.schedule(request, 1);
+    const json = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data;
+
+    return new URLBuilder(this.MANGADEX_API)
+      .addPathComponent('manga')
+      .addQueryParameter('limit', 100)
+      .addQueryParameter('contentRating', ratings)
+      .addQueryParameter('includes', ['cover_art'])
+      .addQueryParameter('ids', json.data.relationships.filter((x: any) => x.type == 'manga').map((x: Tag) => x.id))
+      .buildUrl();
+  }
+
+  async getMangaDetails(mangaId: string): Promise<SourceManga> {
+    this.checkId(mangaId);
+
+    const request = App.createRequest({
+      url: new URLBuilder(this.MANGADEX_API)
+        .addPathComponent('manga')
+        .addPathComponent(mangaId)
+        .addQueryParameter('includes', ['author', 'artist', 'cover_art'])
+        .buildUrl(),
+      method: 'GET'
+    });
+
+    const response = await this.requestManager.schedule(request, 1);
+    const json = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data;
+    const mangaDetails = json.data.attributes;
+
+    const titles = <string[]>([...Object.values(mangaDetails.title), ...mangaDetails.altTitles.flatMap((x: never) => Object.values(x))].map((x: string) => decodeHTMLEntity(x)).filter((x) => x));
+    const desc = decodeHTMLEntity(mangaDetails.description.en)?.replace(/\[\/?[bus]]/g, ''); // Get rid of BBcode tags
+
+    const status = mangaDetails.status;
+
+    const tags: Tag[] = [];
+    const contentRating: string = mangaDetails.contentRating;
+    if(contentRating && contentRating != 'safe') {
+      tags.push(App.createTag({
+        id: contentRating,
+        label: contentRating.charAt(0).toUpperCase() + contentRating.substring(1)
+      }));
+    }
+    for(const tag of mangaDetails.tags) {
+      const tagName: { [index: string]: string } = tag.attributes.name;
+      tags.push(App.createTag({ id: tag.id, label: Object.keys(tagName).map((keys) => tagName[keys])[0] ?? 'Unknown' }));
+    }
+
+    const author = json.data.relationships.filter((x: any) => x.type == 'author').map((x: any) => x.attributes.name).join(', ');
+    const artist = json.data.relationships.filter((x: any) => x.type == 'artist').map((x: any) => x.attributes.name).join(', ');
+
+    let image = '';
+    const coverFileName = json.data.relationships.filter((x: any) => x.type == 'cover_art').map((x: any) => x.attributes?.fileName)[0];
+    if(coverFileName) {
+      image = `${this.COVER_BASE_URL}/${mangaId}/${coverFileName}${MDImageQuality.getEnding(await getMangaThumbnail(this.stateManager))}`;
+    }
+
+    return App.createSourceManga({
+      id: mangaId,
+      mangaInfo: App.createMangaInfo({
+        titles,
+        image,
+        author,
+        artist,
+        desc: desc ?? 'No Description',
+        status,
+        tags: [App.createTagSection({ id: 'tags', label: 'Tags', tags: tags })]
+      })
+    });
+  }
+
+  async tryChecker(mangaId: string): Promise<[string, number]> {
+    const epochKey = `${mangaId}-check-epoch`;
+    const checkerUrl = await getCheckerUrl(this.stateManager);
+    if(!checkerUrl) {return [epochKey, -1];}
+    const checkerUser = await getCheckerUser(this.stateManager);
+    if(!checkerUser || checkerUser.length <= 0) {throw new Error('No user configured');}
+    const lastCheckEpoch = (await this.stateManager.retrieve(epochKey) as number) ?? 0;
+    const request = App.createRequest({
+      url: `${checkerUrl}?userId=${checkerUser}&mangaId=${mangaId}&lastCheckEpoch=${lastCheckEpoch}`,
+      method: 'GET'
+    });
+    const response = await this.checkerRequestManager.schedule(request, 1);
+    const json = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data;
+    if(!json.state) {return [epochKey, -1];}
+    if(json.state == 'error') {
+      throw new Error(`Encountered error fetching ${mangaId}`);
+    } else if(json.state == 'no-user') {
+      throw new Error('Invalid user configured');
+    }
+    if(json.state == 'current') {
+      // await this.stateManager.store(epochKey, json.epoch)
+      throw new Error('Already up to date');
+    }
+    return [epochKey, json.epoch];
+  }
+
+  async getChapters(mangaId: string): Promise<Chapter[]> {
+    this.checkId(mangaId);
+
+    const [epochKey, epoch] = await this.tryChecker(mangaId);
+
+    const languages: string[] = await getLanguages(this.stateManager);
+    const skipSameChapter = await getSkipSameChapter(this.stateManager);
+    const ratings: string[] = await getRatings(this.stateManager);
+    const collectedChapters = new Set<string>();
+    const chapters: Chapter[] = [];
+
+    let offset = 0;
+    let sortingIndex = 0;
+
+    let hasResults = true;
+    while(hasResults) {
+      const request = App.createRequest({
+        url: new URLBuilder(this.MANGADEX_API)
+          .addPathComponent('manga')
+          .addPathComponent(mangaId)
+          .addPathComponent('feed')
+          .addQueryParameter('limit', 500)
+          .addQueryParameter('offset', offset)
+          .addQueryParameter('includes', ['scanlation_group'])
+          .addQueryParameter('translatedLanguage', languages)
+          .addQueryParameter('order', { volume: 'desc', chapter: 'desc', publishAt: 'desc' })
+          .addQueryParameter('contentRating', ratings)
+          .addQueryParameter('includeFutureUpdates', '0')
+          .buildUrl(),
+        method: 'GET'
+      });
+
+      const response = await this.requestManager.schedule(request, 1);
+      const json = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data;
+
+      offset += 500;
+
+      if(json.data === undefined) {throw new Error(`Failed to parse json results for ${mangaId}`);}
+
+      for(const chapter of json.data) {
+        const chapterId = chapter.id;
+        const chapterDetails = chapter.attributes;
+        const name = decodeHTMLEntity(chapterDetails.title);
+        const chapNum = Number(chapterDetails?.chapter);
+        const volume = Number(chapterDetails?.volume);
+        const langCode: string = MDLanguages.getFlagCode(chapterDetails.translatedLanguage);
+        const time = new Date(chapterDetails.publishAt);
+        const group = chapter.relationships.filter((x: any) => x.type == 'scanlation_group').map((x: any) => x.attributes.name).join(', ');
+        const pages = Number(chapterDetails.pages);
+        const identifier = `${volume}-${chapNum}-${chapterDetails.translatedLanguage}`;
+
+        if(collectedChapters.has(identifier) && skipSameChapter) {continue;}
+
+        if(pages > 0) {
+          chapters.push(
+            App.createChapter({
+              id: chapterId,
+              name,
+              chapNum,
+              volume,
+              langCode,
+              group,
+              time,
+              sortingIndex
+            })
+          );
+          collectedChapters.add(identifier);
+          sortingIndex--;
         }
+      }
 
-        return Object.values(sections)
+      if(json.total <= offset) {
+        hasResults = false;
+      }
     }
 
-    async supportsSearchOperators(): Promise<boolean> {
-        return true
+    // if (chapters.length == 0) {
+    //     throw new Error(`Couldn't find any chapters in your selected language for mangaId: ${mangaId}!`)
+    // }
+
+    if(epoch >= 0) {await this.stateManager.store(epochKey, epoch);}
+
+    return chapters.map((chapter) => {
+      chapter.sortingIndex += chapters.length;
+      return App.createChapter(chapter);
+    });
+  }
+
+  async getChapterDetails(mangaId: string, chapterId: string): Promise<ChapterDetails> {
+    this.checkId(chapterId); // Check the the mangaId is an old id
+
+    const dataSaver = await getDataSaver(this.stateManager);
+    const forcePort = await forcePort443(this.stateManager);
+
+    const request = App.createRequest({
+      url: `${this.MANGADEX_API}/at-home/server/${chapterId}${forcePort ? '?forcePort443=true' : ''}`,
+      method: 'GET'
+    });
+
+    const response = await this.requestManager.schedule(request, 1);
+    const json = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data;
+    const serverUrl = json.baseUrl;
+    const chapterDetails = json.chapter;
+
+    let pages: string[];
+    if(dataSaver) {
+      pages = chapterDetails.dataSaver.map((x: string) => `${serverUrl}/data-saver/${chapterDetails.hash}/${x}`);
+    } else {
+      pages = chapterDetails.data.map((x: string) => `${serverUrl}/data/${chapterDetails.hash}/${x}`);
     }
 
-    async supportsTagExclusion(): Promise<boolean> {
-        return true
+    return App.createChapterDetails({
+      id: chapterId,
+      mangaId: mangaId,
+      pages
+    });
+  }
+
+  async getSearchResults(query: SearchRequest, metadata: requestMetadata): Promise<PagedResults> {
+    const ratings: string[] = await getRatings(this.stateManager);
+    // const languages: string[] = await getLanguages(this.stateManager)
+    const offset: number = metadata?.offset ?? 0;
+    let results: PartialSourceManga[] = [];
+
+    const searchType = query.title?.match(/[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/i) ? 'ids[]' : 'title';
+
+    const url = new URLBuilder(this.MANGADEX_API)
+      .addPathComponent('manga')
+      .addQueryParameter(searchType, (query.title?.length ?? 0) > 0 ? query.title! : undefined)
+      .addQueryParameter('limit', 100)
+    // .addQueryParameter('hasAvailableChapters', true)
+    // .addQueryParameter('availableTranslatedLanguage', languages)
+      .addQueryParameter('offset', offset)
+      .addQueryParameter('contentRating', ratings)
+      .addQueryParameter('includes', ['cover_art'])
+      .addQueryParameter('includedTags', query.includedTags?.map((x) => x.id))
+      .addQueryParameter('includedTagsMode', query.includeOperator)
+      .addQueryParameter('excludedTags', query.excludedTags?.map((x) => x.id))
+      .addQueryParameter('excludedTagsMode', query.excludeOperator)
+      .buildUrl();
+
+    const request = App.createRequest({
+      url: url,
+      method: 'GET'
+    });
+    const response = await this.requestManager.schedule(request, 1);
+
+    if(response.status != 200) {
+      return App.createPagedResults({ results });
     }
 
-    // Used for seasonal listing
-    async getCustomListRequestURL(listId: string, ratings: string[]): Promise<string> {
-        const request = App.createRequest({
-            url: `${this.MANGADEX_API}/list/${listId}`,
-            method: 'GET'
+    const json = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data;
+    if(json.data === undefined) {
+      throw new Error('Failed to parse json for the given search');
+    }
+
+    results = await parseMangaList(json.data, this, getSearchThumbnail);
+    return App.createPagedResults({
+      results,
+      metadata: { offset: offset + 100 }
+    });
+  }
+
+  async getHomePageSections(sectionCallback: (section: HomeSection) => void): Promise<void> {
+    const ratings: string[] = await getRatings(this.stateManager);
+    const languages: string[] = await getLanguages(this.stateManager);
+    const promises: Promise<void>[] = [];
+
+    const sections = [
+      {
+        request: App.createRequest({
+          url: await this.getCustomListRequestURL(SEASONAL_LIST, ratings),
+          method: 'GET'
+        }),
+        section: App.createHomeSection({
+          id: 'seasonal',
+          title: 'Seasonal',
+          containsMoreItems: false,
+          type: HomeSectionType.featured
         })
-
-        const response = await this.requestManager.schedule(request, 1)
-        const json = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data
-
-        return new URLBuilder(this.MANGADEX_API)
+      },
+      {
+        request: App.createRequest({
+          url: new URLBuilder(this.MANGADEX_API)
             .addPathComponent('manga')
-            .addQueryParameter('limit', 100)
+            .addQueryParameter('limit', 20)
+            .addQueryParameter('hasAvailableChapters', true)
+            .addQueryParameter('availableTranslatedLanguage', languages)
+            .addQueryParameter('order', { followedCount: 'desc' })
             .addQueryParameter('contentRating', ratings)
             .addQueryParameter('includes', ['cover_art'])
-            .addQueryParameter('ids', json.data.relationships.filter((x: any) => x.type == 'manga').map((x: Tag) => x.id))
-            .buildUrl()
-    }
-
-    async getMangaDetails(mangaId: string): Promise<SourceManga> {
-        this.checkId(mangaId)
-
-        const request = App.createRequest({
-            url: new URLBuilder(this.MANGADEX_API)
-                .addPathComponent('manga')
-                .addPathComponent(mangaId)
-                .addQueryParameter('includes', ['author', 'artist', 'cover_art'])
-                .buildUrl(),
-            method: 'GET'
+            .buildUrl(),
+          method: 'GET'
+        }),
+        section: App.createHomeSection({
+          id: 'popular',
+          title: 'Popular',
+          containsMoreItems: true,
+          type: HomeSectionType.singleRowNormal
         })
-
-        const response = await this.requestManager.schedule(request, 1)
-        const json = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data
-        const mangaDetails = json.data.attributes
-
-        const titles = <string[]>([...Object.values(mangaDetails.title), ...mangaDetails.altTitles.flatMap((x: never) => Object.values(x))].map((x: string) => decodeHTMLEntity(x)).filter((x) => x))
-        const desc = decodeHTMLEntity(mangaDetails.description.en)?.replace(/\[\/?[bus]]/g, '') // Get rid of BBcode tags
-
-        const status = mangaDetails.status
-
-        const tags: Tag[] = []
-        const contentRating: string = mangaDetails.contentRating
-        if(contentRating && contentRating != 'safe') {
-            tags.push(App.createTag({
-                id: contentRating,
-                label: contentRating.charAt(0).toUpperCase() + contentRating.substring(1)
-            }))
-        }
-        for (const tag of mangaDetails.tags) {
-            const tagName: { [index: string]: string } = tag.attributes.name
-            tags.push(App.createTag({ id: tag.id, label: Object.keys(tagName).map((keys) => tagName[keys])[0] ?? 'Unknown' }))
-        }
-
-        const author = json.data.relationships.filter((x: any) => x.type == 'author').map((x: any) => x.attributes.name).join(', ')
-        const artist = json.data.relationships.filter((x: any) => x.type == 'artist').map((x: any) => x.attributes.name).join(', ')
-
-        let image = ''
-        const coverFileName = json.data.relationships.filter((x: any) => x.type == 'cover_art').map((x: any) => x.attributes?.fileName)[0]
-        if (coverFileName) {
-            image = `${this.COVER_BASE_URL}/${mangaId}/${coverFileName}${MDImageQuality.getEnding(await getMangaThumbnail(this.stateManager))}`
-        }
-
-        return App.createSourceManga({
-            id: mangaId,
-            mangaInfo: App.createMangaInfo({
-                titles,
-                image,
-                author,
-                artist,
-                desc: desc ?? 'No Description',
-                status,
-                tags: [App.createTagSection({ id: 'tags', label: 'Tags', tags: tags })]
-            })
-        })
-    }
-
-    async tryChecker(mangaId: string): Promise<[string, number]> {
-        const epochKey = `${mangaId}-check-epoch`
-        const checkerUrl = await getCheckerUrl(this.stateManager)
-        if(!checkerUrl) return [epochKey, -1]
-        const checkerUser = await getCheckerUser(this.stateManager)
-        if(!checkerUser || checkerUser.length <= 0) throw new Error('No user configured')
-        const lastCheckEpoch = (await this.stateManager.retrieve(epochKey) as number) ?? 0
-        const request = App.createRequest({
-            url: `${checkerUrl}?userId=${checkerUser}&mangaId=${mangaId}&lastCheckEpoch=${lastCheckEpoch}`,
-            method: 'GET'
-        })
-        const response = await this.checkerRequestManager.schedule(request, 1)
-        const json = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data
-        if(!json.state) return [epochKey, -1]
-        if(json.state == 'error') {
-            throw new Error(`Encountered error fetching ${mangaId}`)
-        } else if(json.state == 'no-user') {
-            throw new Error('Invalid user configured')
-        }
-        if(json.state == 'current') {
-            // await this.stateManager.store(epochKey, json.epoch)
-            throw new Error('Already up to date')
-        }
-        return [epochKey, json.epoch]
-    }
-
-    async getChapters(mangaId: string): Promise<Chapter[]> {
-        this.checkId(mangaId)
-
-        const [epochKey, epoch] = await this.tryChecker(mangaId)
-
-        const languages: string[] = await getLanguages(this.stateManager)
-        const skipSameChapter = await getSkipSameChapter(this.stateManager)
-        const ratings: string[] = await getRatings(this.stateManager)
-        const collectedChapters = new Set<string>()
-        const chapters: Chapter[] = []
-
-        let offset = 0
-        let sortingIndex = 0
-
-        let hasResults = true
-        while (hasResults) {
-            const request = App.createRequest({
-                url: new URLBuilder(this.MANGADEX_API)
-                    .addPathComponent('manga')
-                    .addPathComponent(mangaId)
-                    .addPathComponent('feed')
-                    .addQueryParameter('limit', 500)
-                    .addQueryParameter('offset', offset)
-                    .addQueryParameter('includes', ['scanlation_group'])
-                    .addQueryParameter('translatedLanguage', languages)
-                    .addQueryParameter('order', { volume: 'desc', chapter: 'desc', publishAt: 'desc' })
-                    .addQueryParameter('contentRating', ratings)
-                    .addQueryParameter('includeFutureUpdates', '0')
-                    .buildUrl(),
-                method: 'GET'
-            })
-
-            const response = await this.requestManager.schedule(request, 1)
-            const json = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data
-
-            offset += 500
-
-            if (json.data === undefined) throw new Error(`Failed to parse json results for ${mangaId}`)
-
-            for (const chapter of json.data) {
-                const chapterId = chapter.id
-                const chapterDetails = chapter.attributes
-                const name = decodeHTMLEntity(chapterDetails.title)
-                const chapNum = Number(chapterDetails?.chapter)
-                const volume = Number(chapterDetails?.volume)
-                const langCode: string = MDLanguages.getFlagCode(chapterDetails.translatedLanguage)
-                const time = new Date(chapterDetails.publishAt)
-                const group = chapter.relationships.filter((x: any) => x.type == 'scanlation_group').map((x: any) => x.attributes.name).join(', ')
-                const pages = Number(chapterDetails.pages)
-                const identifier = `${volume}-${chapNum}-${chapterDetails.translatedLanguage}`
-
-                if (collectedChapters.has(identifier) && skipSameChapter) continue
-
-                if (pages > 0) {
-                    chapters.push(
-                        App.createChapter({
-                            id: chapterId,
-                            name,
-                            chapNum,
-                            volume,
-                            langCode,
-                            group,
-                            time,
-                            sortingIndex
-                        })
-                    )
-                    collectedChapters.add(identifier)
-                    sortingIndex--
-                }
-            }
-
-            if (json.total <= offset) {
-                hasResults = false
-            }
-        }
-
-        // if (chapters.length == 0) {
-        //     throw new Error(`Couldn't find any chapters in your selected language for mangaId: ${mangaId}!`)
-        // }
-
-        if(epoch >= 0) await this.stateManager.store(epochKey, epoch)
-
-        return chapters.map(chapter => {
-            chapter.sortingIndex += chapters.length
-            return App.createChapter(chapter)
-        })
-    }
-
-    async getChapterDetails(mangaId: string, chapterId: string): Promise<ChapterDetails> {
-        this.checkId(chapterId) // Check the the mangaId is an old id
-
-        const dataSaver = await getDataSaver(this.stateManager)
-        const forcePort = await forcePort443(this.stateManager)
-
-        const request = App.createRequest({
-            url: `${this.MANGADEX_API}/at-home/server/${chapterId}${forcePort ? '?forcePort443=true' : ''}`,
-            method: 'GET'
-        })
-
-        const response = await this.requestManager.schedule(request, 1)
-        const json = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data
-        const serverUrl = json.baseUrl
-        const chapterDetails = json.chapter
-
-        let pages: string[]
-        if (dataSaver) {
-            pages = chapterDetails.dataSaver.map((x: string) => `${serverUrl}/data-saver/${chapterDetails.hash}/${x}`)
-        } else {
-            pages = chapterDetails.data.map((x: string) => `${serverUrl}/data/${chapterDetails.hash}/${x}`)
-        }
-
-        return App.createChapterDetails({
-            id: chapterId,
-            mangaId: mangaId,
-            pages
-        })
-    }
-
-    async getSearchResults(query: SearchRequest, metadata: requestMetadata): Promise<PagedResults> {
-        const ratings: string[] = await getRatings(this.stateManager)
-        // const languages: string[] = await getLanguages(this.stateManager)
-        const offset: number = metadata?.offset ?? 0
-        let results: PartialSourceManga[] = []
-
-        const searchType = query.title?.match(/[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/i) ? 'ids[]' : 'title'
-
-        const url = new URLBuilder(this.MANGADEX_API)
+      },
+      {
+        request: App.createRequest({
+          url: new URLBuilder(this.MANGADEX_API)
             .addPathComponent('manga')
-            .addQueryParameter(searchType, (query.title?.length ?? 0) > 0 ? query.title! : undefined)
-            .addQueryParameter('limit', 100)
-            // .addQueryParameter('hasAvailableChapters', true)
-            // .addQueryParameter('availableTranslatedLanguage', languages)
-            .addQueryParameter('offset', offset)
+            .addQueryParameter('limit', 20)
+            .addQueryParameter('hasAvailableChapters', true)
+            .addQueryParameter('availableTranslatedLanguage', languages)
+            .addQueryParameter('order', { latestUploadedChapter: 'desc' })
             .addQueryParameter('contentRating', ratings)
             .addQueryParameter('includes', ['cover_art'])
-            .addQueryParameter('includedTags', query.includedTags?.map((x) => x.id))
-            .addQueryParameter('includedTagsMode', query.includeOperator)
-            .addQueryParameter('excludedTags', query.excludedTags?.map((x) => x.id))
-            .addQueryParameter('excludedTagsMode', query.excludeOperator)
-            .buildUrl()
-
-        const request = App.createRequest({
-            url: url,
-            method: 'GET'
+            .buildUrl(),
+          method: 'GET'
+        }),
+        section: App.createHomeSection({
+          id: 'latest_updates',
+          title: 'Latest Updates',
+          containsMoreItems: true,
+          type: HomeSectionType.singleRowNormal
         })
-        const response = await this.requestManager.schedule(request, 1)
-
-        if (response.status != 200) {
-            return App.createPagedResults({ results })
-        }
-
-        const json = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data
-        if (json.data === undefined) {
-            throw new Error('Failed to parse json for the given search')
-        }
-
-        results = await parseMangaList(json.data, this, getSearchThumbnail)
-        return App.createPagedResults({
-            results,
-            metadata: { offset: offset + 100 }
+      },
+      {
+        request: App.createRequest({
+          url: new URLBuilder(this.MANGADEX_API)
+            .addPathComponent('manga')
+            .addQueryParameter('limit', 20)
+            .addQueryParameter('hasAvailableChapters', true)
+            .addQueryParameter('availableTranslatedLanguage', languages)
+            .addQueryParameter('order', { createdAt: 'desc' })
+            .addQueryParameter('contentRating', ratings)
+            .addQueryParameter('includes', ['cover_art'])
+            .buildUrl(),
+          method: 'GET'
+        }),
+        section: App.createHomeSection({
+          id: 'recently_Added',
+          title: 'Recently Added',
+          containsMoreItems: true,
+          type: HomeSectionType.singleRowNormal
         })
+      }
+    ];
+
+    for(const section of sections) {
+      // Let the app load empty sections
+      sectionCallback(section.section);
+      // Get the section data
+      promises.push(
+        this.requestManager.schedule(section.request, 1).then(async (response) => {
+          const json: MangaDexSearchResponse = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data;
+
+          if(json.data === undefined) {
+            throw new Error(`Failed to parse json results for section ${section.section.title}`);
+          }
+
+          section.section.items = await parseMangaList(json.data, this, getHomepageThumbnail);
+
+          sectionCallback(section.section);
+        })
+      );
     }
 
-    async getHomePageSections(sectionCallback: (section: HomeSection) => void): Promise<void> {
-        const ratings: string[] = await getRatings(this.stateManager)
-        const languages: string[] = await getLanguages(this.stateManager)
-        const promises: Promise<void>[] = []
+    // Make sure the function completes
+    await Promise.all(promises);
+  }
 
-        const sections = [
-            {
-                request: App.createRequest({
-                    url: await this.getCustomListRequestURL(SEASONAL_LIST, ratings),
-                    method: 'GET'
-                }),
-                section: App.createHomeSection({
-                    id: 'seasonal',
-                    title: 'Seasonal',
-                    containsMoreItems: false,
-                    type: HomeSectionType.featured
-                })
-            },
-            {
-                request: App.createRequest({
-                    url: new URLBuilder(this.MANGADEX_API)
-                        .addPathComponent('manga')
-                        .addQueryParameter('limit', 20)
-                        .addQueryParameter('hasAvailableChapters', true)
-                        .addQueryParameter('availableTranslatedLanguage', languages)
-                        .addQueryParameter('order', { followedCount: 'desc' })
-                        .addQueryParameter('contentRating', ratings)
-                        .addQueryParameter('includes', ['cover_art'])
-                        .buildUrl(),
-                    method: 'GET'
-                }),
-                section: App.createHomeSection({
-                    id: 'popular',
-                    title: 'Popular',
-                    containsMoreItems: true,
-                    type: HomeSectionType.singleRowNormal
-                })
-            },
-            {
-                request: App.createRequest({
-                    url: new URLBuilder(this.MANGADEX_API)
-                        .addPathComponent('manga')
-                        .addQueryParameter('limit', 20)
-                        .addQueryParameter('hasAvailableChapters', true)
-                        .addQueryParameter('availableTranslatedLanguage', languages)
-                        .addQueryParameter('order', { latestUploadedChapter: 'desc' })
-                        .addQueryParameter('contentRating', ratings)
-                        .addQueryParameter('includes', ['cover_art'])
-                        .buildUrl(),
-                    method: 'GET'
-                }),
-                section: App.createHomeSection({
-                    id: 'latest_updates',
-                    title: 'Latest Updates',
-                    containsMoreItems: true,
-                    type: HomeSectionType.singleRowNormal
-                })
-            },
-            {
-                request: App.createRequest({
-                    url: new URLBuilder(this.MANGADEX_API)
-                        .addPathComponent('manga')
-                        .addQueryParameter('limit', 20)
-                        .addQueryParameter('hasAvailableChapters', true)
-                        .addQueryParameter('availableTranslatedLanguage', languages)
-                        .addQueryParameter('order', { createdAt: 'desc' })
-                        .addQueryParameter('contentRating', ratings)
-                        .addQueryParameter('includes', ['cover_art'])
-                        .buildUrl(),
-                    method: 'GET'
-                }),
-                section: App.createHomeSection({
-                    id: 'recently_Added',
-                    title: 'Recently Added',
-                    containsMoreItems: true,
-                    type: HomeSectionType.singleRowNormal
-                })
-            }
-        ]
+  async getViewMoreItems(homepageSectionId: string, metadata: requestMetadata): Promise<PagedResults> {
+    const offset: number = metadata?.offset ?? 0;
+    const collectedIds: string[] = metadata?.collectedIds ?? [];
+    const ratings: string[] = await getRatings(this.stateManager);
+    const languages: string[] = await getLanguages(this.stateManager);
 
-        for (const section of sections) {
-            // Let the app load empty sections
-            sectionCallback(section.section)
-            // Get the section data
-            promises.push(
-                this.requestManager.schedule(section.request, 1).then(async (response) => {
-                    const json: MangaDexSearchResponse = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data
+    let results: PartialSourceManga[] = [];
+    let url = '';
 
-                    if (json.data === undefined) {
-                        throw new Error(`Failed to parse json results for section ${section.section.title}`)
-                    }
+    switch(homepageSectionId) {
+      case 'popular': {
+        url = new URLBuilder(this.MANGADEX_API)
+          .addPathComponent('manga')
+          .addQueryParameter('limit', 100)
+          .addQueryParameter('hasAvailableChapters', true)
+          .addQueryParameter('availableTranslatedLanguage', languages)
+          .addQueryParameter('order', { followedCount: 'desc' })
+          .addQueryParameter('offset', offset)
+          .addQueryParameter('contentRating', ratings)
+          .addQueryParameter('includes', ['cover_art'])
+          .buildUrl();
+        break;
+      }
 
-                    section.section.items = await parseMangaList(json.data, this, getHomepageThumbnail)
+      case 'latest_updates': {
+        url = new URLBuilder(this.MANGADEX_API)
+          .addPathComponent('manga')
+          .addQueryParameter('limit', 100)
+          .addQueryParameter('hasAvailableChapters', true)
+          .addQueryParameter('availableTranslatedLanguage', languages)
+          .addQueryParameter('order', { latestUploadedChapter: 'desc' })
+          .addQueryParameter('offset', offset)
+          .addQueryParameter('contentRating', ratings)
+          .addQueryParameter('includes', ['cover_art'])
+          .buildUrl();
+        break;
+      }
 
-                    sectionCallback(section.section)
-                })
-            )
-        }
-
-        // Make sure the function completes
-        await Promise.all(promises)
+      case 'recently_Added': {
+        url = new URLBuilder(this.MANGADEX_API)
+          .addPathComponent('manga')
+          .addQueryParameter('limit', 100)
+          .addQueryParameter('hasAvailableChapters', true)
+          .addQueryParameter('availableTranslatedLanguage', languages)
+          .addQueryParameter('order', { createdAt: 'desc' })
+          .addQueryParameter('offset', offset)
+          .addQueryParameter('contentRating', ratings)
+          .addQueryParameter('includes', ['cover_art'])
+          .buildUrl();
+        break;
+      }
     }
 
-    async getViewMoreItems(homepageSectionId: string, metadata: requestMetadata): Promise<PagedResults> {
-        const offset: number = metadata?.offset ?? 0
-        const collectedIds: string[] = metadata?.collectedIds ?? []
-        const ratings: string[] = await getRatings(this.stateManager)
-        const languages: string[] = await getLanguages(this.stateManager)
+    const request = App.createRequest({
+      url: url,
+      method: 'GET'
+    });
+    const response = await this.requestManager.schedule(request, 1);
 
-        let results: PartialSourceManga[] = []
-        let url = ''
+    const json: MangaDexSearchResponse = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data;
 
-        switch (homepageSectionId) {
-            case 'popular': {
-                url = new URLBuilder(this.MANGADEX_API)
-                    .addPathComponent('manga')
-                    .addQueryParameter('limit', 100)
-                    .addQueryParameter('hasAvailableChapters', true)
-                    .addQueryParameter('availableTranslatedLanguage', languages)
-                    .addQueryParameter('order', { followedCount: 'desc' })
-                    .addQueryParameter('offset', offset)
-                    .addQueryParameter('contentRating', ratings)
-                    .addQueryParameter('includes', ['cover_art'])
-                    .buildUrl()
-                break
-            }
-
-            case 'latest_updates': {
-                url = new URLBuilder(this.MANGADEX_API)
-                    .addPathComponent('manga')
-                    .addQueryParameter('limit', 100)
-                    .addQueryParameter('hasAvailableChapters', true)
-                    .addQueryParameter('availableTranslatedLanguage', languages)
-                    .addQueryParameter('order', { latestUploadedChapter: 'desc' })
-                    .addQueryParameter('offset', offset)
-                    .addQueryParameter('contentRating', ratings)
-                    .addQueryParameter('includes', ['cover_art'])
-                    .buildUrl()
-                break
-            }
-
-            case 'recently_Added': {
-                url = new URLBuilder(this.MANGADEX_API)
-                    .addPathComponent('manga')
-                    .addQueryParameter('limit', 100)
-                    .addQueryParameter('hasAvailableChapters', true)
-                    .addQueryParameter('availableTranslatedLanguage', languages)
-                    .addQueryParameter('order', { createdAt: 'desc' })
-                    .addQueryParameter('offset', offset)
-                    .addQueryParameter('contentRating', ratings)
-                    .addQueryParameter('includes', ['cover_art'])
-                    .buildUrl()
-                break
-            }
-        }
-
-        const request = App.createRequest({
-            url: url,
-            method: 'GET'
-        })
-        const response = await this.requestManager.schedule(request, 1)
-
-        const json: MangaDexSearchResponse = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data
-
-        if (json.data === undefined) {
-            throw new Error('Failed to parse json results for getViewMoreItems')
-        }
-
-        results = await parseMangaList(json.data, this, getHomepageThumbnail)
-
-        return App.createPagedResults({
-            results,
-            metadata: { offset: offset + 100, collectedIds }
-        })
+    if(json.data === undefined) {
+      throw new Error('Failed to parse json results for getViewMoreItems');
     }
 
-    // Utility
-    checkId(id: string): void {
-        if (!id.includes('-')) {
-            throw new Error('OLD ID: PLEASE REFRESH AND CLEAR ORPHANED CHAPTERS')
-        }
+    results = await parseMangaList(json.data, this, getHomepageThumbnail);
+
+    return App.createPagedResults({
+      results,
+      metadata: { offset: offset + 100, collectedIds }
+    });
+  }
+
+  // Utility
+  checkId(id: string): void {
+    if(!id.includes('-')) {
+      throw new Error('OLD ID: PLEASE REFRESH AND CLEAR ORPHANED CHAPTERS');
     }
+  }
 }
