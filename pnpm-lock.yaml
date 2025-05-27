@@ -68,13 +68,13 @@ packages:
     resolution: {integrity: sha512-D2hP9eA+Sqx1kBZgzxZh0y1trbuU+JoDkiEwqhQ36nodYqJwyEIhPSdMNd7lOm/4io72luTPWH20Yda0xOuUow==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/parser@7.27.2':
-    resolution: {integrity: sha512-QYLs8299NA7WM/bZAdp+CviYYkVoYXlDW2rzliy3chxd1PQjej7JORuMJDJXJUb9g0TT+B99EwaVLKmX+sPXWw==}
+  '@babel/parser@7.27.3':
+    resolution: {integrity: sha512-xyYxRj6+tLNDTWi0KCBcZ9V7yg3/lwL9DWh9Uwh/RIVlIfFidggcgxKX3GCXwCiswwcGRawBKbEg2LG/Y8eJhw==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
-  '@babel/types@7.27.1':
-    resolution: {integrity: sha512-+EzkxvLNfiUeKMgy/3luqfsCWFRXLb7U6wNQTk60tovuckwB15B191tJWvpp4HjiQWdJkCxO3Wbvc6jlk3Xb2Q==}
+  '@babel/types@7.27.3':
+    resolution: {integrity: sha512-Y1GkI4ktrtvmawoSq+4FCVHNryea6uR+qUQy0AGxLSsjCX0nVmkYQMBLHDkXZuo5hGx7eYdnIaslsdBFm7zbUw==}
     engines: {node: '>=6.9.0'}
 
   '@cspotcode/source-map-support@0.8.1':
@@ -215,11 +215,11 @@ packages:
   '@paperback/types@1.0.0-alpha.53':
     resolution: {integrity: sha512-+sHZ/eezBL3ona+DoAxtYEJ303a9rCkrP7YKLwAoz10kjTXJz4l4lnE8/s5JOpF8pAj/907GBhEBO1pBVWyngQ==}
 
-  '@protobuf-ts/runtime-rpc@2.10.0':
-    resolution: {integrity: sha512-8CS/XPv3+pMK4v8UKhtCdvbS4h9l7aqlteKdRt0/UbIKZ8n0qHj6hX8cBhz2ngvohxCOS0N08zPr9aCLBNhW3Q==}
+  '@protobuf-ts/runtime-rpc@2.11.0':
+    resolution: {integrity: sha512-g/oMPym5LjVyCc3nlQc6cHer0R3CyleBos4p7CjRNzdKuH/FlRXzfQYo6EN5uv8vLtn7zEK9Cy4YBKvHStIaag==}
 
-  '@protobuf-ts/runtime@2.10.0':
-    resolution: {integrity: sha512-ypYwGg9Pn3W/2lZ7/HW60hONGuSdzphvOY8Dq7LeNttymDe0y3LaTUUMRpuGqOT6FfrWEMnfQbyqU8AAreo8wA==}
+  '@protobuf-ts/runtime@2.11.0':
+    resolution: {integrity: sha512-DfpRpUiNvPC3Kj48CmlU4HaIEY1Myh++PIumMmohBAk8/k0d2CkxYxJfPyUAxfuUfl97F4AvuCu1gXmfOG7OJQ==}
 
   '@protobufjs/aspromise@1.1.2':
     resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}
@@ -2237,11 +2237,11 @@ snapshots:
 
   '@babel/helper-validator-identifier@7.27.1': {}
 
-  '@babel/parser@7.27.2':
+  '@babel/parser@7.27.3':
     dependencies:
-      '@babel/types': 7.27.1
+      '@babel/types': 7.27.3
 
-  '@babel/types@7.27.1':
+  '@babel/types@7.27.3':
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.27.1
@@ -2460,7 +2460,7 @@ snapshots:
       '@oclif/plugin-plugins': 2.4.7(@swc/core@1.7.1)(@types/node@22.15.21)(typescript@5.8.3)
       '@paperback/runtime-polyfills': 1.0.0-alpha.53
       '@paperback/types': 1.0.0-alpha.53
-      '@protobuf-ts/runtime-rpc': 2.10.0
+      '@protobuf-ts/runtime-rpc': 2.11.0
       browserify: 17.0.1
       chai: 4.5.0
       chalk: 4.1.2
@@ -2479,11 +2479,11 @@ snapshots:
 
   '@paperback/types@1.0.0-alpha.53': {}
 
-  '@protobuf-ts/runtime-rpc@2.10.0':
+  '@protobuf-ts/runtime-rpc@2.11.0':
     dependencies:
-      '@protobuf-ts/runtime': 2.10.0
+      '@protobuf-ts/runtime': 2.11.0
 
-  '@protobuf-ts/runtime@2.10.0': {}
+  '@protobuf-ts/runtime@2.11.0': {}
 
   '@protobufjs/aspromise@1.1.2': {}
 
@@ -2818,7 +2818,7 @@ snapshots:
 
   babel-walk@3.0.0-canary-5:
     dependencies:
-      '@babel/types': 7.27.1
+      '@babel/types': 7.27.3
 
   balanced-match@1.0.2: {}
 
@@ -3096,8 +3096,8 @@ snapshots:
 
   constantinople@4.0.1:
     dependencies:
-      '@babel/parser': 7.27.2
-      '@babel/types': 7.27.1
+      '@babel/parser': 7.27.3
+      '@babel/types': 7.27.3
 
   constants-browserify@1.0.0: {}
 
@@ -4893,8 +4893,8 @@ snapshots:
 
   with@7.0.2:
     dependencies:
-      '@babel/parser': 7.27.2
-      '@babel/types': 7.27.1
+      '@babel/parser': 7.27.3
+      '@babel/types': 7.27.3
       assert-never: 1.4.0
       babel-walk: 3.0.0-canary-5
 
