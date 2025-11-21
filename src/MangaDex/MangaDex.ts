@@ -66,7 +66,7 @@ export const MangaDexInfo: SourceInfo = {
   description: 'Extension that pulls manga from MangaDex',
   icon: 'icon.png',
   name: 'MangaDex',
-  version: '3.0.15',
+  version: '3.0.16',
   authorWebsite: 'https://github.com/nar1n',
   websiteBaseURL: MANGADEX_DOMAIN,
   contentRating: ContentRating.EVERYONE,
@@ -282,6 +282,15 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
     return [epochKey, json.epoch];
   }
 
+  parseChapter(chapter: string | null | undefined): number {
+    chapter = (chapter ?? '0').toUpperCase().replace(/([^.])([A-Z]+)/g, (_, pre, letters) => `${pre}.${letters.split().join('.')}`);
+    const pieces: string[] = chapter.split(/\./g).map((p: string) => /[A-Z]/.test(p) ? String(p.charCodeAt(0) - 'A'.charCodeAt(0) + 1) : p);
+    if(pieces.length == 1) {
+      return Number(pieces[0]);
+    }
+    return Number(`${pieces[0]}.${pieces.slice(1).join('')}`);
+  }
+
   async getChapters(mangaId: string): Promise<Chapter[]> {
     this.checkId(mangaId);
 
@@ -325,7 +334,7 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
         const chapterId = chapter.id;
         const chapterDetails = chapter.attributes;
         const name = decodeHTMLEntity(chapterDetails.title);
-        const chapNum = Number(chapterDetails?.chapter);
+        const chapNum = this.parseChapter(chapterDetails?.chapter);
         const volume = Number(chapterDetails?.volume);
         const langCode: string = MDLanguages.getFlagCode(chapterDetails.translatedLanguage);
         const time = new Date(chapterDetails.publishAt);
