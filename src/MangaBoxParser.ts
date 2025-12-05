@@ -118,8 +118,8 @@ export class MangaBoxParser {
       );
 
       let chapNum = 0;
-      const chapRegex = id.match(/(?:chap.*)[-_](\d+(?:\.\d+)?)/);
-      if(chapRegex && chapRegex[1]) {chapNum = Number(chapRegex[1].replace('\\', '.'));}
+      const chapRegex = id.match(/(?:chap.*?)[-_](\d+(?:[.-]\d+)?)/);
+      if(chapRegex && chapRegex[1]) {chapNum = Number(chapRegex[1].replace(/[\\-]/g, '.'));}
 
       chapters.push({
         id: id,
