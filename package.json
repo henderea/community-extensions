@@ -15,14 +15,14 @@
   "author": "Netsky",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "@stylistic/eslint-plugin": "^5.7.0",
+    "@stylistic/eslint-plugin": "^5.7.1",
     "@types/cheerio": "^0.22.35",
     "@typescript-eslint/eslint-plugin": "^8.53.1",
     "@typescript-eslint/parser": "^8.53.1",
     "eslint": "^9.39.2",
-    "eslint-config-henderea": "2.0.99",
+    "eslint-config-henderea": "2.0.101",
     "eslint-plugin-import": "^2.32.0",
-    "globals": "^17.0.0",
+    "globals": "^17.1.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.53.1"
   },
