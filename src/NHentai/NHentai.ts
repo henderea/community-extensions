@@ -45,7 +45,7 @@ const NHENTAI_URL = 'https://nhentai.net';
 const MAX_RATE_LIMIT_RETRIES = 3;
 
 export const NHentaiInfo: SourceInfo = {
-  version: '4.1.0',
+  version: '4.1.1',
   name: 'nhentai',
   icon: 'icon.png',
   author: 'NotMarek & Netsky',

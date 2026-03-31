@@ -29,10 +29,17 @@ export const parseMangaDetails = (data: Gallery): SourceManga => {
     tags.push(App.createTag({ id: tag.name, label: capitalizeTags(tag.name) }));
   }
 
+  const titles: string[] = [data.title.pretty, data.title.english, data.title.japanese].filter((title): title is string => !!title && title !== '');
+  Object.values(data.title).filter((title): title is string => !!title && title !== '').forEach((t) => {
+    if(!titles.includes(t)) {
+      titles.push(t);
+    }
+  });
+
   return App.createSourceManga({
     id: data.id.toString(),
     mangaInfo: App.createMangaInfo({
-      titles: [data.title.pretty, data.title.english, data.title.japanese].filter((title): title is string => !!title && title !== ''),
+      titles,
       artist: artist,
       author: artist,
       image: getCoverImage(data),
