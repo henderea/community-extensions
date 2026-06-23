@@ -17,14 +17,14 @@
   "devDependencies": {
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/cheerio": "^0.22.35",
-    "@typescript-eslint/eslint-plugin": "^8.59.2",
-    "@typescript-eslint/parser": "^8.59.2",
+    "@typescript-eslint/eslint-plugin": "^8.62.0",
+    "@typescript-eslint/parser": "^8.62.0",
     "eslint": "^9.39.4",
-    "eslint-config-henderea": "2.0.124",
+    "eslint-config-henderea": "2.0.126",
     "eslint-plugin-import": "^2.32.0",
-    "globals": "^17.6.0",
+    "globals": "^17.7.0",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.2"
+    "typescript-eslint": "^8.62.0"
   },
   "dependencies": {
     "@paperback/toolchain": "0.8.0-alpha.47",
