@@ -66,7 +66,7 @@ export const MangaDexInfo: SourceInfo = {
   description: 'Extension that pulls manga from MangaDex',
   icon: 'icon.png',
   name: 'MangaDex',
-  version: '3.0.17',
+  version: '3.0.18',
   authorWebsite: 'https://github.com/nar1n',
   websiteBaseURL: MANGADEX_DOMAIN,
   contentRating: ContentRating.EVERYONE,
@@ -319,6 +319,8 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
           .addQueryParameter('order', { volume: 'desc', chapter: 'desc', publishAt: 'desc' })
           .addQueryParameter('contentRating', ratings)
           .addQueryParameter('includeFutureUpdates', '0')
+          .addQueryParameter('includeEmptyPages', '0')
+          .addQueryParameter('includeExternalUrl', '0')
           .buildUrl(),
         method: 'GET'
       });
