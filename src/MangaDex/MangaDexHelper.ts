@@ -1,14 +1,14 @@
 
 export interface requestMetadata {
-    offset?: number
-    collectedIds?: string[]
+  offset?: number
+  collectedIds?: string[]
 }
 
 interface Language {
-    name: string
-    MDCode: string
-    flagCode: string
-    default?: boolean
+  name: string
+  MDCode: string
+  flagCode: string
+  default?: boolean
 }
 
 class MDLanguagesClass {
@@ -281,9 +281,9 @@ class MDLanguagesClass {
 export const MDLanguages = new MDLanguagesClass();
 
 interface Rating {
-    name: string;
-    enum: string;
-    default?: true;
+  name: string;
+  enum: string;
+  default?: true;
 }
 
 class MDContentRatingClass {
@@ -325,9 +325,9 @@ class MDContentRatingClass {
 export const MDRatings = new MDContentRatingClass();
 
 interface HomePageSection {
-    name: string;
-    enum: string;
-    default?: true;
+  name: string;
+  enum: string;
+  default?: true;
 }
 
 class MDHomepageSectionsClass {
@@ -431,10 +431,10 @@ export class URLBuilder {
 }
 
 interface ImageQuality {
-    name: string
-    enum: string
-    ending: string
-    default?: string[]
+  name: string
+  enum: string
+  ending: string
+  default?: string[]
 }
 
 class MDImageQualityClass {

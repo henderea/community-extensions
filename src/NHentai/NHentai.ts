@@ -345,7 +345,7 @@ export class NHentai implements SearchResultsProviding, MangaProviding, ChapterP
   parseJson(response: Response): any {
     try {
       return (typeof response.data == 'string') ? JSON.parse(response.data) : response.data;
-    } catch (error) {
+    } catch(error) {
       console.log(JSON.stringify(error));
       if(response.status == 403 || response.status == 503) {
         throw new Error(`CLOUDFLARE BYPASS ERROR:\nPlease go to the homepage of <${NHentai.name}> and press the cloud icon.`);

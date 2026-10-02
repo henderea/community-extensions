@@ -164,9 +164,9 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
         label: tag.data.attributes.name.en
       });
 
-            // Since we already know that a section for the group has to exist, eslint is complaining
-            // for no reason at all.
-            sections[group]!.tags = [...(sections[group]?.tags ?? []), tagObject];
+      // Since we already know that a section for the group has to exist, eslint is complaining
+      // for no reason at all.
+      sections[group]!.tags = [...(sections[group]?.tags ?? []), tagObject];
     }
 
     return Object.values(sections);
@@ -565,7 +565,6 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
     const ratings: string[] = await getRatings(this.stateManager);
     const languages: string[] = await getLanguages(this.stateManager);
 
-    let results: PartialSourceManga[] = [];
     let url = '';
 
     switch(homepageSectionId) {

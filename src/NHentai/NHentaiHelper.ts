@@ -1,8 +1,8 @@
 interface Language {
-    name: string;
-    NHCode: string;
-    lang: string;
-    default?: boolean;
+  name: string;
+  NHCode: string;
+  lang: string;
+  default?: boolean;
 }
 
 class NHLanguagesClass {
@@ -55,10 +55,10 @@ class NHLanguagesClass {
 
 export const NHLanguages = new NHLanguagesClass();
 interface SortOrder {
-    name: string;
-    NHCode: string;
-    shortcuts: string[];
-    default?: boolean;
+  name: string;
+  NHCode: string;
+  shortcuts: string[];
+  default?: boolean;
 }
 
 class NHSortOrderClass {
