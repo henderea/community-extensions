@@ -49,8 +49,8 @@ importers:
         specifier: ^10.11.0
         version: 10.11.0(supports-color@5.5.0)
       eslint-config-henderea:
-        specifier: 3.0.0
-        version: 3.0.0(@eslint/js@10.0.1(eslint@10.11.0(supports-color@5.5.0)))(@stylistic/eslint-plugin@5.10.0(eslint@10.11.0(supports-color@5.5.0)))(@typescript-eslint/eslint-plugin@8.71.0(@typescript-eslint/parser@8.71.0(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(@typescript-eslint/parser@8.71.0(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(eslint@10.11.0(supports-color@5.5.0))(globals@17.13.0)(typescript-eslint@8.71.0(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(typescript@6.0.3)
+        specifier: 3.0.1
+        version: 3.0.1(@eslint/js@10.0.1(eslint@10.11.0(supports-color@5.5.0)))(@stylistic/eslint-plugin@5.10.0(eslint@10.11.0(supports-color@5.5.0)))(@typescript-eslint/eslint-plugin@8.71.0(@typescript-eslint/parser@8.71.0(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(@typescript-eslint/parser@8.71.0(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(eslint@10.11.0(supports-color@5.5.0))(globals@17.13.0)(typescript-eslint@8.71.0(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(typescript@6.0.3)
       eslint-plugin-import:
         specifier: ^2.32.0
         version: 2.32.0(@typescript-eslint/parser@8.71.0(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)
@@ -895,8 +895,8 @@ packages:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
 
-  eslint-config-henderea@3.0.0:
-    resolution: {integrity: sha512-bGFQyViqEB/TZ/1AWX5kacrqZvUjidsEmMmvSSQyXaD6BwSkGyIDDx8JF4HyQibhmBeJWXswxcupB6jkHcl2OA==}
+  eslint-config-henderea@3.0.1:
+    resolution: {integrity: sha512-vCeLoOh3rUNySO1KSfESWYKqnqS57Ts0aqUwGe1bjD6MKG+QqWe8KUrEvfrlZd7F+6zv7qUwq5hKNpzVgCFphw==}
     peerDependencies:
       '@eslint/js': ^10.0.1
       '@stylistic/eslint-plugin': ^5.10.0
@@ -3468,7 +3468,7 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-config-henderea@3.0.0(@eslint/js@10.0.1(eslint@10.11.0(supports-color@5.5.0)))(@stylistic/eslint-plugin@5.10.0(eslint@10.11.0(supports-color@5.5.0)))(@typescript-eslint/eslint-plugin@8.71.0(@typescript-eslint/parser@8.71.0(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(@typescript-eslint/parser@8.71.0(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(eslint@10.11.0(supports-color@5.5.0))(globals@17.13.0)(typescript-eslint@8.71.0(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(typescript@6.0.3):
+  eslint-config-henderea@3.0.1(@eslint/js@10.0.1(eslint@10.11.0(supports-color@5.5.0)))(@stylistic/eslint-plugin@5.10.0(eslint@10.11.0(supports-color@5.5.0)))(@typescript-eslint/eslint-plugin@8.71.0(@typescript-eslint/parser@8.71.0(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(@typescript-eslint/parser@8.71.0(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(eslint@10.11.0(supports-color@5.5.0))(globals@17.13.0)(typescript-eslint@8.71.0(eslint@10.11.0(supports-color@5.5.0))(supports-color@5.5.0)(typescript@6.0.3))(typescript@6.0.3):
     dependencies:
       '@eslint/js': 10.0.1(eslint@10.11.0(supports-color@5.5.0))
       '@stylistic/eslint-plugin': 5.10.0(eslint@10.11.0(supports-color@5.5.0))
