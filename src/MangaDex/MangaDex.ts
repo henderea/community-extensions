@@ -623,7 +623,7 @@ export class MangaDex implements ChapterProviding, SearchResultsProviding, HomeP
       throw new Error('Failed to parse json results for getViewMoreItems');
     }
 
-    results = await parseMangaList(json.data, this, getHomepageThumbnail);
+    const results = await parseMangaList(json.data, this, getHomepageThumbnail);
 
     return App.createPagedResults({
       results,
