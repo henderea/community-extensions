@@ -45,7 +45,7 @@ const NHENTAI_URL = 'https://nhentai.net';
 const MAX_RATE_LIMIT_RETRIES = 3;
 
 export const NHentaiInfo: SourceInfo = {
-  version: '4.1.1',
+  version: '4.1.2',
   name: 'nhentai',
   icon: 'icon.png',
   author: 'NotMarek & Netsky',
@@ -140,6 +140,15 @@ export class NHentai implements SearchResultsProviding, MangaProviding, ChapterP
   }
 
   async getChapters(mangaId: string): Promise<Chapter[]> {
+    const now: number = Date.now();
+    const rawLastFetch = await this.stateManager.retrieve('last-chapter-fetch');
+    await this.stateManager.store('last-chapter-fetch', now);
+    if(rawLastFetch) {
+      const lastFetch: number = typeof rawLastFetch === 'number' ? rawLastFetch : parseInt(String(rawLastFetch));
+      if(!Number.isNaN(lastFetch) && (now - rawLastFetch) <= 1000) {
+        throw new Error('Skipping Bulk Update');
+      }
+    }
     const request = App.createRequest({
       url: `${NHENTAI_URL}/api/v2/galleries/${mangaId}`,
       method: 'GET'
