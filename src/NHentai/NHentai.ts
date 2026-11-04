@@ -45,7 +45,7 @@ const NHENTAI_URL = 'https://nhentai.net';
 const MAX_RATE_LIMIT_RETRIES = 3;
 
 export const NHentaiInfo: SourceInfo = {
-  version: '4.1.2',
+  version: '4.1.3',
   name: 'nhentai',
   icon: 'icon.png',
   author: 'NotMarek & Netsky',
@@ -85,6 +85,8 @@ export class NHentai implements SearchResultsProviding, MangaProviding, ChapterP
   });
 
   stateManager = App.createSourceStateManager();
+
+  lastChapterFetch: number = 0;
 
   // Sourrce Settings
   async getSourceMenu(): Promise<DUISection> {
@@ -141,11 +143,10 @@ export class NHentai implements SearchResultsProviding, MangaProviding, ChapterP
 
   async getChapters(mangaId: string): Promise<Chapter[]> {
     const now: number = Date.now();
-    const rawLastFetch = await this.stateManager.retrieve('last-chapter-fetch');
-    await this.stateManager.store('last-chapter-fetch', now);
-    if(rawLastFetch) {
-      const lastFetch: number = typeof rawLastFetch === 'number' ? rawLastFetch : parseInt(String(rawLastFetch));
-      if(!Number.isNaN(lastFetch) && (now - rawLastFetch) <= 1000) {
+    const lastFetch: number = this.lastChapterFetch;
+    this.lastChapterFetch = now;
+    if(lastFetch > 0) {
+      if(!Number.isNaN(lastFetch) && (now - lastFetch) <= 1000) {
         throw new Error('Skipping Bulk Update');
       }
     }
