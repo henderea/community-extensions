@@ -44,6 +44,8 @@ The toolchain finds each source as a directory under `src/` that has both `main.
   - Letter-suffix chapter numbers (`12a` → 12.1) in `chapter-providing/parsers.ts`.
   - Content rating (including Safe) shown as a "Content Rating" tag group in manga details, prefixed with the rating icon from `RATINGS` (tags have no color field).
   - Search does not filter by `availableTranslatedLanguage`, and "Has Available Chapters" defaults off.
+  - Unavailable chapters (DMCA, empty, externally hosted) are always hidden; the upstream "Show Unavailable Chapters" toggle is removed (matches 0.8 and the mdchecker server).
+  - The synopsis has no "Tracking available for" list, and the "Final: Vol./Ch." line goes at the top.
 
 ### NHentai specifics
 

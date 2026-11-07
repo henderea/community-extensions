@@ -93,8 +93,6 @@ export interface MangaFeedUrlOptions {
   ratings: readonly string[];
   languages: readonly string[];
   publishAtSince: string | undefined;
-  // Triggers all three include* params (isUnavailable, pages=0, externalUrl).
-  includeUnavailable?: boolean;
 }
 
 // limit=500 matches MangaDex's page cap. Order and
@@ -121,11 +119,6 @@ export function buildMangaFeedUrl(opts: MangaFeedUrlOptions): URL {
   setIfNonEmpty(url, 'excludedUploaders[]', opts.blockedUploaders);
   if(opts.publishAtSince) {
     url.setQueryItem('publishAtSince', opts.publishAtSince);
-  }
-  if(opts.includeUnavailable) {
-    url.setQueryItem('includeUnavailable', '1');
-    url.setQueryItem('includeEmptyPages', '1');
-    url.setQueryItem('includeExternalUrl', '1');
   }
   return url;
 }

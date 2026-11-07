@@ -31,7 +31,6 @@ import {
   getForcePort443,
   getFuzzyBlockingEnabled,
   getGroupBlockingEnabled,
-  getIncludeUnavailable,
   getLanguages,
   getMetadataUpdater,
   getRatings,
@@ -132,7 +131,6 @@ export async function getChapters(
   const blockedGroupsData = groupBlockingEnabled ? (getBlockedGroups() ?? {}) : {};
   const blockedGroups = Object.keys(blockedGroupsData);
   const blockedUploaders = getBlockedUploaders();
-  const includeUnavailable = getIncludeUnavailable();
   // Precompute queries once. The .length value doubles as the "feature off" check inside the loop.
   const blockedGroupQueries =
     groupBlockingEnabled && fuzzyBlockingEnabled
@@ -179,7 +177,6 @@ export async function getChapters(
         ratings,
         languages,
         publishAtSince,
-        includeUnavailable,
       }).toString(),
       method: 'GET',
     };
@@ -258,18 +255,17 @@ export async function getChapters(
 
       const externalUrl = chapterDetails.externalUrl;
       const isUnavailable = pages === 0 || !!externalUrl || chapterDetails.isUnavailable === true;
-      // Externally hosted chapters can have pages > 0 (a promo image),
-      // so the toggle must gate all unavailable cases, not just pages=0.
-      const shouldInclude = !isUnavailable || includeUnavailable;
-      if(shouldInclude) {
+      // Unavailable chapters are always hidden (like the 0.8 source and the
+      // mdchecker server). Externally hosted chapters can have pages > 0
+      // (a promo image), so check all three cases, not just pages=0.
+      if(!isUnavailable) {
         // Count toward the volume flatten only once a chapter actually ships,
         // so a filtered entry can't drop every volume to 0.
         if(!chapterDetails.volume) { anyMissingVolume = true; }
-        const titleForChapter = isUnavailable ? `[Unavailable] ${name}` : name;
         chapters.push({
           chapterId,
           sourceManga,
-          title: titleForChapter,
+          title: name,
           chapNum,
           volume,
           langCode,

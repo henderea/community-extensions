@@ -10,7 +10,6 @@ import type {
   ChapterAttributes,
   ChapterData,
   DatumAttributes,
-  Links,
   MangaDetailsResponse,
   MangaItem,
   Relationship,
@@ -516,19 +515,17 @@ export function parseMangaItemDetails(
 
   const desc = decodeHTML(descriptionMatch).replace(/\[\/?[bus]]/g, '');
 
-  const links = mangaDetails.links as Links | undefined;
-  const trackers = (
-    [
-      ['al', 'AniList'],
-      ['mu', 'MangaUpdates'],
-      ['mal', 'MyAnimeList'],
-    ] as const
-  )
-    .filter(([key]) => Boolean(links?.[key]))
-    .map(([, name]) => name);
-
   // Array order is the display order seen by the user.
   const synopsisParts: string[] = [];
+
+  if(resolvedSettings.showFinalChapterInSynopsis && mangaDetails.status === Status.Completed) {
+    const tags: string[] = [];
+    const lastVol = mangaDetails.lastVolume?.trim();
+    const lastCh = mangaDetails.lastChapter?.trim();
+    if(lastVol) { tags.push(`Vol.${lastVol}`); }
+    if(lastCh) { tags.push(`Ch.${lastCh}`); }
+    if(tags.length > 0) { synopsisParts.push(`Final: ${tags.join(' ')}`); }
+  }
 
   if(resolvedSettings.showAltTitlesInSynopsis && secondaryTitles.length > 0) {
     // Drop the preferred title if it is already shown standalone below.
@@ -550,19 +547,6 @@ export function parseMangaItemDetails(
   }
 
   if(desc) { synopsisParts.push(desc); }
-
-  if(trackers.length > 0) {
-    synopsisParts.push(`Tracking available for:\n${trackers.join('\n')}`);
-  }
-
-  if(resolvedSettings.showFinalChapterInSynopsis && mangaDetails.status === Status.Completed) {
-    const tags: string[] = [];
-    const lastVol = mangaDetails.lastVolume?.trim();
-    const lastCh = mangaDetails.lastChapter?.trim();
-    if(lastVol) { tags.push(`Vol.${lastVol}`); }
-    if(lastCh) { tags.push(`Ch.${lastCh}`); }
-    if(tags.length > 0) { synopsisParts.push(`Final: ${tags.join(' ')}`); }
-  }
 
   const synopsis = synopsisParts.join('\n\n');
 

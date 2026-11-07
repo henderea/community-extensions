@@ -201,8 +201,6 @@ export const getForcePort443 = (): boolean => getKey('force_port_443', false);
 export const setForcePort443 = (v: boolean): void => setKey('force_port_443', v);
 export const getSkipSameChapter = (): boolean => getKey('skip_same_chapter', false);
 export const setSkipSameChapter = (v: boolean): void => setKey('skip_same_chapter', v);
-export const getIncludeUnavailable = (): boolean => getKey('include_unavailable', false);
-export const setIncludeUnavailable = (v: boolean): void => setKey('include_unavailable', v);
 
 // ===== Synopsis and cover preferences =====
 
@@ -323,7 +321,6 @@ const SETTINGS_KEYS: readonly string[] = [
   'data_saver',
   'force_port_443',
   'skip_same_chapter',
-  'include_unavailable',
   'show_alt_titles_in_synopsis',
   'show_final_chapter_in_synopsis',
   'try_first_volume_cover',

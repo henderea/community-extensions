@@ -21,7 +21,6 @@ import {
   getDataSaver,
   getDiscoverThumbnail,
   getForcePort443,
-  getIncludeUnavailable,
   getLanguagePriority,
   getLanguages,
   getMangaThumbnail,
@@ -36,7 +35,6 @@ import {
   setDataSaver,
   setDiscoverThumbnail,
   setForcePort443,
-  setIncludeUnavailable,
   setLanguagePriority,
   setLanguages,
   setMangaThumbnail,
@@ -157,15 +155,6 @@ export class ContentSettingsForm extends Form {
           title: 'Force Port 443',
           value: getForcePort443(),
           onValueChange: Application.Selector(this as ContentSettingsForm, 'handleForcePortChange'),
-        }),
-        ToggleRow('include_unavailable', {
-          title: 'Show Unavailable Chapters',
-          subtitle: 'Includes DMCA removed and externally hosted chapters',
-          value: getIncludeUnavailable(),
-          onValueChange: Application.Selector(
-            this as ContentSettingsForm,
-            'handleIncludeUnavailableChange',
-          ),
         }),
         ToggleRow('show_alt_titles_in_synopsis', {
           title: 'Alt Titles In Synopsis',
@@ -294,10 +283,6 @@ export class ContentSettingsForm extends Form {
 
   async handleForcePortChange(value: boolean): Promise<void> {
     setForcePort443(value);
-  }
-
-  async handleIncludeUnavailableChange(value: boolean): Promise<void> {
-    setIncludeUnavailable(value);
   }
 
   async handleShowAltTitlesChange(value: boolean): Promise<void> {

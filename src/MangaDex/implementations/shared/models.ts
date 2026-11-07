@@ -278,7 +278,7 @@ export interface ChapterAttributes {
   translatedLanguage: string;
   uploader?: string;
   externalUrl?: string;
-  // Set on DMCA removed or withheld chapters. Needs includeUnavailable=1.
+  // Set on DMCA removed or withheld chapters.
   isUnavailable?: boolean;
   version: number;
   createdAt: string;
