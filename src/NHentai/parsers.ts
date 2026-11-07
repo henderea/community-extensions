@@ -59,6 +59,8 @@ export function parseChapter(data: Gallery, sourceManga: SourceManga): Chapter {
     chapterId: sourceManga.mangaId,
     sourceManga,
     chapNum: 1,
+    // Left unset, the app shows "Vol. TBD". 0 means no volume.
+    volume: 0,
     title: data.title.english,
     langCode: NHLanguages.getLangCode(getLanguage(data)),
     publishDate: new Date(data.upload_date * 1000),

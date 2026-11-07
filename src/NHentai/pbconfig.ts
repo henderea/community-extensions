@@ -4,7 +4,7 @@ export default {
   name: 'nhentai',
   description: 'Extension which pulls content from nHentai.',
   // Bump on every change. The 0.8 source ended at 4.1.3.
-  version: '5.0.0',
+  version: '5.0.1',
   icon: 'icon.png',
   language: 'multi',
   contentRating: ContentRating.ADULT,
