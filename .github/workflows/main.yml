@@ -9,18 +9,18 @@ jobs:
     name: Bundle and Publish Sources
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [14.x] 
-
     steps:
       - name: Checkout Branch
         uses: actions/checkout@v2
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js environment
-        uses: actions/setup-node@v2.1.2
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 24
+          cache: pnpm
       
       - name: Extract branch name
         shell: bash
@@ -34,8 +34,8 @@ jobs:
           ref: gh-pages
           path: bundles
 
-      - run: npm install
-      - run: npm run bundle -- --folder=${{ steps.extract_branch.outputs.branch }}
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm bundle --folder=${{ steps.extract_branch.outputs.branch }}
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.0

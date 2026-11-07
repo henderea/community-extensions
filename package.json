@@ -1,14 +1,17 @@
 {
-  "name": "community-extensions",
-  "version": "0.8.0",
-  "repositoryName": "My Extensions (0.8)",
+  "name": "My Extensions (0.9)",
+  "private": true,
+  "version": "0.9.0",
   "description": "Community maintained Paperback extension repository",
-  "main": "index.js",
+  "type": "module",
+  "packageManager": "pnpm@12.16.1",
   "scripts": {
-    "bundle": "paperback bundle",
-    "serve": "paperback serve",
-    "test": "paperback test",
-    "nodemon": "nodemon",
+    "bundle": "paperback-cli bundle",
+    "serve": "paperback-cli serve",
+    "dev": "paperback-cli serve --watch",
+    "logcat": "paperback-cli logcat",
+    "test": "paperback-cli test --noConsole --output ./bundles/tests.json",
+    "tsc": "tsc",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src"
   },
@@ -16,24 +19,22 @@
   "license": "GPL-3.0-or-later",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@paperback/toolchain": "1.0.0-alpha.92",
+    "@paperback/types": "1.0.0-alpha.92",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "@types/cheerio": "^0.22.35",
+    "@types/chai": "^5.2.3",
     "@typescript-eslint/eslint-plugin": "^8.72.1",
     "@typescript-eslint/parser": "^8.72.1",
+    "chai": "^6.3.0",
+    "cheerio": "^1.2.0",
+    "domhandler": "^5.0.3",
     "eslint": "^10.13.0",
     "eslint-config-henderea": "3.0.2",
+    "fastest-levenshtein": "^1.0.16",
     "globals": "^17.13.0",
+    "stemmer": "^2.0.1",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.1"
   },
-  "dependencies": {
-    "@paperback/toolchain": "0.8.0-alpha.47",
-    "@paperback/types": "0.8.0-alpha.47",
-    "cheerio": "1.0.0",
-    "entities": "^7.0.1",
-    "html-entities": "^2.6.0",
-    "nodemon": "^3.1.14",
-    "ts-node": "^10.9.2"
-  },
-  "baseURL": "https://paperback.henderea.com/0.8/"
+  "baseURL": "https://paperback.henderea.com/0.9/"
 }

@@ -4,44 +4,53 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Paperback extension repository (sources for the Paperback iOS manga reader) targeting the **0.8 extension API** (`@paperback/types` / `@paperback/toolchain` `0.8.0-alpha.47`). It currently has two sources: `src/MangaDex` and `src/NHentai`.
+Paperback extension repository (sources for the Paperback iOS manga reader) targeting the **0.9 extension API** (`@paperback/types` / `@paperback/toolchain` `1.0.0-alpha.92`). It has two sources: `src/MangaDex` and `src/NHentai`.
 
-Branches are tied to the Paperback API version: `0.8` (this branch, default) and `0.9`. 0.9 uses a completely different API (no `App.create*`, `Application.*` instead), so code does not transfer between branches as-is.
+Branches are tied to the Paperback API version: `0.8` (default branch, `App.create*` API) and `0.9` (this branch, `Application.*` API). Code does not transfer between branches as-is.
 
 ## Commands
 
-Package manager is pnpm.
+Package manager is pnpm. The toolchain needs Node 24 or newer.
 
-- `pnpm lint` / `pnpm lint:fix`: ESLint on `src` (flat config from `eslint-config-henderea`). VS Code fixes on save via ESLint, with no separate formatter.
+- `pnpm lint` / `pnpm lint:fix`: ESLint on `src` (flat config from `eslint-config-henderea`, plus `block-spacing`/`object-curly-spacing` in `eslint.config.mjs`). Single-line blocks are written `if(x) { return y; }`.
+- `pnpm tsc`: typecheck only (`noEmit`).
 - `pnpm bundle`: builds every source into `bundles/` (gitignored), including `versioning.json` and `index.html`.
-- `pnpm serve`: serves the bundles locally so a Paperback device can add the repo.
-- `pnpm test <SourceId>`: runs the Paperback toolchain test harness against one source, e.g. `pnpm test MangaDex`. There are no unit tests.
+- `pnpm serve` / `pnpm dev`: serve the bundles locally (`dev` watches) so a Paperback device can add the repo.
+- `pnpm test <SourceId>`: runs `src/tests/<SourceId>.ts` (via `src/tests/suite.ts`) against the live site, e.g. `pnpm test MangaDex`. Results go to `bundles/tests.json`.
 - `./my-deploy.sh [name]`: bundles, then copies `bundles/` to the owner's personal server path (`/home/henderea/domains/paperback/<branch>`), served at `baseURL` in `package.json`. It uses `sudo`, so only run it when asked.
 
 CI (`.github/workflows`) bundles each pushed branch into a same-named folder on `gh-pages`, and removes that folder when the branch is deleted.
 
 ## Architecture
 
-The toolchain finds each source by its directory name under `src/`. Each source directory contains:
+The toolchain finds each source as a directory under `src/` that has both `main.ts` and `pbconfig.ts`; the directory name is the source id.
 
-- `<Name>.ts`: exports `<Name>Info: SourceInfo` (metadata, `version`, `intents`) and `class <Name>`, which implements the 0.8 provider interfaces (`ChapterProviding`, `SearchResultsProviding`, `HomePageSectionsProviding`, …). **Bump `version` in `SourceInfo` when you change a source**, because the app uses it to detect updates.
-- `<Name>Settings.ts`: DUI settings forms (`App.createDUIForm/Section/Switch/Select/InputField`) bound to `stateManager.store/retrieve`, plus the `get*` accessors the source calls. Secrets go in `stateManager.keychain`.
-- `<Name>Helper.ts`, `<Name>Parser.ts`, `<Name>Interfaces.ts`: URL building and constants, response-to-Paperback-object parsing, and API response types.
-- `includes/icon.png` is bundled with the source. JSON data (`external/tag.json`, `tags.json`) is imported directly (`resolveJsonModule`).
-
-Runtime objects come from the global `App` (`App.createRequestManager`, `App.createSourceStateManager`, `App.createSourceManga`, …). Do not assume Node APIs are available.
+- `pbconfig.ts`: default-exports the `ExtensionInfo` (`version`, `capabilities` as `SourceIntents.*`). **Bump `version` when you change a source**, because the app uses it to detect updates.
+- `main.ts`: exports an `ExtensionImpl` instance. Interceptors (`PaperbackInterceptor`, `BasicRateLimiter`, `CookieStorageInterceptor`) are registered in `initialise()` and see **every** request the source makes.
+- `static/icon.png` is bundled with the source.
+- Runtime APIs come from the global `Application` (`scheduleRequest` returns `[Response, ArrayBuffer]`, `getState`/`setState(value, key)`, `Selector`, …). Do not assume Node APIs are available.
+- Settings UI is `Form` subclasses built from `Section`, `InputRow`, `SelectRow`, `ToggleRow`, `ButtonRow`, … with handlers bound via `Application.Selector(this, 'method')`.
 
 ### MangaDex specifics
 
-- Uses the MangaDex JSON API (`api.mangadex.org`). The request interceptor adds the referer and an OAuth bearer token, and refreshes the token through `authEndpointRequest` when it is near expiry.
-- **mdchecker integration**: when the `checker_base_url` and `checker_user` settings are set, `getChapters` first calls `tryChecker`. That calls the external paperback-mdchecker server (`GET <base>/manga-check?userId&mangaId&lastCheckEpoch`) through a separate `checkerRequestManager`, and stores a per-manga epoch in state (`${mangaId}-check-epoch`). If the server reports the manga is current, it **throws `'Already up to date'`** on purpose to skip the chapter fetch during update checks. This is a deliberate 0.8-only hack.
-- Legacy numeric manga IDs are rejected with an "OLD ID" error.
+- Based on the general-extensions MangaDex source (`~/projects/general-extensions/src/MangaDex`, 1.0.0-alpha.27), reformatted with this repo's ESLint. Local changes on top of it:
+  - **paperback-mdchecker** (`services/checker.ts`, settings in `settings-form/forms/checker-settings.ts`, state keys `checker_base_url` / `checker_user`, kept out of "Reset All Settings"). Enabled only when both are set.
+    - `processTitlesForUpdates` posts the queue to `/manga-check-batch` and calls `setNewChapters(id, [])` only for ids in `current` and not in `metadataUpdated`; everything else gets a normal `getChapters`. Ids in `metadataUpdated` are remembered in memory (`pendingMetadataRefresh`) so `getChapters` does a full details refresh for them. All checker update calls fail open. Server side of `metadataUpdated`: `claude_output_files/paperback-0.9-metadata-updates.md`.
+    - The upstream "Optimized Updates" probe (and its skip-by-count/status filters, batch size, and inline metadata refresh) is removed on purpose; the server is the only update optimization.
+    - `getChapters` calls `/manga-fetched` after a successful fetch; `getChapterDetails` calls `/chapter-download`. Neither ever throws.
+    - Managed collections come from the server (`/collections*`, ids prefixed `mdchecker:`) when the checker is enabled, otherwise MangaDex reading statuses (needs login).
+    - `MangaDexRateLimiter` and the interceptor skip checker URLs.
+    - Server contract: `claude_input_files/paperback-0.9-mangadex-migration.md` and `~/projects/paperback-mdchecker/lib/app/user/routes/paperback-09.tsx`.
+  - Letter-suffix chapter numbers (`12a` → 12.1) in `chapter-providing/parsers.ts`.
+  - Non-safe content rating shown as a "Content Rating" tag group in manga details.
+  - Search does not filter by `availableTranslatedLanguage`, and "Has Available Chapters" defaults off.
 
 ### NHentai specifics
 
-- Scrapes HTML/JSON from nhentai.net, needs Cloudflare bypass (`CLOUDFLARE_BYPASS_REQUIRED`), and retries on rate limiting (`MAX_RATE_LIMIT_RETRIES`).
+- Port of the 0.8 source (nhentai API v2), not the much larger KakarotExtension NHentai. `network.ts` retries on 429 and throws `CloudflareError` on 403/503 or a `cf-mitigated` challenge; bypass cookies are stored by a `CookieStorageInterceptor`.
+- `processTitlesForUpdates` marks every queued gallery as having no new chapters without making any requests (galleries never change), so update checks never fetch.
 
 ## Misc
 
-- `claude_input_files/` and `claude_output_files/` are gitignored scratch folders for hand-off notes, such as `paperback-0.9-mangadex-migration.md`, which describes porting MangaDex to the 0.9 branch.
-- TypeScript is strict, with `noUncheckedIndexedAccess`, `noUnusedLocals`, and `noImplicitOverride`.
+- `claude_input_files/` and `claude_output_files/` are gitignored scratch folders for hand-off notes.
+- TypeScript is strict with `noUnusedLocals` and `noImplicitOverride`; `noUncheckedIndexedAccess` is off because the upstream MangaDex code doesn't pass it.
