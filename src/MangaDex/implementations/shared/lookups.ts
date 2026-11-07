@@ -85,6 +85,11 @@ export const STATUSES: readonly StatusEntry[] = [
   { enum: Status.Cancelled, name: 'Cancelled', icon: '❌', searchable: true },
 ];
 
+// Human-readable label for mangaInfo.status (the app shows the string as-is).
+export function getStatusName(status: string): string {
+  return STATUSES.find((s) => s.enum === status)?.name ?? status;
+}
+
 export interface ImageQuality {
   name: string;
   enum: string;

@@ -42,7 +42,7 @@ The toolchain finds each source as a directory under `src/` that has both `main.
     - `MangaDexRateLimiter` and the interceptor skip checker URLs.
     - Server contract: `claude_input_files/paperback-0.9-mangadex-migration.md` and `~/projects/paperback-mdchecker/lib/app/user/routes/paperback-09.tsx`.
   - Letter-suffix chapter numbers (`12a` → 12.1) in `chapter-providing/parsers.ts`.
-  - Non-safe content rating shown as a "Content Rating" tag group in manga details.
+  - Content rating (including Safe) shown as a "Content Rating" tag group in manga details, prefixed with the rating icon from `RATINGS` (tags have no color field).
   - Search does not filter by `availableTranslatedLanguage`, and "Has Available Chapters" defaults off.
 
 ### NHentai specifics

@@ -3,7 +3,7 @@
 
 import { ContentRating, type SourceManga, type Tag, type TagSection } from '@paperback/types';
 
-import { getImageQualityEnding, RATINGS, ROMANIZED_CODES, STATUSES } from './lookups';
+import { getImageQualityEnding, getStatusName, RATINGS, ROMANIZED_CODES, STATUSES } from './lookups';
 import type {
   AggregateResponse,
   AltTitle,
@@ -434,7 +434,7 @@ export const parseMangaDetails = (
       author,
       artist,
       synopsis,
-      status: mangaItemDetails.status,
+      status: getStatusName(mangaItemDetails.status),
       tagGroups: mangaItemDetails.tagGroups,
       contentRating: mangaItemDetails.contentRating,
       shareUrl: mangaItemDetails.shareUrl,
@@ -599,16 +599,17 @@ export function parseMangaItemDetails(
 
   const rawContentRating = (mangaDetails.contentRating as string)?.toLowerCase() ?? '';
 
-  // Show non-safe content ratings as a tag (carried over from the 0.8 source).
-  // The id matches the synthetic rating tags in tags.ts (index + 1), so it
-  // lines up with the search form's content rating group.
+  // Show the content rating as a tag (carried over from the 0.8 source), with
+  // the rating's icon since tags can't be colored. The id matches the synthetic
+  // rating tags in tags.ts (index + 1), so it lines up with the search form's
+  // content rating group.
   const ratingIndex = RATINGS.findIndex((r) => r.enum === rawContentRating);
   const rating = RATINGS[ratingIndex];
-  if(rating && ratingIndex > 0) {
+  if(rating) {
     tagGroups.unshift({
       id: 'content_rating',
       title: 'Content Rating',
-      tags: [{ id: String(ratingIndex + 1), title: rating.shortName }],
+      tags: [{ id: String(ratingIndex + 1), title: `${rating.icon} ${rating.shortName}` }],
     });
   }
 
