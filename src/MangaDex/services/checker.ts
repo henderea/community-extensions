@@ -180,12 +180,14 @@ export async function notifyMangaFetched(mangaId: string): Promise<void> {
   }
 }
 
-// Acknowledges a pending chapter re-release on the server. Never throws.
-export async function notifyChapterDownload(chapterId: string): Promise<void> {
+// Records that the user fetched this chapter (read or download) at the given
+// MD@Home content hash. The server lists a re-release only when the hash the
+// user has differs from the current one. Never throws.
+export async function notifyChapterDownload(chapterId: string, mangaId: string, hash: string): Promise<void> {
   if(!isCheckerEnabled()) { return; }
   try {
     await fetchCheckerJSON<CheckerResponse>({
-      url: buildUrl('/chapter-download', { chapterId }),
+      url: buildUrl('/chapter-download', { chapterId, mangaId, hash }),
       method: 'GET',
     });
   } catch(err) {

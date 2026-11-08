@@ -323,10 +323,6 @@ export async function getChapterDetails(chapter: Chapter): Promise<ChapterDetail
     method: 'GET',
   };
 
-  // Acknowledge any pending re-release of this chapter on paperback-mdchecker.
-  // Runs alongside the page fetch and never throws.
-  const checkerAck = notifyChapterDownload(chapterId);
-
   const json = await fetchJSON<ChapterDetailsResponse>(request);
   if(!json.baseUrl || !json.chapter || !json.chapter.hash) {
     throw new Error(`MangaDex returned malformed chapter response for ${chapterId}`);
@@ -346,7 +342,10 @@ export async function getChapterDetails(chapter: Chapter): Promise<ChapterDetail
     (x: string) => `${serverUrl}/${qualityPath}/${chapterDetails.hash}/${x}`,
   );
 
-  await checkerAck;
+  // Tell paperback-mdchecker which content the user now has (the hash of the
+  // pages being served), so re-release tracking compares against it. Only sent
+  // once the at-home response is known good. Never throws.
+  await notifyChapterDownload(chapterId, mangaId, chapterDetails.hash);
   return { id: chapterId, mangaId: mangaId, pages };
 }
 
