@@ -39,6 +39,7 @@ The toolchain finds each source as a directory under `src/` that has both `main.
     - The upstream "Optimized Updates" probe (and its skip-by-count/status filters, batch size, and inline metadata refresh) is removed on purpose; the server is the only update optimization.
     - `getChapters` calls `/manga-fetched` after a successful fetch; `getChapterDetails` calls `/chapter-download`. Neither ever throws.
     - Managed collections come from the server (`/collections*`, ids prefixed `mdchecker:`) when the checker is enabled, otherwise MangaDex reading statuses (needs login).
+    - "Potential Manga" home section (`potential_manga`) shows the server's admin potential-manga list (`/potential-manga`), and is available only to admins. "Test Connection" stores `isAdmin` from `/user-info` in `checker_is_admin`, which is cleared when the base URL or user changes. Sections can set `isAvailable` in `SECTION_DEFINITIONS`, and the discover settings form hides unavailable ones without dropping them from the saved order. Server side: `claude_output_files/paperback-0.9-potential-manga.md`.
     - `MangaDexRateLimiter` and the interceptor skip checker URLs.
     - Server contract: `claude_input_files/paperback-0.9-mangadex-migration.md` and `~/projects/paperback-mdchecker/lib/app/user/routes/paperback-09.tsx`.
   - Letter-suffix chapter numbers (`12a` → 12.1) in `chapter-providing/parsers.ts`.

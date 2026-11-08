@@ -8,8 +8,10 @@ import {
   type PagedResults,
 } from '@paperback/types';
 
+import { getCheckerPotentialManga, type PotentialManga } from '../../services/checker';
 import { fetchJSON } from '../../services/network';
 import { ensureCuratedListIds, fetchCustomListMangaIds } from '../shared/curated-lists';
+import { getRatingEnumList } from '../shared/lookups';
 import type { ChapterResponse, Metadata, SearchResponse } from '../shared/models';
 import {
   assertDataArray,
@@ -26,6 +28,7 @@ import {
   getLanguages,
   getLatestUpdatesEnabled,
   getPopularEnabled,
+  getPotentialMangaEnabled,
   getRatings,
   getRecentlyAddedEnabled,
   getRecommendedEnabled,
@@ -33,6 +36,8 @@ import {
   getSelfPublishedEnabled,
   getShowChapter,
   getShowVolume,
+  isCheckerAdmin,
+  isSectionAvailable,
 } from '../shared/state';
 import { buildLatestChaptersUrl, buildMangaListUrl } from '../shared/urls';
 import {
@@ -80,7 +85,7 @@ export async function getDiscoverSections(): Promise<DiscoverSection[]> {
   const sections: DiscoverSection[] = [];
   for(const sectionId of sectionOrder) {
     const definition = definitionsById.get(sectionId);
-    if(definition && definition.getEnabled()) {
+    if(definition && isSectionAvailable(definition) && definition.getEnabled()) {
       sections.push({
         id: definition.id,
         title: definition.title,
@@ -128,6 +133,11 @@ export async function getDiscoverSectionItems(
   if(sectionId === DISCOVER_SECTIONS.RECENTLY_ADDED) {
     if(!getRecentlyAddedEnabled()) { return { items: [], metadata: undefined }; }
     return getRecentlyAddedItems(section, metadata);
+  }
+
+  if(sectionId === DISCOVER_SECTIONS.POTENTIAL_MANGA) {
+    if(!getPotentialMangaEnabled() || !isCheckerAdmin()) { return { items: [], metadata: undefined }; }
+    return getPotentialMangaItems(section, metadata);
   }
 
   return { items: [], metadata: undefined };
@@ -355,4 +365,74 @@ function getRecentlyAddedItems(
   metadata: Metadata | undefined,
 ): Promise<PagedResults<DiscoverSectionItem>> {
   return getOrderedMangaCarousel(section, metadata, 'order[createdAt]', 'simpleCarouselItem');
+}
+
+// "★ 72 · Tag: Isekai": the admin page's tag score and exclude reason.
+function potentialMangaSubtitle(manga: PotentialManga): string {
+  const score = manga.tagScore < 0 ? '★ –' : `★ ${manga.tagScore}`;
+  return manga.excludeReason ? `${score} · ${manga.excludeReason}` : score;
+}
+
+// paperback-mdchecker's potential-manga list (admin only), in the admin page's
+// order. The server list is fetched once, on the first page, and carried in
+// metadata; each page then looks up MANGA_PAGE_LIMIT ids on MangaDex for
+// titles (in the user's title languages) and covers.
+async function getPotentialMangaItems(
+  section: DiscoverSection,
+  metadata: Metadata | undefined,
+): Promise<PagedResults<DiscoverSectionItem>> {
+  let ids = metadata?.potentialMangaIds;
+  let titles = metadata?.potentialMangaTitles;
+  let subtitles = metadata?.potentialMangaSubtitles;
+  if(!ids || !titles || !subtitles) {
+    const manga = await getCheckerPotentialManga();
+    ids = manga.map((m) => m.mangaId);
+    titles = manga.map((m) => m.title ?? m.mangaId);
+    subtitles = manga.map(potentialMangaSubtitle);
+  }
+  const offset = metadata?.offset ?? 0;
+  const pageIds = ids.slice(offset, offset + MANGA_PAGE_LIMIT);
+  if(pageIds.length === 0) { return { items: [], metadata: undefined }; }
+
+  // Every rating and no language filter: this is the admin's own list, so
+  // nothing on it should silently disappear.
+  const json = await fetchJSON<SearchResponse>({
+    url: buildMangaListUrl({
+      limit: pageIds.length,
+      ratings: getRatingEnumList(),
+      languages: [],
+      ids: pageIds,
+    }).toString(),
+    method: 'GET',
+  });
+  assertDataArray(json, section.title);
+  const parsedById = new Map(
+    parseMangaList(json.data, getDiscoverThumbnail).map((m) => [m.mangaId, m]),
+  );
+
+  const items = pageIds.map((mangaId, i) => {
+    const parsed = parsedById.get(mangaId);
+    return {
+      type: 'simpleCarouselItem' as const,
+      mangaId,
+      // Fall back to the server's title for a manga MangaDex no longer returns.
+      imageUrl: parsed?.imageUrl ?? '',
+      title: parsed?.title ?? titles[offset + i] ?? mangaId,
+      subtitle: subtitles[offset + i],
+      contentRating: parsed?.contentRating,
+    };
+  });
+
+  const nextOffset = offset + pageIds.length;
+  return {
+    items,
+    metadata: nextOffset < ids.length
+      ? {
+        offset: nextOffset,
+        potentialMangaIds: ids,
+        potentialMangaTitles: titles,
+        potentialMangaSubtitles: subtitles,
+      }
+      : undefined,
+  };
 }

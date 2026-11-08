@@ -9,12 +9,14 @@ import {
   type FormSectionElement,
 } from '@paperback/types';
 
-import { getCheckerCollections } from '../../../services/checker';
+import { getCheckerCollections, getCheckerIsAdminFromServer } from '../../../services/checker';
 import {
   getCheckerBaseUrl,
+  getCheckerIsAdmin,
   getCheckerUser,
   isCheckerEnabled,
   setCheckerBaseUrl,
+  setCheckerIsAdmin,
   setCheckerUser,
 } from '../../shared/state';
 
@@ -36,7 +38,7 @@ export class CheckerSettingsForm extends Form {
           id: 'checker_settings',
           header: 'paperback-mdchecker',
           footer:
-            'When both values are set, update checks skip manga the server reports as current, and library collections come from the server instead of MangaDex reading statuses.',
+            'When both values are set, update checks skip manga the server reports as current, and library collections come from the server instead of MangaDex reading statuses. Test Connection also checks whether the user is a server admin, which unlocks the Potential Manga home section.',
         },
         [
           InputRow('checker_base_url', {
@@ -52,6 +54,11 @@ export class CheckerSettingsForm extends Form {
           LabelRow('checker_status', {
             title: 'Status',
             value: isCheckerEnabled() ? 'Enabled' : 'Disabled',
+          }),
+          LabelRow('checker_admin', {
+            title: 'Admin',
+            value: getCheckerIsAdmin() ? 'Yes' : 'No (run Test Connection)',
+            isHidden: !isCheckerEnabled(),
           }),
         ],
       ),
@@ -70,26 +77,42 @@ export class CheckerSettingsForm extends Form {
   }
 
   async handleBaseUrlChange(value: string): Promise<void> {
+    const wasAdmin = getCheckerIsAdmin();
     setCheckerBaseUrl(value);
+    if(wasAdmin !== getCheckerIsAdmin()) { Application.invalidateDiscoverSections(); }
     this.baseUrl = getCheckerBaseUrl();
     this.statusMessage = '';
     this.reloadForm();
   }
 
   async handleUserChange(value: string): Promise<void> {
+    const wasAdmin = getCheckerIsAdmin();
     setCheckerUser(value);
+    if(wasAdmin !== getCheckerIsAdmin()) { Application.invalidateDiscoverSections(); }
     this.user = getCheckerUser();
     this.statusMessage = '';
     this.reloadForm();
   }
 
   async handleTest(): Promise<void> {
+    const wasAdmin = getCheckerIsAdmin();
     try {
       const collections = await getCheckerCollections();
       this.statusMessage = `OK: ${collections.length} collection${collections.length === 1 ? '' : 's'}`;
+      try {
+        const isAdmin = await getCheckerIsAdminFromServer();
+        setCheckerIsAdmin(isAdmin);
+        if(isAdmin) { this.statusMessage += ', admin'; }
+      } catch(err) {
+        // Older servers have no /user-info; treat that as not an admin.
+        setCheckerIsAdmin(false);
+        this.statusMessage += ` (admin check failed: ${err instanceof Error ? err.message : String(err)})`;
+      }
     } catch(err) {
+      setCheckerIsAdmin(false);
       this.statusMessage = err instanceof Error ? err.message : String(err);
     }
+    if(wasAdmin !== getCheckerIsAdmin()) { Application.invalidateDiscoverSections(); }
     this.reloadForm();
   }
 }

@@ -205,6 +205,11 @@ export interface Metadata extends JSONObject {
   offset?: number;
   // Carried by list: search across pages so /list is fetched only once.
   listMangaIds?: string[];
+  // Potential Manga: the server list from the first page, carried so later
+  // pages don't refetch it (and can't shift if it changes meanwhile).
+  potentialMangaIds?: string[];
+  potentialMangaTitles?: string[];
+  potentialMangaSubtitles?: string[];
 }
 
 export interface StatisticsResponse {

@@ -11,7 +11,7 @@ import { chunk } from '../implementations/shared/utils';
 // The server rejects more than 2000 ids per batch.
 const CHECK_BATCH_SIZE = 500;
 
-type CheckerState = 'ok' | 'no-user' | 'no-collection' | 'no-chapter-id' | 'acknowledged' | 'error';
+type CheckerState = 'ok' | 'no-user' | 'not-admin' | 'no-collection' | 'no-chapter-id' | 'acknowledged' | 'error';
 
 interface CheckerResponse {
   state?: CheckerState;
@@ -47,6 +47,24 @@ interface CollectionMangaResponse extends CheckerResponse {
   mangaIds?: string[];
 }
 
+interface UserInfoResponse extends CheckerResponse {
+  isAdmin?: boolean;
+}
+
+export interface PotentialManga {
+  mangaId: string;
+  title: string | null;
+  // 0-100, or -1 when no tag of the manga is rated.
+  tagScore: number;
+  // Why the admin page greys the card out ('added', 'Origin: ko', 'Shounen',
+  // 'Tag: …'), or null for a plain suggestion.
+  excludeReason: string | null;
+}
+
+interface PotentialMangaResponse extends CheckerResponse {
+  manga?: PotentialManga[];
+}
+
 interface CommitResponse extends CheckerResponse {
   added?: number;
   removed?: number;
@@ -63,6 +81,8 @@ function stateMessage(state: string | undefined): string {
   switch(state) {
     case 'no-user':
       return `paperback-mdchecker does not know user "${getCheckerUser()}". New users can take a few minutes to show up.`;
+    case 'not-admin':
+      return `paperback-mdchecker user "${getCheckerUser()}" is not an admin.`;
     case 'no-collection':
       return 'paperback-mdchecker does not know that collection.';
     case undefined:
@@ -211,4 +231,41 @@ export async function commitCheckerCollection(
   if(json.state !== 'ok') {
     throw new CheckerError(stateMessage(json.state), json.state);
   }
+}
+
+// ===== User info =====
+
+// Whether the configured user is a server admin. Throws on a bad state; a server
+// without /user-info answers with HTML (invalid JSON), which also throws.
+export async function getCheckerIsAdminFromServer(): Promise<boolean> {
+  const json = await fetchCheckerJSON<UserInfoResponse>({
+    url: buildUrl('/user-info'),
+    method: 'GET',
+  });
+  if(json.state !== 'ok') {
+    throw new CheckerError(stateMessage(json.state), json.state);
+  }
+  return json.isAdmin === true;
+}
+
+// ===== Potential manga (admin) =====
+
+// The admin potential-manga list, in the admin page's order. Throws on
+// anything but 'ok' (including 'not-admin').
+export async function getCheckerPotentialManga(): Promise<PotentialManga[]> {
+  const json = await fetchCheckerJSON<PotentialMangaResponse>({
+    url: buildUrl('/potential-manga'),
+    method: 'GET',
+  });
+  if(json.state !== 'ok' || !Array.isArray(json.manga)) {
+    throw new CheckerError(stateMessage(json.state), json.state);
+  }
+  return json.manga
+    .filter((m) => m && typeof m.mangaId === 'string' && m.mangaId.length > 0)
+    .map((m) => ({
+      mangaId: m.mangaId.toLowerCase(),
+      title: typeof m.title === 'string' && m.title.length > 0 ? m.title : null,
+      tagScore: typeof m.tagScore === 'number' && Number.isFinite(m.tagScore) ? m.tagScore : -1,
+      excludeReason: typeof m.excludeReason === 'string' && m.excludeReason.length > 0 ? m.excludeReason : null,
+    }));
 }

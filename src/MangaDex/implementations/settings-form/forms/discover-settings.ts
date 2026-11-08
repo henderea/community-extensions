@@ -15,12 +15,23 @@ import {
   DEFAULT_SECTION_ORDER,
   SECTION_DEFINITIONS,
   getDiscoverSectionOrder,
+  isSectionAvailable,
   setDiscoverSectionOrder,
 } from '../../shared/state';
 import { bindMoveHandlers, buildReorderableRows, swapItems } from './reorderable';
 
 const titleForSectionId = (id: string): string =>
   SECTION_DEFINITIONS.find((s) => s.id === id)?.title ?? id;
+
+const isSectionIdAvailable = (id: string): boolean => {
+  const def = SECTION_DEFINITIONS.find((s) => s.id === id);
+  return def ? isSectionAvailable(def) : false;
+};
+
+// The saved order keeps unavailable sections (e.g. Potential Manga for a
+// non-admin) in place; the form only shows and moves the available ones.
+const getVisibleSectionOrder = (): string[] =>
+  getDiscoverSectionOrder().filter(isSectionIdAvailable);
 
 export class DiscoverSettingsForm extends Form {
   constructor() {
@@ -31,7 +42,7 @@ export class DiscoverSettingsForm extends Form {
   // Application.Selector requires literal method names, so toggle and move
   // handlers are attached dynamically and refreshed after a reorder.
   private rebindHandlers(): void {
-    bindMoveHandlers(this, getDiscoverSectionOrder().length, (from, to) =>
+    bindMoveHandlers(this, getVisibleSectionOrder().length, (from, to) =>
       this.handleMove(from, to),
     );
     for(const def of SECTION_DEFINITIONS) {
@@ -45,7 +56,13 @@ export class DiscoverSettingsForm extends Form {
   }
 
   private async handleMove(fromIndex: number, toIndex: number): Promise<void> {
-    const next = swapItems(getDiscoverSectionOrder(), fromIndex, toIndex);
+    // Swap the two visible ids at their positions in the full saved order.
+    const visible = getVisibleSectionOrder();
+    const fromId = visible[fromIndex];
+    const toId = visible[toIndex];
+    if(fromId === undefined || toId === undefined) { return; }
+    const order = getDiscoverSectionOrder();
+    const next = swapItems(order, order.indexOf(fromId), order.indexOf(toId));
     if(!next) { return; }
     setDiscoverSectionOrder(next);
     Application.invalidateDiscoverSections();
@@ -57,7 +74,7 @@ export class DiscoverSettingsForm extends Form {
     return [
       Section(
         { id: 'discover_visibility', header: 'Home Sections' },
-        SECTION_DEFINITIONS.map((def) =>
+        SECTION_DEFINITIONS.filter(isSectionAvailable).map((def) =>
           ToggleRow(`${def.id}_enabled`, {
             title: def.title,
             value: def.getEnabled(),
@@ -79,7 +96,7 @@ export class DiscoverSettingsForm extends Form {
   }
 
   private createOrderItems(): FormItemElement<unknown>[] {
-    const currentOrder = getDiscoverSectionOrder();
+    const currentOrder = getVisibleSectionOrder();
     const items: FormItemElement<unknown>[] = [
       LabelRow('current_order', {
         title: 'Current Order',

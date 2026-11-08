@@ -7,7 +7,7 @@ export default {
   name: 'MangaDex',
   description: 'Extension that pulls content from mangadex.org, with paperback-mdchecker support.',
   // Based on general-extensions MangaDex 1.0.0-alpha.27. Bump on every change.
-  version: '4.0.4',
+  version: '4.1.0',
   icon: 'icon.png',
   language: 'multi',
   contentRating: ContentRating.EVERYONE,

@@ -22,6 +22,7 @@ export const DISCOVER_SECTIONS = {
   SELF_PUBLISHED: 'self_published',
   SEASONAL: 'seasonal',
   RECENTLY_ADDED: 'recently_added',
+  POTENTIAL_MANGA: 'potential_manga',
 };
 
 // Order mirrors the MangaDex website homepage.
@@ -32,9 +33,11 @@ export const DEFAULT_SECTION_ORDER = [
   DISCOVER_SECTIONS.SELF_PUBLISHED,
   DISCOVER_SECTIONS.SEASONAL,
   DISCOVER_SECTIONS.RECENTLY_ADDED,
+  DISCOVER_SECTIONS.POTENTIAL_MANGA,
 ];
 
-// Bump when adding a new section so old saved orders reset.
+// Bump to reset saved orders. Not needed just to add a section:
+// getDiscoverSectionOrder appends new ids to a saved order.
 const DISCOVER_SECTION_ORDER_SCHEMA = 2;
 const THUMBNAIL_QUALITY_SCHEMA = 1;
 
@@ -109,6 +112,8 @@ export const getSeasonalEnabled = (): boolean => getKey('seasonal_enabled', true
 export const setSeasonalEnabled = (v: boolean): void => setKey('seasonal_enabled', v);
 export const getRecentlyAddedEnabled = (): boolean => getKey('recently_added_enabled', true);
 export const setRecentlyAddedEnabled = (v: boolean): void => setKey('recently_added_enabled', v);
+export const getPotentialMangaEnabled = (): boolean => getKey('potential_manga_enabled', true);
+export const setPotentialMangaEnabled = (v: boolean): void => setKey('potential_manga_enabled', v);
 
 // Carousel type values are kept as the strings the Paperback runtime expects
 // instead of importing DiscoverSectionType here
@@ -118,9 +123,14 @@ export interface DiscoverSectionDefinition {
   type: 'prominentCarousel' | 'chapterUpdates' | 'simpleCarousel' | 'featured';
   getEnabled: () => boolean;
   setEnabled: (value: boolean) => void;
+  // false hides the section everywhere (home, toggles, order). Omitted = always.
+  isAvailable?: () => boolean;
 }
 
-// Single source of truth for the six discover sections. Used by the
+export const isSectionAvailable = (def: DiscoverSectionDefinition): boolean =>
+  def.isAvailable?.() ?? true;
+
+// Single source of truth for the discover sections. Used by the
 // discover provider (titles + types) and the settings form (titles + toggles).
 export const SECTION_DEFINITIONS: readonly DiscoverSectionDefinition[] = [
   {
@@ -164,6 +174,15 @@ export const SECTION_DEFINITIONS: readonly DiscoverSectionDefinition[] = [
     type: 'simpleCarousel',
     getEnabled: getRecentlyAddedEnabled,
     setEnabled: setRecentlyAddedEnabled,
+  },
+  {
+    // paperback-mdchecker's admin potential-manga list. Admin checker users only.
+    id: DISCOVER_SECTIONS.POTENTIAL_MANGA,
+    title: 'Potential Manga',
+    type: 'simpleCarousel',
+    getEnabled: getPotentialMangaEnabled,
+    setEnabled: setPotentialMangaEnabled,
+    isAvailable: () => isCheckerAdmin(),
   },
 ];
 
@@ -293,12 +312,24 @@ export const setMetadataUpdater = (v: boolean): void => setKey('metadata_updater
 // Not in SETTINGS_KEYS on purpose, so "Reset All Settings" keeps the server
 // connection. The checker is enabled only when both values are set.
 export const getCheckerBaseUrl = (): string => getKey('checker_base_url', '').trim();
-export const setCheckerBaseUrl = (v: string): void =>
-  setKey('checker_base_url', (v ?? '').trim().replace(/\/+$/, ''));
+export function setCheckerBaseUrl(v: string): void {
+  const next = (v ?? '').trim().replace(/\/+$/, '');
+  if(next !== getCheckerBaseUrl()) { setCheckerIsAdmin(false); }
+  setKey('checker_base_url', next);
+}
 export const getCheckerUser = (): string => getKey('checker_user', '').trim();
-export const setCheckerUser = (v: string): void => setKey('checker_user', (v ?? '').trim());
+export function setCheckerUser(v: string): void {
+  const next = (v ?? '').trim();
+  if(next !== getCheckerUser()) { setCheckerIsAdmin(false); }
+  setKey('checker_user', next);
+}
 export const isCheckerEnabled = (): boolean =>
   getCheckerBaseUrl().length > 0 && getCheckerUser().length > 0;
+// Whether the server said this user is an admin, as of the last "Test
+// Connection". Cleared whenever the base URL or user changes.
+export const getCheckerIsAdmin = (): boolean => getKey('checker_is_admin', false);
+export const setCheckerIsAdmin = (v: boolean): void => setKey('checker_is_admin', v);
+export const isCheckerAdmin = (): boolean => isCheckerEnabled() && getCheckerIsAdmin();
 
 // ===== Reset =====
 
@@ -313,6 +344,7 @@ const SETTINGS_KEYS: readonly string[] = [
   'self_published_enabled',
   'seasonal_enabled',
   'recently_added_enabled',
+  'potential_manga_enabled',
   'languages',
   'language_priority',
   'romanized_priority_enabled',
