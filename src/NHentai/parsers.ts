@@ -25,7 +25,7 @@ export function parseMangaDetails(data: Gallery): SourceManga {
 
   const tags: Tag[] = data.tags
     .filter((tag) => tag.type === 'tag')
-    .map((tag) => ({ id: tag.name, title: capitalizeTags(tag.name) }));
+    .map((tag) => ({ id: tagId(tag), title: capitalizeTags(tag.name) }));
 
   // pretty, english, japanese first, then anything else the API returns.
   const titles: string[] = [data.title.pretty, data.title.english, data.title.japanese]
@@ -99,6 +99,13 @@ export function parseSearch(data: QueryResponse): SearchResultItem[] {
 }
 
 // ===== Utility =====
+
+// Paperback rejects ids with spaces or other symbols outside `._-@()[]%?#+=/&:`
+// (e.g. "rough translation"), so use the slug and strip anything left over.
+function tagId(tag: TagObject): string {
+  const base = tag.slug && tag.slug !== '' ? tag.slug : tag.name.trim().replace(/\s+/g, '-');
+  return base.replace(/[^a-zA-Z0-9._\-@()[\]%?#+=/&:]/g, '-');
+}
 
 function capitalizeTags(str: string): string {
   return str.split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
