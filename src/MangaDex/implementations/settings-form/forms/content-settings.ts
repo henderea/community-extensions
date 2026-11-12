@@ -3,7 +3,6 @@
 
 import {
   Form,
-  NavigationRow,
   Section,
   SelectRow,
   ToggleRow,
@@ -21,12 +20,9 @@ import {
   getDataSaver,
   getDiscoverThumbnail,
   getForcePort443,
-  getLanguagePriority,
   getLanguages,
   getMangaThumbnail,
-  getNativeTitleDisplay,
   getRatings,
-  getRomanizedPriorityEnabled,
   getSearchThumbnail,
   getShowAltTitlesInSynopsis,
   getShowFinalChapterInSynopsis,
@@ -35,35 +31,20 @@ import {
   setDataSaver,
   setDiscoverThumbnail,
   setForcePort443,
-  setLanguagePriority,
   setLanguages,
   setMangaThumbnail,
-  setNativeTitleDisplay,
   setRatings,
-  setRomanizedPriorityEnabled,
   setSearchThumbnail,
   setShowAltTitlesInSynopsis,
   setShowFinalChapterInSynopsis,
   setSkipSameChapter,
   setTryFirstVolumeCover,
 } from '../../shared/state';
-import { LanguagePriorityForm } from './language-priority';
-
-const NATIVE_TITLE_DISPLAY_LABELS: Record<string, string> = {
-  none: 'None',
-  author: 'Author Field',
-  author_desc: 'Author Field (+ Author)',
-  description: 'Description',
-};
 
 export class ContentSettingsForm extends Form {
   override getSections(): FormSectionElement<unknown>[] {
     const selectedLanguages = getLanguages();
     const selectedRatings = getRatings();
-    const priorityOrder = getLanguagePriority();
-    const prioritySubtitle = priorityOrder.map((code) => MDLanguages.getName(code)).join(' → ');
-    const romanizedPriorityEnabled = getRomanizedPriorityEnabled();
-    const nativeTitleDisplay = getNativeTitleDisplay();
     const discoverThumb = getDiscoverThumbnail();
     const searchThumb = getSearchThumbnail();
     const mangaThumb = getMangaThumbnail();
@@ -85,43 +66,6 @@ export class ContentSettingsForm extends Form {
           })),
           onValueChange: Application.Selector(this as ContentSettingsForm, 'handleLanguageChange'),
         }),
-        ToggleRow('romanized_priority', {
-          title: 'Prefer Romanized Titles',
-          subtitle: 'Use ja/ko/zh romanized titles',
-          value: romanizedPriorityEnabled,
-          onValueChange: Application.Selector(
-            this as ContentSettingsForm,
-            'handleRomanizedPriorityChange',
-          ),
-        }),
-        ...(romanizedPriorityEnabled
-          ? [
-            SelectRow('native_title_display', {
-              title: 'Romanized Title Shown In',
-              subtitle: NATIVE_TITLE_DISPLAY_LABELS[nativeTitleDisplay] ?? 'None',
-              value: [nativeTitleDisplay],
-              minItemCount: 1,
-              maxItemCount: 1,
-              options: Object.entries(NATIVE_TITLE_DISPLAY_LABELS).map(([id, title]) => ({
-                id,
-                title,
-              })),
-              onValueChange: Application.Selector(
-                this as ContentSettingsForm,
-                'handleNativeTitleDisplayChange',
-              ),
-            }),
-          ]
-          : []),
-        ...(priorityOrder.length > 1
-          ? [
-            NavigationRow('language_priority', {
-              title: 'Language Priority',
-              subtitle: prioritySubtitle,
-              form: new LanguagePriorityForm(),
-            }),
-          ]
-          : []),
         SelectRow('ratings', {
           title: 'Content Rating',
           subtitle: getRatingEnumList()
@@ -241,28 +185,7 @@ export class ContentSettingsForm extends Form {
   }
 
   async handleLanguageChange(value: string[]): Promise<void> {
-    const currentPriority = getLanguagePriority();
-    const selectedSet = new Set(value);
-    const currentSet = new Set(currentPriority);
-    // Keep existing priority for languages still selected, then append newly selected ones.
-    const reconciled = [
-      ...currentPriority.filter((code) => selectedSet.has(code)),
-      ...value.filter((code) => !currentSet.has(code)),
-    ];
-    setLanguagePriority(reconciled);
     setLanguages(value);
-    Application.invalidateDiscoverSections();
-    this.reloadForm();
-  }
-
-  async handleRomanizedPriorityChange(value: boolean): Promise<void> {
-    setRomanizedPriorityEnabled(value);
-    Application.invalidateDiscoverSections();
-    this.reloadForm();
-  }
-
-  async handleNativeTitleDisplayChange(value: string[]): Promise<void> {
-    setNativeTitleDisplay(value[0] ?? 'none');
     Application.invalidateDiscoverSections();
     this.reloadForm();
   }

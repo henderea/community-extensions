@@ -3,7 +3,7 @@
 
 import { ContentRating, type SourceManga, type Tag, type TagSection } from '@paperback/types';
 
-import { getImageQualityEnding, getStatusName, RATINGS, ROMANIZED_CODES, STATUSES } from './lookups';
+import { getImageQualityEnding, getStatusName, RATINGS, STATUSES } from './lookups';
 import type {
   AggregateResponse,
   AltTitle,
@@ -17,11 +17,8 @@ import type {
 } from './models';
 import { COVER_BASE_URL, MANGADEX_DOMAIN, Status } from './models';
 import {
-  getLanguagePriority,
   getMangaThumbnail,
-  getNativeTitleDisplay,
   getRelevanceScoringEnabled,
-  getRomanizedPriorityEnabled,
   getShowAltTitlesInSynopsis,
   getShowChapter,
   getShowFinalChapterInSynopsis,
@@ -29,7 +26,6 @@ import {
   getShowSearchRatingInSubtitle,
   getShowStatusIcons,
   getShowVolume,
-  getTitleLanguages,
 } from './state';
 import { decodeHTML, precomputeQuery, relevanceScore } from './utils';
 
@@ -43,7 +39,6 @@ type MangaItemWithAdditionalInfo = {
 
 type MangaItemDetails = {
   primaryTitle: string;
-  preferredLanguageTitle?: string;
   secondaryTitles: string[];
   synopsis: string;
   status: Status;
@@ -199,37 +194,6 @@ export function collectUniqueMangaIdsFromChapters(
   return { ids, chapterByMangaId };
 }
 
-const getFirstLanguageMatch = (
-  values: Record<string, string | undefined> | undefined,
-  languages: readonly string[],
-): string | undefined => {
-  if(!values) { return undefined; }
-  for(const lang of languages) {
-    const match = values[lang];
-    if(match) { return match; }
-  }
-  return undefined;
-};
-
-const getFirstLanguageMatchFromAlt = (
-  altTitles: AltTitle[] | undefined,
-  languages: readonly string[],
-): string | undefined => {
-  if(!altTitles) { return undefined; }
-  for(const lang of languages) {
-    for(const alt of altTitles) {
-      if(!alt || typeof alt !== 'object') { continue; }
-      const match = (alt as Record<string, string | undefined>)[lang];
-      if(match) { return match; }
-    }
-  }
-  return undefined;
-};
-
-const getFirstValue = (
-  values: Record<string, string | undefined> | undefined,
-): string | undefined => Object.values(values ?? {}).find((v) => v);
-
 const flattenDecodedAltTitles = (altTitles: AltTitle[] | undefined): string[] =>
   altTitles
     ?.filter((x): x is AltTitle => !!x && typeof x === 'object')
@@ -237,25 +201,20 @@ const flattenDecodedAltTitles = (altTitles: AltTitle[] | undefined): string[] =>
     .filter((v): v is string => typeof v === 'string')
     .map(decodeHTML) ?? [];
 
-// Title resolution: romanized opt in, then preferred languages, then any value. Raw, not decoded.
-const resolvePrimaryTitleRaw = (
+// Every title value then every alt title, decoded, empties dropped. Same list
+// (and order) as paperback-mdchecker's title check (lib/api/title-check.ts).
+const collectDecodedTitles = (
   title: Record<string, string | undefined> | undefined,
   altTitles: AltTitle[] | undefined,
-  languages: readonly string[],
-  romanizedEnabled: boolean,
-): string => {
-  const romanizedMatch = romanizedEnabled
-    ? (getFirstLanguageMatch(title, ROMANIZED_CODES) ??
-      getFirstLanguageMatchFromAlt(altTitles, ROMANIZED_CODES))
-    : undefined;
-  return (
-    romanizedMatch ??
-    getFirstLanguageMatch(title, languages) ??
-    getFirstLanguageMatchFromAlt(altTitles, languages) ??
-    getFirstValue(title) ??
-    ''
-  );
-};
+): string[] =>
+  [...Object.values(title ?? {}), ...(altTitles ?? []).flatMap((x) => (x && typeof x === 'object' ? Object.values(x) : []))]
+    .filter((v): v is string => typeof v === 'string' && v.length > 0)
+    .map(decodeHTML);
+
+// Matches paperback-mdchecker's manga_title: the first title containing a Latin
+// letter, otherwise the first title.
+const pickPrimaryTitle = (titles: readonly string[]): string =>
+  titles.find((t) => /[a-zA-Z]/.test(t)) ?? titles[0] ?? 'INVALID TITLE';
 
 export const parseMangaList = (
   object: MangaItem[],
@@ -271,8 +230,6 @@ export const parseMangaList = (
     queryTitle && getRelevanceScoringEnabled() ? precomputeQuery(queryTitle) : null;
 
   const thumbnailQuality = thumbnailSelector();
-  const languages = getTitleLanguages();
-  const romanizedPriorityEnabled = getRomanizedPriorityEnabled();
   const showStatusIcons = getShowStatusIcons();
   const showRatingIcons = getShowRatingIcons();
   const showChapter = getShowChapter();
@@ -284,12 +241,10 @@ export const parseMangaList = (
     if(!manga || !manga.attributes) { continue; }
     const mangaId = manga.id;
     const mangaDetails = manga.attributes;
-    const title = decodeHTML(
-      resolvePrimaryTitleRaw(
+    const title = pickPrimaryTitle(
+      collectDecodedTitles(
         mangaDetails.title as Record<string, string | undefined>,
         mangaDetails.altTitles,
-        languages,
-        romanizedPriorityEnabled,
       ),
     );
 
@@ -393,27 +348,11 @@ export const parseMangaDetails = (
       .filter(Boolean)
       .join(', ') || undefined;
 
-  let author = joinCreditNames('author');
-  let artist = joinCreditNames('artist');
+  const author = joinCreditNames('author');
+  const artist = joinCreditNames('artist');
 
   // Pass synopsis through unchanged so the update batch comparison matches, with no placeholder.
   const synopsis = mangaItemDetails.synopsis;
-
-  const nativeTitleDisplay = settings?.nativeTitleDisplay ?? getNativeTitleDisplay();
-  const preferredTitle = mangaItemDetails.preferredLanguageTitle;
-  if(preferredTitle && preferredTitle !== mangaItemDetails.primaryTitle) {
-    if(nativeTitleDisplay === 'author') {
-      author = preferredTitle;
-      artist = undefined;
-    } else if(nativeTitleDisplay === 'author_desc') {
-      const credits: string[] = [];
-      if(author) { credits.push(author); }
-      if(artist && artist !== author) { credits.push(artist); }
-      const suffix = credits.length > 0 ? ` (${credits.join(', ')})` : '';
-      author = `${preferredTitle}${suffix}`;
-      artist = undefined;
-    }
-  }
 
   const thumbnailQuality = settings?.mangaThumbnail ?? getMangaThumbnail();
   const image = coverFileNameOverride
@@ -451,10 +390,6 @@ export const parseMangaDetails = (
 
 // mangaThumbnail is optional, only readMangaDetailsSettings() populates it (used for cover URL build).
 export interface MangaDetailsSettings {
-  titleLanguages: readonly string[];
-  romanizedPriorityEnabled: boolean;
-  languagePriority: readonly string[];
-  nativeTitleDisplay: string;
   mangaThumbnail?: string;
   showAltTitlesInSynopsis?: boolean;
   showFinalChapterInSynopsis?: boolean;
@@ -462,10 +397,6 @@ export interface MangaDetailsSettings {
 
 export function readMangaTitleSettings(): MangaDetailsSettings {
   return {
-    titleLanguages: getTitleLanguages(),
-    romanizedPriorityEnabled: getRomanizedPriorityEnabled(),
-    languagePriority: getLanguagePriority(),
-    nativeTitleDisplay: getNativeTitleDisplay(),
     showAltTitlesInSynopsis: getShowAltTitlesInSynopsis(),
     showFinalChapterInSynopsis: getShowFinalChapterInSynopsis(),
   };
@@ -486,32 +417,20 @@ export function parseMangaItemDetails(
   aggregate?: AggregateResponse,
 ): MangaItemDetails {
   const resolvedSettings = settings ?? readMangaTitleSettings();
-  const languages = resolvedSettings.titleLanguages;
 
-  const primaryTitle: string = decodeHTML(
-    resolvePrimaryTitleRaw(
-      mangaDetails.title as Record<string, string | undefined>,
-      mangaDetails.altTitles,
-      languages,
-      resolvedSettings.romanizedPriorityEnabled,
-    ),
+  const allTitles = collectDecodedTitles(
+    mangaDetails.title as Record<string, string | undefined>,
+    mangaDetails.altTitles,
   );
-
-  const priorityLanguages = resolvedSettings.languagePriority;
-  const preferredMatch =
-    getFirstLanguageMatch(
-      mangaDetails.title as Record<string, string | undefined>,
-      priorityLanguages,
-    ) ?? getFirstLanguageMatchFromAlt(mangaDetails.altTitles, priorityLanguages);
-  const preferredLanguageTitle = preferredMatch ? decodeHTML(preferredMatch) : undefined;
+  const primaryTitle: string = pickPrimaryTitle(allTitles);
 
   // Decode before dedup. Encoded duplicates of the primary title would survive otherwise.
   const secondaryTitles: string[] = Array.from(
-    new Set(flattenDecodedAltTitles(mangaDetails.altTitles).filter((v) => v !== primaryTitle)),
+    new Set(allTitles.filter((v) => v !== primaryTitle)),
   );
 
   const description = mangaDetails.description as Record<string, string | undefined> | undefined;
-  const descriptionMatch = getFirstLanguageMatch(description, languages) ?? description?.en ?? '';
+  const descriptionMatch = description?.en ?? '';
 
   const desc = decodeHTML(descriptionMatch).replace(/\[\/?[bus]]/g, '');
 
@@ -528,22 +447,7 @@ export function parseMangaItemDetails(
   }
 
   if(resolvedSettings.showAltTitlesInSynopsis && secondaryTitles.length > 0) {
-    // Drop the preferred title if it is already shown standalone below.
-    const altsToShow =
-      resolvedSettings.nativeTitleDisplay === 'description' && preferredLanguageTitle
-        ? secondaryTitles.filter((t) => t !== preferredLanguageTitle)
-        : secondaryTitles;
-    if(altsToShow.length > 0) {
-      synopsisParts.push(`Alternative Titles:\n${altsToShow.join('\n')}`);
-    }
-  }
-
-  if(
-    resolvedSettings.nativeTitleDisplay === 'description' &&
-    preferredLanguageTitle &&
-    preferredLanguageTitle !== primaryTitle
-  ) {
-    synopsisParts.push(preferredLanguageTitle);
+    synopsisParts.push(`Alternative Titles:\n${secondaryTitles.join('\n')}`);
   }
 
   if(desc) { synopsisParts.push(desc); }
@@ -599,7 +503,6 @@ export function parseMangaItemDetails(
 
   return {
     primaryTitle,
-    preferredLanguageTitle,
     secondaryTitles,
     synopsis,
     status,

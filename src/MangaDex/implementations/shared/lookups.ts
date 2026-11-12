@@ -126,7 +126,6 @@ export function getDefaultImageQuality(section: string): string {
   return IMAGE_QUALITIES.find((q) => q.default?.includes(section))?.enum ?? '';
 }
 
-export const ROMANIZED_CODES = ['ja-ro', 'ko-ro', 'zh-ro'] as const;
 
 export interface Demographic {
   name: string;

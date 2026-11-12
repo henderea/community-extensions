@@ -2,7 +2,7 @@
 /* Copyright © 2026 Inkdex */
 
 import { MDLanguages } from './languages';
-import { getDefaultImageQuality, getDefaultRatings, ROMANIZED_CODES } from './lookups';
+import { getDefaultImageQuality, getDefaultRatings } from './lookups';
 import type {
   AccessToken,
   AuthError,
@@ -186,29 +186,11 @@ export const SECTION_DEFINITIONS: readonly DiscoverSectionDefinition[] = [
   },
 ];
 
-// ===== Languages and title display =====
+// ===== Languages =====
 
 export const getLanguages = (): string[] =>
   readStringArray('languages', () => MDLanguages.getDefault());
 export const setLanguages = (v: string[]): void => setKey('languages', v);
-export const getLanguagePriority = (): string[] =>
-  readStringArray('language_priority', getLanguages);
-export const setLanguagePriority = (v: string[]): void => setKey('language_priority', v);
-export const getRomanizedPriorityEnabled = (): boolean =>
-  getKey('romanized_priority_enabled', false);
-export const setRomanizedPriorityEnabled = (v: boolean): void =>
-  setKey('romanized_priority_enabled', v);
-
-// Prepends the romanized codes when romanized priority is enabled.
-export function getTitleLanguages(): string[] {
-  const priority = getLanguagePriority();
-  if(!getRomanizedPriorityEnabled()) { return priority; }
-  const romanized = new Set<string>(ROMANIZED_CODES);
-  return [...ROMANIZED_CODES, ...priority.filter((code) => !romanized.has(code))];
-}
-
-export const getNativeTitleDisplay = (): string => getKey('native_title_display', 'none');
-export const setNativeTitleDisplay = (v: string): void => setKey('native_title_display', v);
 
 // ===== Content rating and chapter behavior =====
 
@@ -346,9 +328,6 @@ const SETTINGS_KEYS: readonly string[] = [
   'recently_added_enabled',
   'potential_manga_enabled',
   'languages',
-  'language_priority',
-  'romanized_priority_enabled',
-  'native_title_display',
   'ratings',
   'data_saver',
   'force_port_443',
